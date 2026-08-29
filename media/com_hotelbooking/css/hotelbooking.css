@@ -158,6 +158,7 @@
 	display: flex;
 	justify-content: center;
 	gap: 0.5rem;
+	width: 100%;
 	max-width: 480px;
 	margin: 0 auto;
 	background: #FFFFFF;
@@ -168,6 +169,7 @@
 
 .hotelbooking-hero form input {
 	flex: 1;
+	min-width: 0;
 	border: none;
 	background: transparent;
 	padding: 0.6rem 1rem;
@@ -181,6 +183,7 @@
 }
 
 .hotelbooking-hero form button {
+	flex-shrink: 0;
 	border: none;
 	background: var(--hb-accent-dark);
 	color: #FFFFFF;
@@ -191,6 +194,12 @@
 	transition: background-color 0.15s ease;
 }
 
+@media (max-width: 400px) {
+	.hotelbooking-hero form button {
+		padding: 0.65rem 1rem;
+	}
+}
+
 .hotelbooking-hero form button:hover {
 	background: #7d3d1b;
 }
@@ -199,12 +208,14 @@
 .hotelbooking-destinations > form {
 	display: flex;
 	gap: 0.5rem;
+	width: 100%;
 	max-width: 480px;
 	margin: 0 0 2rem;
 }
 
 .hotelbooking-destinations > form input {
 	flex: 1;
+	min-width: 0;
 	padding: 0.65rem 1rem;
 	border: 1px solid var(--hb-border);
 	border-radius: var(--hb-radius-sm);
@@ -219,6 +230,7 @@
 }
 
 .hotelbooking-destinations > form button {
+	flex-shrink: 0;
 	border: none;
 	background: var(--hb-accent-dark);
 	color: #FFFFFF;
