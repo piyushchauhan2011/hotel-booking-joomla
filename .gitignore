@@ -1,0 +1,48 @@
+# === Joomla! secrets & environment ===
+/configuration.php
+/configuration.php.bak
+
+# === Joomla! generated/runtime directories ===
+/cache/*
+!/cache/index.html
+/administrator/cache/*
+!/administrator/cache/index.html
+/administrator/logs/*
+!/administrator/logs/index.html
+/logs/*
+!/logs/index.html
+/tmp/*
+!/tmp/index.html
+
+# Leftover installer folder (Joomla deletes this automatically after install,
+# but ignore it in case a fresh/failed install run leaves it behind)
+/installation/
+
+# Update/restore script Joomla writes during self-updates
+/administrator/components/com_joomlaupdate/restore.php
+
+# === ddev ===
+# ddev maintains its own .gitignore inside .ddev/ for generated files;
+# just make sure nothing environment-specific leaks from the project root.
+/.ddev/db_snapshots/
+/.ddev/import.sql
+/.ddev/traefik/certs/
+
+# === OS / editor cruft ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# === Node (in case any tooling adds it later) ===
+node_modules/
+npm-debug.log*
+
+# === Backups / archives accidentally dropped in the repo root ===
+# (scoped to root only — component source ships its own *.sql files, e.g.
+# administrator/components/com_hotelbooking/sql/install.mysql.utf8.sql)
+/*.sql
+/*.sql.gz
+/*.zip
+/*.tar.gz

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="basic">
+		<field
+			name="id"
+			type="number"
+			readonly="true"
+			default="0"
+		/>
+
+		<field
+			name="room_id"
+			type="sql"
+			label="COM_HOTELBOOKING_FIELD_ROOM_LABEL"
+			required="true"
+			query="SELECT id AS value, name AS text FROM #__hotelbooking_rooms ORDER BY name ASC"
+			key_field="value"
+			value_field="text"
+			>
+			<option value="">JOPTION_SELECT_AN_OPTION</option>
+		</field>
+
+		<field
+			name="guest_name"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_GUEST_NAME_LABEL"
+			required="true"
+			size="40"
+		/>
+
+		<field
+			name="guest_email"
+			type="email"
+			label="COM_HOTELBOOKING_FIELD_GUEST_EMAIL_LABEL"
+			required="true"
+			size="40"
+		/>
+
+		<field
+			name="checkin_date"
+			type="calendar"
+			label="COM_HOTELBOOKING_FIELD_CHECKIN_LABEL"
+			required="true"
+			format="%Y-%m-%d"
+		/>
+
+		<field
+			name="checkout_date"
+			type="calendar"
+			label="COM_HOTELBOOKING_FIELD_CHECKOUT_LABEL"
+			required="true"
+			format="%Y-%m-%d"
+		/>
+
+		<field
+			name="guests"
+			type="number"
+			label="COM_HOTELBOOKING_FIELD_GUESTS_LABEL"
+			required="true"
+			default="1"
+			min="1"
+		/>
+
+		<field
+			name="status"
+			type="list"
+			label="COM_HOTELBOOKING_FIELD_STATUS_LABEL"
+			default="pending"
+			>
+			<option value="pending">COM_HOTELBOOKING_STATUS_PENDING</option>
+			<option value="confirmed">COM_HOTELBOOKING_STATUS_CONFIRMED</option>
+			<option value="cancelled">COM_HOTELBOOKING_STATUS_CANCELLED</option>
+		</field>
+
+		<field
+			name="created"
+			type="calendar"
+			label="COM_HOTELBOOKING_FIELD_CREATED_LABEL"
+			format="%Y-%m-%d %H:%M:%S"
+			readonly="true"
+			filter="unset"
+		/>
+	</fieldset>
+</form>

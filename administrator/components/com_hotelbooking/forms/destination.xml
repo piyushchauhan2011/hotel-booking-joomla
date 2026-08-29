@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="basic">
+		<field
+			name="id"
+			type="number"
+			readonly="true"
+			default="0"
+		/>
+
+		<field
+			name="name"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_NAME_LABEL"
+			required="true"
+			size="40"
+		/>
+
+		<field
+			name="alias"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_ALIAS_LABEL"
+			hint="Auto-generated from name if left blank"
+			size="40"
+		/>
+
+		<field
+			name="description"
+			type="textarea"
+			label="COM_HOTELBOOKING_FIELD_DESCRIPTION_LABEL"
+			rows="6"
+			cols="30"
+		/>
+
+		<field
+			name="image"
+			type="media"
+			label="COM_HOTELBOOKING_FIELD_IMAGE_LABEL"
+		/>
+
+		<field
+			name="published"
+			type="list"
+			label="COM_HOTELBOOKING_FIELD_PUBLISHED_LABEL"
+			default="1"
+			>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field
+			name="ordering"
+			type="hidden"
+			default="0"
+		/>
+	</fieldset>
+</form>

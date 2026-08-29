@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+	<layout title="COM_HOTELBOOKING_ROOM_VIEW_DEFAULT_TITLE" option="COM_HOTELBOOKING_ROOM_VIEW_DEFAULT_OPTION">
+		<message>
+			<![CDATA[COM_HOTELBOOKING_ROOM_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+
+	<fields name="request">
+		<fieldset name="request">
+			<field
+				name="id"
+				type="number"
+				label="COM_HOTELBOOKING_FIELD_ROOM_LABEL"
+				required="true"
+			/>
+		</fieldset>
+	</fields>
+</metadata>

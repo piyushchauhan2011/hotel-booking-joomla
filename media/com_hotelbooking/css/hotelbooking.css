@@ -1,0 +1,497 @@
+:root {
+	--hb-bg: #FBF7F2;
+	--hb-surface: #FFFFFF;
+	--hb-text: #2B2420;
+	--hb-text-muted: #6B5F55;
+	--hb-accent: #C1622D;
+	--hb-accent-dark: #9C4C22;
+	--hb-accent-soft: #F3E4D8;
+	--hb-border: #E7DDD2;
+	--hb-shadow: 0 4px 16px rgba(43, 36, 32, 0.08);
+	--hb-shadow-hover: 0 10px 28px rgba(43, 36, 32, 0.14);
+	--hb-radius: 14px;
+	--hb-radius-sm: 8px;
+	--hb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.hotelbooking-home,
+.hotelbooking-destinations,
+.hotelbooking-destination,
+.hotelbooking-room,
+.hotelbooking-confirmation {
+	font-family: var(--hb-font);
+	color: var(--hb-text);
+}
+
+.hotelbooking-home h1,
+.hotelbooking-home h2,
+.hotelbooking-destinations h1,
+.hotelbooking-destinations h2,
+.hotelbooking-destination h1,
+.hotelbooking-destination h2,
+.hotelbooking-room h1,
+.hotelbooking-room h2,
+.hotelbooking-confirmation h1 {
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: var(--hb-text);
+}
+
+/* Buttons */
+.hb-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+	padding: 0.7rem 1.5rem;
+	border-radius: 999px;
+	font-weight: 600;
+	font-size: 0.95rem;
+	text-decoration: none;
+	cursor: pointer;
+	border: 2px solid transparent;
+	transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.hb-btn--primary {
+	background: var(--hb-accent);
+	color: #FFFFFF;
+}
+
+.hb-btn--primary:hover {
+	background: var(--hb-accent-dark);
+	transform: translateY(-1px);
+}
+
+.hb-btn--outline {
+	background: transparent;
+	color: var(--hb-accent);
+	border-color: var(--hb-accent);
+}
+
+.hb-btn--outline:hover {
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	border-color: var(--hb-accent-dark);
+}
+
+/* Fields */
+.hb-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	margin-bottom: 1rem;
+}
+
+.hb-field label {
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--hb-text-muted);
+}
+
+.hb-field input,
+.hb-field select,
+.hb-field textarea {
+	font-family: var(--hb-font);
+	font-size: 1rem;
+	padding: 0.65rem 0.9rem;
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+	background: var(--hb-surface);
+	color: var(--hb-text);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hb-field input:focus,
+.hb-field select:focus,
+.hb-field textarea:focus {
+	outline: none;
+	border-color: var(--hb-accent);
+	box-shadow: 0 0 0 3px var(--hb-accent-soft);
+}
+
+.hb-field--full {
+	grid-column: 1 / -1;
+}
+
+/* Hero */
+.hotelbooking-hero {
+	position: relative;
+	overflow: hidden;
+	background: linear-gradient(135deg, var(--hb-accent), var(--hb-accent-dark));
+	color: #FFFFFF;
+	border-radius: var(--hb-radius);
+	padding: 3.5rem 2rem;
+	text-align: center;
+	margin-bottom: 2.5rem;
+}
+
+.hotelbooking-hero-illustration {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 130px;
+	fill: rgba(255, 255, 255, 0.1);
+	pointer-events: none;
+}
+
+.hotelbooking-hero-content {
+	position: relative;
+	z-index: 1;
+}
+
+.hotelbooking-hero h1 {
+	color: #FFFFFF;
+	font-size: 2.25rem;
+	margin: 0 0 0.5rem;
+}
+
+.hotelbooking-hero p {
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 1.05rem;
+	margin: 0 0 1.75rem;
+}
+
+.hotelbooking-hero form {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	max-width: 480px;
+	margin: 0 auto;
+	background: #FFFFFF;
+	padding: 0.5rem;
+	border-radius: 999px;
+	box-shadow: var(--hb-shadow-hover);
+}
+
+.hotelbooking-hero form input {
+	flex: 1;
+	border: none;
+	background: transparent;
+	padding: 0.6rem 1rem;
+	font-family: var(--hb-font);
+	font-size: 1rem;
+	color: var(--hb-text);
+}
+
+.hotelbooking-hero form input:focus {
+	outline: none;
+}
+
+.hotelbooking-hero form button {
+	border: none;
+	background: var(--hb-accent);
+	color: #FFFFFF;
+	padding: 0.65rem 1.5rem;
+	border-radius: 999px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+.hotelbooking-hero form button:hover {
+	background: var(--hb-accent-dark);
+}
+
+/* Plain search form (Destinations list page) */
+.hotelbooking-destinations > form {
+	display: flex;
+	gap: 0.5rem;
+	max-width: 480px;
+	margin: 0 0 2rem;
+}
+
+.hotelbooking-destinations > form input {
+	flex: 1;
+	padding: 0.65rem 1rem;
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+	font-family: var(--hb-font);
+	font-size: 1rem;
+}
+
+.hotelbooking-destinations > form input:focus {
+	outline: none;
+	border-color: var(--hb-accent);
+	box-shadow: 0 0 0 3px var(--hb-accent-soft);
+}
+
+.hotelbooking-destinations > form button {
+	border: none;
+	background: var(--hb-accent);
+	color: #FFFFFF;
+	padding: 0.65rem 1.5rem;
+	border-radius: var(--hb-radius-sm);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.hotelbooking-destinations > form button:hover {
+	background: var(--hb-accent-dark);
+}
+
+/* Grids */
+.hb-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 1.5rem;
+	margin: 1.5rem 0 2rem;
+}
+
+/* Cards */
+.hb-card {
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	overflow: hidden;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+	display: flex;
+	flex-direction: column;
+}
+
+.hb-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--hb-shadow-hover);
+}
+
+.hb-card-image {
+	aspect-ratio: 16 / 9;
+	width: 100%;
+	object-fit: cover;
+	display: block;
+	background: var(--hb-accent-soft);
+}
+
+.hb-card-image--placeholder {
+	background: linear-gradient(135deg, var(--hb-accent-soft), var(--hb-border));
+}
+
+.hb-card-body {
+	padding: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	flex: 1;
+}
+
+.hb-card-body h3 {
+	margin: 0;
+	font-size: 1.1rem;
+}
+
+.hb-card-body h3 a {
+	color: var(--hb-text);
+	text-decoration: none;
+}
+
+.hb-card-body h3 a:hover {
+	color: var(--hb-accent);
+}
+
+.hb-card-body p {
+	margin: 0;
+	color: var(--hb-text-muted);
+	font-size: 0.92rem;
+	line-height: 1.5;
+}
+
+.hb-card-price {
+	color: var(--hb-accent);
+	font-weight: 700;
+	font-size: 1.05rem;
+}
+
+.hb-card-body .hb-btn {
+	margin-top: 0.5rem;
+	align-self: flex-start;
+}
+
+/* Destination detail page: single constrained column */
+.hotelbooking-destination {
+	max-width: 900px;
+}
+
+.hotelbooking-destination > .hb-card-image,
+.hotelbooking-destination > .hb-card-image--placeholder {
+	border-radius: var(--hb-radius);
+	margin-bottom: 1.25rem;
+	aspect-ratio: 21 / 9;
+	object-fit: cover;
+	width: 100%;
+}
+
+.hotelbooking-destination > .hb-grid {
+	max-width: none;
+}
+
+/* Room detail page: two-column layout (content left, booking sidebar right) */
+.hotelbooking-room {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr;
+	gap: 2.5rem;
+	align-items: start;
+}
+
+.hotelbooking-room > .hb-card-image,
+.hotelbooking-room > .hb-card-image--placeholder,
+.hotelbooking-room > .hotelbooking-description {
+	grid-column: 1;
+	grid-row: auto;
+}
+
+.hotelbooking-room-meta,
+.hotelbooking-room > h2,
+.hotelbooking-room > form {
+	grid-column: 2;
+	grid-row: auto;
+}
+
+.hotelbooking-room h1,
+.hotelbooking-room-destination-link {
+	grid-column: 1 / -1;
+}
+
+@media (max-width: 800px) {
+	.hotelbooking-room {
+		grid-template-columns: 1fr;
+	}
+
+	.hotelbooking-room h1,
+	.hotelbooking-room-destination-link,
+	.hotelbooking-room > .hb-card-image,
+	.hotelbooking-room > .hb-card-image--placeholder,
+	.hotelbooking-room > .hotelbooking-description,
+	.hotelbooking-room-meta,
+	.hotelbooking-room > h2,
+	.hotelbooking-room > form {
+		grid-column: 1;
+	}
+
+	.hotelbooking-room form {
+		grid-template-columns: 1fr;
+	}
+
+	.hotelbooking-room form .hb-field {
+		grid-column: 1;
+	}
+}
+
+.hotelbooking-room > .hb-card-image,
+.hotelbooking-room > .hb-card-image--placeholder {
+	border-radius: var(--hb-radius);
+	margin-bottom: 1.25rem;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	width: 100%;
+}
+
+.hotelbooking-description {
+	max-width: 65ch;
+	line-height: 1.7;
+	color: var(--hb-text-muted);
+}
+
+.hotelbooking-room-destination-link {
+	display: inline-block;
+	margin-bottom: 1rem;
+}
+
+.hotelbooking-room-destination-link a {
+	color: var(--hb-accent);
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.hotelbooking-room-destination-link a:hover {
+	color: var(--hb-accent-dark);
+	text-decoration: underline;
+}
+
+.hotelbooking-room-meta {
+	background: var(--hb-surface);
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius);
+	padding: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.hotelbooking-room-meta .hb-card-price {
+	font-size: 1.4rem;
+}
+
+/* Booking form */
+.hotelbooking-room form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0 1rem;
+}
+
+.hotelbooking-room form .hb-btn {
+	grid-column: 1 / -1;
+	width: 100%;
+	margin-top: 0.5rem;
+}
+
+/* Confirmation */
+.hotelbooking-confirmation {
+	max-width: 560px;
+	margin: 2rem auto;
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	border-top: 4px solid var(--hb-accent);
+	padding: 2.5rem;
+	text-align: center;
+}
+
+.hotelbooking-confirmation h1 {
+	margin-top: 0;
+}
+
+.hotelbooking-confirmation p {
+	color: var(--hb-text-muted);
+	line-height: 1.6;
+}
+
+/* Empty states */
+.hotelbooking-home p,
+.hotelbooking-destinations p,
+.hotelbooking-destination p {
+	color: var(--hb-text-muted);
+}
+
+.hotelbooking-home .hotelbooking-hero p {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.hotelbooking-home > p,
+.hotelbooking-destinations > p,
+.hotelbooking-destination > p:not(.hotelbooking-room-destination-link) {
+	text-align: center;
+	padding: 2.5rem 1rem;
+	background: var(--hb-accent-soft);
+	border-radius: var(--hb-radius);
+}
+
+.hb-empty-icon {
+	display: block;
+	width: 40px;
+	height: 40px;
+	margin: 0 auto 0.75rem;
+	color: var(--hb-accent);
+}
+
+/* Inline meta icons (price, capacity) */
+.hb-icon {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	vertical-align: -3px;
+	margin-right: 0.35rem;
+	color: currentColor;
+}

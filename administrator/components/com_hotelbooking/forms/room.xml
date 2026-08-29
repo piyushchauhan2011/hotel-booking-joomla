@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="basic">
+		<field
+			name="id"
+			type="number"
+			readonly="true"
+			default="0"
+		/>
+
+		<field
+			name="destination_id"
+			type="sql"
+			label="COM_HOTELBOOKING_FIELD_DESTINATION_LABEL"
+			required="true"
+			query="SELECT id AS value, name AS text FROM #__hotelbooking_destinations WHERE published=1 ORDER BY name ASC"
+			key_field="value"
+			value_field="text"
+			>
+			<option value="">JOPTION_SELECT_AN_OPTION</option>
+		</field>
+
+		<field
+			name="name"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_NAME_LABEL"
+			required="true"
+			size="40"
+		/>
+
+		<field
+			name="description"
+			type="textarea"
+			label="COM_HOTELBOOKING_FIELD_DESCRIPTION_LABEL"
+			rows="6"
+			cols="30"
+		/>
+
+		<field
+			name="price"
+			type="number"
+			label="COM_HOTELBOOKING_FIELD_PRICE_LABEL"
+			required="true"
+			default="0"
+			step="0.01"
+			min="0"
+		/>
+
+		<field
+			name="capacity"
+			type="number"
+			label="COM_HOTELBOOKING_FIELD_CAPACITY_LABEL"
+			required="true"
+			default="1"
+			min="1"
+		/>
+
+		<field
+			name="image"
+			type="media"
+			label="COM_HOTELBOOKING_FIELD_IMAGE_LABEL"
+		/>
+
+		<field
+			name="published"
+			type="list"
+			label="COM_HOTELBOOKING_FIELD_PUBLISHED_LABEL"
+			default="1"
+			>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field
+			name="ordering"
+			type="hidden"
+			default="0"
+		/>
+	</fieldset>
+</form>
