@@ -27,13 +27,20 @@ use Joomla\CMS\Router\Route;
 						<div class="hb-card-image hb-card-image--placeholder"></div>
 					<?php endif; ?>
 					<div class="hb-card-body">
-						<h3>
+						<h2>
 							<a href="<?php echo Route::_('index.php?option=com_hotelbooking&view=destination&id=' . (int) $destination->id); ?>">
 								<?php echo htmlspecialchars($destination->name); ?>
 							</a>
-						</h3>
-						<?php if (!empty($destination->description)) : ?>
-							<p><?php echo htmlspecialchars(substr(strip_tags($destination->description), 0, 150)); ?></p>
+						</h2>
+						<?php if (!empty($destination->description)) :
+							$teaser = trim(strtok(strip_tags($destination->description), "\n"));
+
+							if (\function_exists('mb_strlen') && mb_strlen($teaser) > 160) {
+								$teaser = mb_substr($teaser, 0, 160);
+								$teaser = mb_substr($teaser, 0, mb_strrpos($teaser, ' ')) . '…';
+							}
+							?>
+							<p><?php echo htmlspecialchars($teaser); ?></p>
 						<?php endif; ?>
 					</div>
 				</div>

@@ -54,12 +54,12 @@
 }
 
 .hb-btn--primary {
-	background: var(--hb-accent);
+	background: var(--hb-accent-dark);
 	color: #FFFFFF;
 }
 
 .hb-btn--primary:hover {
-	background: var(--hb-accent-dark);
+	background: #7d3d1b;
 	transform: translateY(-1px);
 }
 
@@ -182,7 +182,7 @@
 
 .hotelbooking-hero form button {
 	border: none;
-	background: var(--hb-accent);
+	background: var(--hb-accent-dark);
 	color: #FFFFFF;
 	padding: 0.65rem 1.5rem;
 	border-radius: 999px;
@@ -192,7 +192,7 @@
 }
 
 .hotelbooking-hero form button:hover {
-	background: var(--hb-accent-dark);
+	background: #7d3d1b;
 }
 
 /* Plain search form (Destinations list page) */
@@ -220,7 +220,7 @@
 
 .hotelbooking-destinations > form button {
 	border: none;
-	background: var(--hb-accent);
+	background: var(--hb-accent-dark);
 	color: #FFFFFF;
 	padding: 0.65rem 1.5rem;
 	border-radius: var(--hb-radius-sm);
@@ -276,16 +276,19 @@
 	flex: 1;
 }
 
+.hb-card-body h2,
 .hb-card-body h3 {
 	margin: 0;
 	font-size: 1.1rem;
 }
 
+.hb-card-body h2 a,
 .hb-card-body h3 a {
 	color: var(--hb-text);
 	text-decoration: none;
 }
 
+.hb-card-body h2 a:hover,
 .hb-card-body h3 a:hover {
 	color: var(--hb-accent);
 }
@@ -298,7 +301,7 @@
 }
 
 .hb-card-price {
-	color: var(--hb-accent);
+	color: var(--hb-accent-dark);
 	font-weight: 700;
 	font-size: 1.05rem;
 }
@@ -326,7 +329,10 @@
 	max-width: none;
 }
 
-/* Room detail page: two-column layout (content left, booking sidebar right) */
+/* Room detail page: two-column layout (content left, booking sidebar right).
+   Each column is one explicit wrapper element (.hotelbooking-room-main /
+   .hotelbooking-room-sidebar) so CSS Grid places them deterministically —
+   no relying on implicit auto-placement across interleaved siblings. */
 .hotelbooking-room {
 	display: grid;
 	grid-template-columns: 1.5fr 1fr;
@@ -334,23 +340,25 @@
 	align-items: start;
 }
 
-.hotelbooking-room > .hb-card-image,
-.hotelbooking-room > .hb-card-image--placeholder,
-.hotelbooking-room > .hotelbooking-description {
-	grid-column: 1;
-	grid-row: auto;
-}
-
-.hotelbooking-room-meta,
-.hotelbooking-room > h2,
-.hotelbooking-room > form {
-	grid-column: 2;
-	grid-row: auto;
-}
-
 .hotelbooking-room h1,
 .hotelbooking-room-destination-link {
 	grid-column: 1 / -1;
+}
+
+.hotelbooking-room-main {
+	grid-column: 1;
+	min-width: 0;
+}
+
+.hotelbooking-room-sidebar {
+	grid-column: 2;
+	background: var(--hb-surface);
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 1.5rem;
+	position: sticky;
+	top: 1.5rem;
 }
 
 @media (max-width: 800px) {
@@ -358,15 +366,13 @@
 		grid-template-columns: 1fr;
 	}
 
-	.hotelbooking-room h1,
-	.hotelbooking-room-destination-link,
-	.hotelbooking-room > .hb-card-image,
-	.hotelbooking-room > .hb-card-image--placeholder,
-	.hotelbooking-room > .hotelbooking-description,
-	.hotelbooking-room-meta,
-	.hotelbooking-room > h2,
-	.hotelbooking-room > form {
+	.hotelbooking-room-main,
+	.hotelbooking-room-sidebar {
 		grid-column: 1;
+	}
+
+	.hotelbooking-room-sidebar {
+		position: static;
 	}
 
 	.hotelbooking-room form {
@@ -378,8 +384,8 @@
 	}
 }
 
-.hotelbooking-room > .hb-card-image,
-.hotelbooking-room > .hb-card-image--placeholder {
+.hotelbooking-room-main .hb-card-image,
+.hotelbooking-room-main .hb-card-image--placeholder {
 	border-radius: var(--hb-radius);
 	margin-bottom: 1.25rem;
 	aspect-ratio: 16 / 9;
@@ -399,29 +405,32 @@
 }
 
 .hotelbooking-room-destination-link a {
-	color: var(--hb-accent);
+	color: var(--hb-accent-dark);
 	text-decoration: none;
 	font-weight: 600;
 }
 
 .hotelbooking-room-destination-link a:hover {
-	color: var(--hb-accent-dark);
+	color: #7d3d1b;
 	text-decoration: underline;
 }
 
 .hotelbooking-room-meta {
-	background: var(--hb-surface);
-	border: 1px solid var(--hb-border);
-	border-radius: var(--hb-radius);
-	padding: 1.25rem;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	margin-bottom: 1.5rem;
+	padding-bottom: 1.25rem;
+	margin-bottom: 1.25rem;
+	border-bottom: 1px solid var(--hb-border);
 }
 
 .hotelbooking-room-meta .hb-card-price {
 	font-size: 1.4rem;
+}
+
+.hotelbooking-room-sidebar h2 {
+	margin-top: 0;
+	font-size: 1.15rem;
 }
 
 /* Booking form */

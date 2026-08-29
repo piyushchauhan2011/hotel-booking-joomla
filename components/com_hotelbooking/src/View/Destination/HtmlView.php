@@ -21,6 +21,19 @@ class HtmlView extends BaseHtmlView
         $this->item = $model->getItem();
         $this->rooms = $this->item ? $model->getRooms((int) $this->item->id) : [];
 
+        if ($this->item) {
+            $description = trim(strip_tags((string) $this->item->description));
+            $description = $description !== ''
+                ? $description
+                : sprintf('Browse rooms and book your stay in %s.', $this->item->name);
+
+            if (\function_exists('mb_strimwidth')) {
+                $description = mb_strimwidth($description, 0, 160, '...');
+            }
+
+            $this->getDocument()->setDescription($description);
+        }
+
         return parent::display($tpl);
     }
 }

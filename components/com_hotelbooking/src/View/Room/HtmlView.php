@@ -18,6 +18,19 @@ class HtmlView extends BaseHtmlView
 
         $this->item = $this->getModel()->getItem();
 
+        if ($this->item) {
+            $description = trim(strip_tags((string) $this->item->description));
+            $description = $description !== ''
+                ? $description
+                : sprintf('Book the %s in %s.', $this->item->name, $this->item->destination_name);
+
+            if (\function_exists('mb_strimwidth')) {
+                $description = mb_strimwidth($description, 0, 160, '...');
+            }
+
+            $this->getDocument()->setDescription($description);
+        }
+
         return parent::display($tpl);
     }
 }

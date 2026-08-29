@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Illustration of a cosy hotel room with a bed and curtained window">
+	<rect width="800" height="450" fill="#F3E4D8"/>
+	<rect x="0" y="380" width="800" height="70" fill="#E7DDD2"/>
+
+	<rect x="500" y="60" width="220" height="260" rx="6" fill="#FBF7F2"/>
+	<rect x="500" y="60" width="220" height="260" rx="6" fill="none" stroke="#E7DDD2" stroke-width="8"/>
+	<rect x="606" y="60" width="8" height="260" fill="#E7DDD2"/>
+	<rect x="480" y="40" width="40" height="300" fill="#9C4C22" opacity="0.85"/>
+	<rect x="720" y="40" width="40" height="300" fill="#9C4C22" opacity="0.85"/>
+
+	<rect x="60" y="230" width="360" height="150" rx="14" fill="#FFFFFF"/>
+	<rect x="60" y="200" width="360" height="60" rx="10" fill="#9C4C22"/>
+	<rect x="80" y="215" width="130" height="60" rx="16" fill="#FFFFFF"/>
+	<rect x="230" y="215" width="130" height="60" rx="16" fill="#FFFFFF"/>
+	<rect x="60" y="330" width="360" height="20" fill="#C1622D"/>
+
+	<rect x="420" y="300" width="70" height="80" rx="6" fill="#FBF7F2" stroke="#E7DDD2" stroke-width="4"/>
+	<circle cx="455" cy="280" r="18" fill="#9C4C22" opacity="0.85"/>
+	<polygon points="440,262 470,262 455,238" fill="#C1622D"/>
+</svg>

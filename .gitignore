@@ -46,3 +46,6 @@ npm-debug.log*
 /*.sql.gz
 /*.zip
 /*.tar.gz
+
+.claude
+.playwright-mcp
