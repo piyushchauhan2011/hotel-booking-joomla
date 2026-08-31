@@ -25,6 +25,7 @@ class HtmlView extends BaseHtmlView
             $this->item->offers        = SubformHelper::decodeRows($this->item->offers, 'offer_item');
             $this->item->amenities     = $this->item->amenities ? explode(',', $this->item->amenities) : [];
             $this->item->nearby_places = SubformHelper::decodeRows($this->item->nearby_places, 'nearby_place_item');
+            $this->item->faqs          = SubformHelper::decodeRows($this->item->faqs, 'faq_item');
 
             $description = trim(strip_tags((string) $this->item->description));
             $description = $description !== ''

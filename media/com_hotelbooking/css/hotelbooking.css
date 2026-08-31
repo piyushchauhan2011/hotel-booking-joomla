@@ -909,6 +909,50 @@
 	font-size: 0.85rem !important;
 }
 
+/* FAQs */
+.hb-faqs {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin: 1.5rem 0;
+}
+
+.hb-faq-item {
+	background: var(--hb-surface);
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius);
+	padding: 0.9rem 1.1rem;
+}
+
+.hb-faq-item summary {
+	cursor: pointer;
+	font-weight: 700;
+	list-style: none;
+}
+
+.hb-faq-item summary::-webkit-details-marker {
+	display: none;
+}
+
+.hb-faq-item summary::before {
+	content: "+";
+	display: inline-block;
+	width: 1.2em;
+	color: var(--hb-accent-dark);
+	font-weight: 700;
+}
+
+.hb-faq-item[open] summary::before {
+	content: "\2212";
+}
+
+.hb-faq-answer {
+	margin-top: 0.6rem;
+	color: var(--hb-text-muted);
+	font-size: 0.92rem;
+	line-height: 1.5;
+}
+
 /* Amenities checklist */
 .hb-amenities {
 	display: grid;

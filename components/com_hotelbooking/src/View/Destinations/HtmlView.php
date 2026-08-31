@@ -12,6 +12,7 @@ class HtmlView extends BaseHtmlView
     protected $items;
     protected $state;
     protected $pagination;
+    protected $faqs;
 
     public function display($tpl = null)
     {
@@ -21,6 +22,7 @@ class HtmlView extends BaseHtmlView
         $this->items      = $this->get('Items');
         $this->state      = $this->get('State');
         $this->pagination = $this->get('Pagination');
+        $this->faqs       = $this->getModel()->getFaqs();
 
         return parent::display($tpl);
     }

@@ -5,6 +5,7 @@ namespace Learn\Component\Hotelbooking\Site\Model;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\QueryInterface;
+use Learn\Component\Hotelbooking\Site\Helper\FaqHelper;
 
 \defined('_JEXEC') or die;
 
@@ -48,5 +49,10 @@ class DestinationsModel extends ListModel
         $query->order($db->quoteName('a.ordering') . ' ASC');
 
         return $query;
+    }
+
+    public function getFaqs(): array
+    {
+        return FaqHelper::getPublished($this->getDatabase(), 'destinations');
     }
 }

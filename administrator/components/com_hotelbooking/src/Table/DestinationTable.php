@@ -10,7 +10,7 @@ use Joomla\Event\DispatcherInterface;
 
 class DestinationTable extends Table
 {
-    protected $_jsonEncode = ['gallery', 'offers'];
+    protected $_jsonEncode = ['gallery', 'offers', 'faqs'];
 
     public function __construct(DatabaseInterface $db, ?DispatcherInterface $dispatcher = null)
     {

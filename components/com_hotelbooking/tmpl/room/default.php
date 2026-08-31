@@ -79,6 +79,11 @@ $itemId = Factory::getApplication()->getInput()->getInt('Itemid', 0);
 				<?php endforeach; ?>
 			</ul>
 		<?php endif; ?>
+
+		<?php if (!empty($this->item->faqs)) : ?>
+			<h2><?php echo Text::_('COM_HOTELBOOKING_FAQS_HEADING'); ?></h2>
+			<?php echo LayoutHelper::render('faqs', ['faqs' => $this->item->faqs], JPATH_ROOT . '/components/com_hotelbooking/layouts'); ?>
+		<?php endif; ?>
 	</div>
 
 	<aside class="hotelbooking-room-sidebar">

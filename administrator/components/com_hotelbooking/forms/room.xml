@@ -105,6 +105,17 @@
 		/>
 
 		<field
+			name="faqs"
+			type="subform"
+			label="COM_HOTELBOOKING_FIELD_FAQS_LABEL"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable-table"
+			formsource="administrator/components/com_hotelbooking/forms/subforms/faq_item.xml"
+			min="0"
+			max="20"
+		/>
+
+		<field
 			name="image"
 			type="media"
 			label="COM_HOTELBOOKING_FIELD_IMAGE_LABEL"

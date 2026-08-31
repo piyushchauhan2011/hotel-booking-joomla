@@ -5,7 +5,7 @@
 	<creationDate>2026-08-29</creationDate>
 	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<version>0.1.2</version>
+	<version>0.1.3</version>
 	<description>COM_HOTELBOOKING_XML_DESCRIPTION</description>
 
 	<namespace path="src">Learn\Component\Hotelbooking</namespace>
@@ -45,6 +45,7 @@
 			<menu link="option=com_hotelbooking&amp;view=destinations">COM_HOTELBOOKING_SUBMENU_DESTINATIONS</menu>
 			<menu link="option=com_hotelbooking&amp;view=rooms">COM_HOTELBOOKING_SUBMENU_ROOMS</menu>
 			<menu link="option=com_hotelbooking&amp;view=bookings">COM_HOTELBOOKING_SUBMENU_BOOKINGS</menu>
+			<menu link="option=com_hotelbooking&amp;view=faqs">COM_HOTELBOOKING_SUBMENU_FAQS</menu>
 		</submenu>
 		<files folder="admin">
 			<folder>src</folder>
