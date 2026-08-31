@@ -1,1 +1,872 @@
-:root{--hb-bg: #FBF7F2;--hb-surface: #FFFFFF;--hb-text: #2B2420;--hb-text-muted: #6B5F55;--hb-accent: #C1622D;--hb-accent-dark: #9C4C22;--hb-accent-hover: #7d3d1b;--hb-accent-soft: #F3E4D8;--hb-border: #E7DDD2;--hb-shadow: 0 4px 16px rgba(43, 36, 32, 0.08);--hb-radius: 14px;--hb-radius-sm: 8px}body{background-color:var(--hb-bg);color:var(--hb-text)}a{color:var(--hb-accent-dark)}a:hover:not(.btn):not(.hb-btn){color:var(--hb-accent-hover)}.mod-menu a{color:var(--hb-text)}.mod-menu a:hover,.mod-menu .current>a{color:var(--hb-accent)}.btn-primary{background-color:var(--hb-accent-dark);border-color:var(--hb-accent-dark)}.btn-primary:hover{background-color:var(--hb-accent-hover);border-color:var(--hb-accent-hover)}@font-face{font-family:"Font Awesome 6 Free";font-style:normal;font-weight:400;font-display:swap;src:url(/media/vendor/fontawesome-free/webfonts/fa-regular-400.woff2) format("woff2")}@font-face{font-family:"Font Awesome 6 Free";font-style:normal;font-weight:900;font-display:swap;src:url(/media/vendor/fontawesome-free/webfonts/fa-solid-900.woff2) format("woff2")}@font-face{font-family:"Font Awesome 6 Brands";font-style:normal;font-weight:400;font-display:swap;src:url(/media/vendor/fontawesome-free/webfonts/fa-brands-400.woff2) format("woff2")}.com-content-category-blog__item.blog-item{background:var(--hb-surface);border-radius:var(--hb-radius);box-shadow:var(--hb-shadow);padding:1.75rem 2rem;margin-bottom:1.5rem}.com-content-category-blog__item.blog-item .page-header{border:none;margin-bottom:.5rem;padding-bottom:0}.com-content-category-blog__item.blog-item .page-header h2{font-size:1.5rem;font-weight:700;margin:0}.com-content-category-blog__item.blog-item .page-header h2 a{color:var(--hb-text);text-decoration:none}.com-content-category-blog__item.blog-item .page-header h2 a:hover{color:var(--hb-accent)}.article-info.text-muted{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem;font-size:.85rem;color:var(--hb-text-muted) !important;margin:.5rem 0 1rem}.article-info .article-info-term{display:none}.article-info dd{margin:0;display:inline-flex;align-items:center}.article-info dd.category-name{background:var(--hb-accent-soft);color:var(--hb-accent-dark);padding:.15rem .7rem;border-radius:999px;font-weight:600}.article-info dd.category-name a{color:inherit;text-decoration:none}.item-page .page-header h2,.item-page .page-header h1{font-weight:700}.com-content-category-blog__pagination a,.com-content-category-blog__pagination span{display:inline-flex;align-items:center;padding:.4rem .9rem;border-radius:999px;border:2px solid var(--hb-accent-dark);color:var(--hb-accent-dark);text-decoration:none;font-weight:600;font-size:.85rem}.com-content-category-blog__pagination a:hover{background:var(--hb-accent-soft)}html{scroll-behavior:smooth}.hb-article-card{background:var(--hb-surface);border-radius:var(--hb-radius);box-shadow:var(--hb-shadow);padding:2rem 2.5rem 2.5rem;margin:1.5rem 0 2rem}.hb-article-card .page-header{border:none;padding-bottom:0;margin-bottom:.5rem}.hb-article-card .page-header h1,.hb-article-card .page-header h2{font-size:2rem;font-weight:700;color:var(--hb-text);scroll-margin-top:1rem}.hb-article-card .com-content-article__body h2,.hb-article-card .com-content-article__body h3{scroll-margin-top:1.25rem;color:var(--hb-text)}.hb-article-card .com-content-article__body h2{font-size:1.5rem;font-weight:700;margin:2rem 0 1rem}.hb-article-card .com-content-article__body h3{font-size:1.2rem;font-weight:700;margin:1.5rem 0 .75rem}.hb-article-card .com-content-article__body p{line-height:1.7;margin:0 0 1.1rem}.header.container-header{background:linear-gradient(135deg, var(--hb-accent), var(--hb-accent-dark));padding:1.1rem 1.5rem;box-shadow:0 2px 12px rgba(43,36,32,.18)}.header.container-header .grid-child{padding:0}.navbar-brand .brand-logo,.navbar-brand .brand-logo span{color:#fff;font-size:1.5rem;font-weight:700;text-decoration:none;line-height:1.2}.navbar-brand .site-description{color:rgba(255,255,255,.85);font-size:.9rem;margin-top:.1rem}.container-nav{margin-top:1.1rem}.mod-menu ul{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem .5rem;list-style:none;margin:0;padding:0}.mod-menu a,.container-header .mod-menu>li>a{display:inline-flex;align-items:center;color:rgba(255,255,255,.9);padding:.5rem .9rem;border-radius:999px;text-decoration:none;font-weight:600;transition:background-color .15s ease,color .15s ease}.mod-menu a:hover,.mod-menu .current>a,.container-header .mod-menu>li>a:hover,.container-header .mod-menu>li.current>a{color:#fff;background:rgba(255,255,255,.18)}.container-header .mod-menu .mod-menu__sub a:hover{text-decoration:none}.container-header .mod-menu>li.active:after,.container-header .mod-menu>li:hover:after{content:none}@media(max-width: 991.98px){.container-header .mod-menu.mod-list>li>a:hover,.container-header .mod-menu>li.active>a,.container-header .mod-menu>li.active>span,.container-header .mod-menu>li>a:hover{text-decoration:none}}@media(min-width: 992px){.header.container-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem 2rem}.container-nav{margin-top:0}}@media(max-width: 991.98px){.mod-menu ul{flex-direction:column;align-items:stretch;gap:.4rem}.mod-menu a{width:100%;background:rgba(255,255,255,.1)}.mod-menu .current>a{background:rgba(255,255,255,.25)}.hb-nav-btn{width:100%;justify-content:center;margin-left:0 !important;margin-top:.35rem}.header.container-header{padding-right:4.5rem}html.hb-js .container-nav{display:none}html.hb-js .container-nav.is-open{display:block}}.hb-nav-toggle{display:none;position:absolute;top:1.15rem;right:1.5rem;width:2.5rem;height:2.5rem;padding:0;border:none;background:rgba(255,255,255,.15);border-radius:999px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:20}.hb-nav-toggle span{display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:transform .2s ease,opacity .2s ease}.hb-nav-toggle.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.hb-nav-toggle.is-open span:nth-child(2){opacity:0}.hb-nav-toggle.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}@media(max-width: 991.98px){html.hb-js .hb-nav-toggle{display:flex}}.hb-nav-btn{display:inline-flex !important;align-items:center;padding:.5rem 1.1rem !important;border-radius:999px !important;font-weight:600;margin-left:.25rem}.hb-nav-btn--outline{border:2px solid rgba(255,255,255,.7) !important;background:rgba(0,0,0,0) !important}.hb-nav-btn--outline:hover{border-color:#fff !important;background:rgba(255,255,255,.1) !important}.hb-nav-btn--primary{background:#fff !important;color:var(--hb-accent-dark) !important}.hb-nav-btn--primary:hover{background:var(--hb-accent-soft) !important;color:var(--hb-accent-dark) !important}.container-footer.footer{background:var(--hb-text);color:rgba(255,255,255,.75);padding:3rem 1.5rem 2rem;margin-top:3rem;border-top:3px solid var(--hb-accent)}.hb-footer{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr repeat(3, 1fr);gap:2rem 1.5rem;text-align:left}.hb-footer-brand strong{color:#fff;font-size:1.2rem}.hb-footer-brand p{margin:.6rem 0 0;color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.55;max-width:34ch}.hb-footer-heading{margin:0 0 .9rem;color:rgba(255,255,255,.85);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}.hb-footer-links{display:flex;flex-direction:column;gap:.6rem}.hb-footer-links a{color:rgba(255,255,255,.75);text-decoration:none;font-weight:500;font-size:.9rem}.hb-footer-links a:hover{color:#fff;text-decoration:underline}.hb-footer-copy{grid-column:1/-1;margin:1.25rem 0 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.15);font-size:.8rem;color:rgba(255,255,255,.5)}@media(max-width: 800px){.hb-footer{grid-template-columns:1fr 1fr}.hb-footer-brand{grid-column:1/-1}}@media(max-width: 480px){.hb-footer{grid-template-columns:1fr}}.hb-share{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin:1.25rem 0 1.75rem;padding:1rem 0;border-top:1px solid var(--hb-border);border-bottom:1px solid var(--hb-border)}.hb-share-label{font-weight:600;font-size:.9rem;color:var(--hb-text-muted);margin-right:.25rem}.hb-share-btn{display:inline-flex;align-items:center;justify-content:center;width:2.25rem;height:2.25rem;border-radius:50%;background:var(--hb-accent-soft);color:var(--hb-accent-dark);border:none;cursor:pointer;text-decoration:none;transition:background-color .15s ease,color .15s ease}.hb-share-btn svg{width:1.05rem;height:1.05rem}.hb-share-btn:hover,.hb-share-btn:focus-visible{background:var(--hb-accent-dark);color:#fff}.hb-share-btn--copy.is-copied{background:var(--hb-accent-dark);color:#fff}.hb-toc{background:var(--hb-accent-soft);border-radius:var(--hb-radius-sm);padding:1.1rem 1.4rem;margin:0 0 1.75rem}.hb-toc-title{font-weight:700;font-size:.95rem;color:var(--hb-accent-dark);margin:0 0 .6rem;text-transform:uppercase;letter-spacing:.03em}.hb-toc ol{list-style:none;margin:0;padding:0;counter-reset:hb-toc-counter}.hb-toc li{counter-increment:hb-toc-counter;margin:.35rem 0}.hb-toc li::before{content:counter(hb-toc-counter) ". ";color:var(--hb-accent-dark);font-weight:600}.hb-toc li.hb-toc-level-3{margin-left:1.25rem;font-size:.9rem}.hb-toc a{color:var(--hb-text);text-decoration:none;font-weight:600}.hb-toc a:hover{color:var(--hb-accent-dark);text-decoration:underline}.hb-article-card+.pagenavigation,.pagenavigation{margin:.5rem 0 2rem}.pagenavigation .btn{display:inline-flex;align-items:center;padding:.5rem 1.1rem;border-radius:999px;border:2px solid var(--hb-accent);background:rgba(0,0,0,0);color:var(--hb-accent-dark);font-weight:600;text-decoration:none}.pagenavigation .btn:hover{background:var(--hb-accent-soft);border-color:var(--hb-accent-dark)}.com-users-login,.com-users-registration{max-width:480px;margin:2rem auto;background:var(--hb-surface);border-radius:var(--hb-radius);box-shadow:var(--hb-shadow);padding:2rem 2.25rem}.com-users-login__form,.com-users-registration__form{background:rgba(0,0,0,0);border:none;padding:0;margin:0}.com-users-login .control-label label,.com-users-registration .control-label label{font-weight:600;font-size:.9rem;color:var(--hb-text-muted)}.com-users-login .form-control,.com-users-registration .form-control,.com-users-login input[type=text],.com-users-login input[type=password],.com-users-registration input[type=text],.com-users-registration input[type=password],.com-users-registration input[type=email]{border:1px solid var(--hb-border);border-radius:var(--hb-radius-sm);padding:.6rem .9rem}.com-users-login .form-control:focus,.com-users-registration .form-control:focus{outline:none;border-color:var(--hb-accent);box-shadow:0 0 0 3px var(--hb-accent-soft)}.com-users-login .form-control:invalid,.com-users-registration .form-control:invalid{border-color:var(--hb-accent)}.com-users-login .form-control:invalid:focus,.com-users-registration .form-control:invalid:focus{outline:none;box-shadow:0 0 0 3px var(--hb-accent-soft)}.com-users-login .btn-primary,.com-users-registration .btn-primary{width:100%;border-radius:999px;padding:.65rem;font-weight:600}.com-users-login__options.list-group{margin-top:1rem;border:none}.com-users-login__options .list-group-item{border:none;padding:.35rem 0;color:var(--hb-accent-dark);background:rgba(0,0,0,0)}.com-content-article__body img{max-width:100%;height:auto;border-radius:var(--hb-radius-sm);margin:1rem 0}.com-content-article__body table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.95rem}.com-content-article__body table caption{caption-side:top;text-align:left;font-weight:600;color:var(--hb-text-muted);margin-bottom:.4rem}.com-content-article__body th,.com-content-article__body td{text-align:left;padding:.6rem .9rem;border:1px solid var(--hb-border)}.com-content-article__body th{background:var(--hb-accent-soft);color:var(--hb-accent-dark);font-weight:700}.com-content-article__body tbody tr:nth-child(even){background:var(--hb-bg)}.com-content-article__body blockquote{border-left:4px solid var(--hb-accent);background:var(--hb-bg);margin:1.25rem 0;padding:.9rem 1.25rem;font-style:italic;color:var(--hb-text-muted);border-radius:0 var(--hb-radius-sm) var(--hb-radius-sm) 0}.com-content-article__body blockquote p:last-child{margin-bottom:0}.com-content-article__body ul,.com-content-article__body ol{margin:0 0 1.1rem;padding-left:1.5rem;line-height:1.7}.com-content-article__body li{margin:.25rem 0}.com-content-article__body pre{background:var(--hb-text);color:#f5efe8;border-radius:var(--hb-radius-sm);padding:1rem 1.25rem;overflow-x:auto;margin:1.25rem 0;font-size:.88rem;line-height:1.6}.com-content-article__body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.com-content-article__body :not(pre)>code{background:var(--hb-accent-soft);color:var(--hb-accent-dark);padding:.15rem .4rem;border-radius:4px;font-size:.9em}
+/*
+ * Custom site styling for the Hotel Booking child template.
+ * Hand-authored plain CSS — edit this file directly, there is no build step.
+ *
+ * Shared breakpoints used throughout this file (kept here as a single
+ * reference since CSS has no variables for media-query conditions):
+ *   - nav collapsed:   max-width: 991.98px
+ *   - nav expanded:    min-width: 992px
+ *   - footer 2-column: max-width: 800px
+ *   - footer 1-column: max-width: 480px
+ */
+
+/* Design tokens for this template's own custom styling. com_hotelbooking
+   declares its own separate --hb-* tokens for its component views, so this
+   block only affects markup styled below (header/footer/blog/article/auth
+   chrome). */
+:root {
+	--hb-bg: #FBF7F2;
+	--hb-surface: #FFFFFF;
+	--hb-text: #2B2420;
+	--hb-text-muted: #6B5F55;
+	--hb-accent: #C1622D;
+	--hb-accent-dark: #9C4C22;
+	--hb-accent-hover: #7d3d1b;
+	--hb-accent-soft: #F3E4D8;
+	--hb-border: #E7DDD2;
+	--hb-shadow: 0 4px 16px rgba(43, 36, 32, 0.08);
+	--hb-radius: 14px;
+	--hb-radius-sm: 8px;
+}
+
+/* ==========================================================================
+   Base: site-wide palette tie-in
+   ========================================================================== */
+
+body {
+	background-color: var(--hb-bg);
+	color: var(--hb-text);
+}
+
+a {
+	color: var(--hb-accent-dark);
+}
+
+/* Excludes button-styled anchors (Bootstrap .btn, com_hotelbooking's .hb-btn)
+   since this generic prose-link hover color has higher specificity than
+   their own `color` declaration and would otherwise silently override it
+   (e.g. turning "Book Now"'s white text near-invisible on its dark hover bg). */
+a:hover:not(.btn):not(.hb-btn) {
+	color: var(--hb-accent-hover);
+}
+
+/* Base (dark-on-light) menu link color for any mod_menu instance outside the
+   header — e.g. a footer or sidebar nav. The header section below overrides
+   this back to white specifically inside .container-header. */
+.mod-menu a {
+	color: var(--hb-text);
+}
+
+.mod-menu a:hover,
+.mod-menu .current > a {
+	color: var(--hb-accent);
+}
+
+.btn-primary {
+	background-color: var(--hb-accent-dark);
+	border-color: var(--hb-accent-dark);
+}
+
+.btn-primary:hover {
+	background-color: var(--hb-accent-hover);
+	border-color: var(--hb-accent-hover);
+}
+
+/* ==========================================================================
+   Font Awesome font-display override
+   ========================================================================== */
+
+/* Override Joomla core's joomla-fontawesome.min.css, which ships all three
+   Font Awesome families with font-display:block (blocks text paint while the
+   webfont loads). Redeclaring the same family/style/weight here, after core's
+   stylesheet in the cascade, swaps in font-display:swap without touching core. */
+@font-face {
+	font-family: "Font Awesome 6 Free";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(/media/vendor/fontawesome-free/webfonts/fa-regular-400.woff2) format("woff2");
+}
+
+@font-face {
+	font-family: "Font Awesome 6 Free";
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: url(/media/vendor/fontawesome-free/webfonts/fa-solid-900.woff2) format("woff2");
+}
+
+@font-face {
+	font-family: "Font Awesome 6 Brands";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(/media/vendor/fontawesome-free/webfonts/fa-brands-400.woff2) format("woff2");
+}
+
+/* ==========================================================================
+   Layout: Blog — Category Blog listing
+   (components/com_content/tmpl/category/blog.php + blog_item.php)
+   ========================================================================== */
+
+.com-content-category-blog__item.blog-item {
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 1.75rem 2rem;
+	margin-bottom: 1.5rem;
+}
+
+.com-content-category-blog__item.blog-item .page-header {
+	border: none;
+	margin-bottom: 0.5rem;
+	padding-bottom: 0;
+}
+
+.com-content-category-blog__item.blog-item .page-header h2 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin: 0;
+}
+
+.com-content-category-blog__item.blog-item .page-header h2 a {
+	color: var(--hb-text);
+	text-decoration: none;
+}
+
+.com-content-category-blog__item.blog-item .page-header h2 a:hover {
+	color: var(--hb-accent);
+}
+
+.article-info.text-muted {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.4rem 0.9rem;
+	font-size: 0.85rem;
+	color: var(--hb-text-muted) !important;
+	margin: 0.5rem 0 1rem;
+}
+
+.article-info .article-info-term {
+	display: none;
+}
+
+.article-info dd {
+	margin: 0;
+	display: inline-flex;
+	align-items: center;
+}
+
+.article-info dd.category-name {
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	padding: 0.15rem 0.7rem;
+	border-radius: 999px;
+	font-weight: 600;
+}
+
+.article-info dd.category-name a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Single article view shares the same page-header / article-info layouts */
+.item-page .page-header h2,
+.item-page .page-header h1 {
+	font-weight: 700;
+}
+
+.com-content-category-blog__pagination a,
+.com-content-category-blog__pagination span {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.4rem 0.9rem;
+	border-radius: 999px;
+	border: 2px solid var(--hb-accent-dark);
+	color: var(--hb-accent-dark);
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.85rem;
+}
+
+.com-content-category-blog__pagination a:hover {
+	background: var(--hb-accent-soft);
+}
+
+/* ==========================================================================
+   Layout: single article reading page
+   (templates/tpl_hotelbooking/html/com_content/article/default.php)
+   ========================================================================== */
+
+html {
+	scroll-behavior: smooth;
+}
+
+.hb-article-card {
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 2rem 2.5rem 2.5rem;
+	margin: 1.5rem 0 2rem;
+}
+
+.hb-article-card .page-header {
+	border: none;
+	padding-bottom: 0;
+	margin-bottom: 0.5rem;
+}
+
+.hb-article-card .page-header h1,
+.hb-article-card .page-header h2 {
+	font-size: 2rem;
+	font-weight: 700;
+	color: var(--hb-text);
+	scroll-margin-top: 1rem;
+}
+
+.hb-article-card .com-content-article__body h2,
+.hb-article-card .com-content-article__body h3 {
+	scroll-margin-top: 1.25rem;
+	color: var(--hb-text);
+}
+
+.hb-article-card .com-content-article__body h2 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin: 2rem 0 1rem;
+}
+
+.hb-article-card .com-content-article__body h3 {
+	font-size: 1.2rem;
+	font-weight: 700;
+	margin: 1.5rem 0 0.75rem;
+}
+
+.hb-article-card .com-content-article__body p {
+	line-height: 1.7;
+	margin: 0 0 1.1rem;
+}
+
+/* ==========================================================================
+   Component: header / navbar
+   (templates/cassiopeia/index.php: .header > .navbar-brand + .container-nav)
+   ========================================================================== */
+
+.header.container-header {
+	background: linear-gradient(135deg, var(--hb-accent), var(--hb-accent-dark));
+	padding: 1.1rem 1.5rem;
+	box-shadow: 0 2px 12px rgba(43, 36, 32, 0.18);
+}
+
+.header.container-header .grid-child {
+	padding: 0;
+}
+
+.navbar-brand .brand-logo,
+.navbar-brand .brand-logo span {
+	color: #FFFFFF;
+	font-size: 1.5rem;
+	font-weight: 700;
+	text-decoration: none;
+	line-height: 1.2;
+}
+
+.navbar-brand .site-description {
+	color: rgba(255, 255, 255, 0.85);
+	font-size: 0.9rem;
+	margin-top: 0.1rem;
+}
+
+.container-nav {
+	margin-top: 1.1rem;
+}
+
+.mod-menu ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.25rem 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Matches (and beats) core template.css's `.container-header .mod-menu > li > a`
+   specificity so this wins on specificity alone, not just load order. */
+.mod-menu a,
+.container-header .mod-menu > li > a {
+	display: inline-flex;
+	align-items: center;
+	color: rgba(255, 255, 255, 0.9);
+	padding: 0.5rem 0.9rem;
+	border-radius: 999px;
+	text-decoration: none;
+	font-weight: 600;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.mod-menu a:hover,
+.mod-menu .current > a,
+.container-header .mod-menu > li > a:hover,
+.container-header .mod-menu > li.current > a {
+	color: #FFFFFF;
+	background: rgba(255, 255, 255, 0.18);
+}
+
+/* Joomla core (template.css) re-applies text-decoration:underline on hover for
+   dropdown/submenu links (all widths), on the active item + hover under
+   991.98px, and separately draws a white ::after underline bar under the
+   active/hovered top-level item at desktop widths (>=992px) — all of which
+   clash with our pill-background style above. Cancel all of them, matching
+   core's exact selectors so this wins purely on cascade order (loads after core). */
+.container-header .mod-menu .mod-menu__sub a:hover {
+	text-decoration: none;
+}
+
+.container-header .mod-menu > li.active:after,
+.container-header .mod-menu > li:hover:after {
+	content: none;
+}
+
+@media (max-width: 991.98px) {
+	.container-header .mod-menu.mod-list > li > a:hover,
+	.container-header .mod-menu > li.active > a,
+	.container-header .mod-menu > li.active > span,
+	.container-header .mod-menu > li > a:hover {
+		text-decoration: none;
+	}
+}
+
+@media (min-width: 992px) {
+	.header.container-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 0.5rem 2rem;
+	}
+
+	.container-nav {
+		margin-top: 0;
+	}
+}
+
+@media (max-width: 991.98px) {
+	.mod-menu ul {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.4rem;
+	}
+
+	.mod-menu a {
+		width: 100%;
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	.mod-menu .current > a {
+		background: rgba(255, 255, 255, 0.25);
+	}
+
+	.hb-nav-btn {
+		width: 100%;
+		justify-content: center;
+		margin-left: 0 !important;
+		margin-top: 0.35rem;
+	}
+
+	.header.container-header {
+		padding-right: 4.5rem;
+	}
+
+	/* Collapsed behind a hamburger toggle, added at runtime by custom.js. The
+	   html.hb-js gate keeps the nav visible by default when JS hasn't run
+	   (no toggle button exists yet in that case either, so nothing is lost). */
+	html.hb-js .container-nav {
+		display: none;
+	}
+
+	html.hb-js .container-nav.is-open {
+		display: block;
+	}
+}
+
+/* ==========================================================================
+   Component: mobile nav toggle
+   (button injected by media/templates/site/tpl_hotelbooking/js/custom.js)
+   ========================================================================== */
+
+.hb-nav-toggle {
+	display: none;
+	position: absolute;
+	top: 1.15rem;
+	right: 1.5rem;
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0;
+	border: none;
+	background: rgba(255, 255, 255, 0.15);
+	border-radius: 999px;
+	cursor: pointer;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	z-index: 20;
+}
+
+.hb-nav-toggle span {
+	display: block;
+	width: 20px;
+	height: 2px;
+	background: #FFFFFF;
+	border-radius: 2px;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hb-nav-toggle.is-open span:nth-child(1) {
+	transform: translateY(7px) rotate(45deg);
+}
+
+.hb-nav-toggle.is-open span:nth-child(2) {
+	opacity: 0;
+}
+
+.hb-nav-toggle.is-open span:nth-child(3) {
+	transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 991.98px) {
+	html.hb-js .hb-nav-toggle {
+		display: flex;
+	}
+}
+
+/* ==========================================================================
+   Component: Login / Sign Up nav buttons
+   (menu item "Link Class" field)
+   ========================================================================== */
+
+.hb-nav-btn {
+	display: inline-flex !important;
+	align-items: center;
+	padding: 0.5rem 1.1rem !important;
+	border-radius: 999px !important;
+	font-weight: 600;
+	margin-left: 0.25rem;
+}
+
+.hb-nav-btn--outline {
+	border: 2px solid rgba(255, 255, 255, 0.7) !important;
+	background: transparent !important;
+}
+
+.hb-nav-btn--outline:hover {
+	border-color: #FFFFFF !important;
+	background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.hb-nav-btn--primary {
+	background: #FFFFFF !important;
+	color: var(--hb-accent-dark) !important;
+}
+
+.hb-nav-btn--primary:hover {
+	background: var(--hb-accent-soft) !important;
+	color: var(--hb-accent-dark) !important;
+}
+
+/* ==========================================================================
+   Component: footer
+   (mod_custom "Footer" module, position=footer)
+   ========================================================================== */
+
+.container-footer.footer {
+	background: var(--hb-text);
+	color: rgba(255, 255, 255, 0.75);
+	padding: 3rem 1.5rem 2rem;
+	margin-top: 3rem;
+	border-top: 3px solid var(--hb-accent);
+}
+
+.hb-footer {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1.4fr repeat(3, 1fr);
+	gap: 2rem 1.5rem;
+	text-align: left;
+}
+
+.hb-footer-brand strong {
+	color: #FFFFFF;
+	font-size: 1.2rem;
+}
+
+.hb-footer-brand p {
+	margin: 0.6rem 0 0;
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 0.9rem;
+	line-height: 1.55;
+	max-width: 34ch;
+}
+
+.hb-footer-heading {
+	margin: 0 0 0.9rem;
+	color: rgba(255, 255, 255, 0.85);
+	font-size: 0.78rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.hb-footer-links {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.hb-footer-links a {
+	color: rgba(255, 255, 255, 0.75);
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 0.9rem;
+}
+
+.hb-footer-links a:hover {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+.hb-footer-copy {
+	grid-column: 1 / -1;
+	margin: 1.25rem 0 0;
+	padding-top: 1.5rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	font-size: 0.8rem;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 800px) {
+	.hb-footer {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.hb-footer-brand {
+		grid-column: 1 / -1;
+	}
+}
+
+@media (max-width: 480px) {
+	.hb-footer {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ==========================================================================
+   Component: share buttons
+   ========================================================================== */
+
+.hb-share {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.6rem;
+	margin: 1.25rem 0 1.75rem;
+	padding: 1rem 0;
+	border-top: 1px solid var(--hb-border);
+	border-bottom: 1px solid var(--hb-border);
+}
+
+.hb-share-label {
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--hb-text-muted);
+	margin-right: 0.25rem;
+}
+
+.hb-share-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 50%;
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.hb-share-btn svg {
+	width: 1.05rem;
+	height: 1.05rem;
+}
+
+.hb-share-btn:hover,
+.hb-share-btn:focus-visible {
+	background: var(--hb-accent-dark);
+	color: #FFFFFF;
+}
+
+.hb-share-btn--copy.is-copied {
+	background: var(--hb-accent-dark);
+	color: #FFFFFF;
+}
+
+/* ==========================================================================
+   Component: table of contents
+   ========================================================================== */
+
+.hb-toc {
+	background: var(--hb-accent-soft);
+	border-radius: var(--hb-radius-sm);
+	padding: 1.1rem 1.4rem;
+	margin: 0 0 1.75rem;
+}
+
+.hb-toc-title {
+	font-weight: 700;
+	font-size: 0.95rem;
+	color: var(--hb-accent-dark);
+	margin: 0 0 0.6rem;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.hb-toc ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	counter-reset: hb-toc-counter;
+}
+
+.hb-toc li {
+	counter-increment: hb-toc-counter;
+	margin: 0.35rem 0;
+}
+
+.hb-toc li::before {
+	content: counter(hb-toc-counter) ". ";
+	color: var(--hb-accent-dark);
+	font-weight: 600;
+}
+
+.hb-toc li.hb-toc-level-3 {
+	margin-left: 1.25rem;
+	font-size: 0.9rem;
+}
+
+.hb-toc a {
+	color: var(--hb-text);
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.hb-toc a:hover {
+	color: var(--hb-accent-dark);
+	text-decoration: underline;
+}
+
+/* ==========================================================================
+   Component: Prev/Next pagenavigation
+   (plugins/content/pagenavigation/tmpl/default.php)
+   ========================================================================== */
+
+.hb-article-card + .pagenavigation,
+.pagenavigation {
+	margin: 0.5rem 0 2rem;
+}
+
+.pagenavigation .btn {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.5rem 1.1rem;
+	border-radius: 999px;
+	border: 2px solid var(--hb-accent);
+	background: transparent;
+	color: var(--hb-accent-dark);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.pagenavigation .btn:hover {
+	background: var(--hb-accent-soft);
+	border-color: var(--hb-accent-dark);
+}
+
+/* ==========================================================================
+   Page: Login / Registration forms (com_users)
+   ========================================================================== */
+
+.com-users-login,
+.com-users-registration {
+	max-width: 480px;
+	margin: 2rem auto;
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 2rem 2.25rem;
+}
+
+.com-users-login__form,
+.com-users-registration__form {
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.com-users-login .control-label label,
+.com-users-registration .control-label label {
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--hb-text-muted);
+}
+
+.com-users-login .form-control,
+.com-users-registration .form-control,
+.com-users-login input[type="text"],
+.com-users-login input[type="password"],
+.com-users-registration input[type="text"],
+.com-users-registration input[type="password"],
+.com-users-registration input[type="email"] {
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+	padding: 0.6rem 0.9rem;
+}
+
+.com-users-login .form-control:focus,
+.com-users-registration .form-control:focus {
+	outline: none;
+	border-color: var(--hb-accent);
+	box-shadow: 0 0 0 3px var(--hb-accent-soft);
+}
+
+/* A field left empty on submit gets the browser's native :invalid state (plus
+   a native "please fill in this field" bubble that isn't stylable at all) —
+   re-tint the border/focus ring to match the theme instead of leaving the
+   browser default red/black. */
+.com-users-login .form-control:invalid,
+.com-users-registration .form-control:invalid {
+	border-color: var(--hb-accent);
+}
+
+.com-users-login .form-control:invalid:focus,
+.com-users-registration .form-control:invalid:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px var(--hb-accent-soft);
+}
+
+.com-users-login .btn-primary,
+.com-users-registration .btn-primary {
+	width: 100%;
+	border-radius: 999px;
+	padding: 0.65rem;
+	font-weight: 600;
+}
+
+.com-users-login__options.list-group {
+	margin-top: 1rem;
+	border: none;
+}
+
+.com-users-login__options .list-group-item {
+	border: none;
+	padding: 0.35rem 0;
+	color: var(--hb-accent-dark);
+	background: transparent;
+}
+
+/* ==========================================================================
+   Page: rich content blocks inside article body
+   ========================================================================== */
+
+.com-content-article__body img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--hb-radius-sm);
+	margin: 1rem 0;
+}
+
+.com-content-article__body table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.25rem 0;
+	font-size: 0.95rem;
+}
+
+.com-content-article__body table caption {
+	caption-side: top;
+	text-align: left;
+	font-weight: 600;
+	color: var(--hb-text-muted);
+	margin-bottom: 0.4rem;
+}
+
+.com-content-article__body th,
+.com-content-article__body td {
+	text-align: left;
+	padding: 0.6rem 0.9rem;
+	border: 1px solid var(--hb-border);
+}
+
+.com-content-article__body th {
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	font-weight: 700;
+}
+
+.com-content-article__body tbody tr:nth-child(even) {
+	background: var(--hb-bg);
+}
+
+.com-content-article__body blockquote {
+	border-left: 4px solid var(--hb-accent);
+	background: var(--hb-bg);
+	margin: 1.25rem 0;
+	padding: 0.9rem 1.25rem;
+	font-style: italic;
+	color: var(--hb-text-muted);
+	border-radius: 0 var(--hb-radius-sm) var(--hb-radius-sm) 0;
+}
+
+.com-content-article__body blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+.com-content-article__body ul,
+.com-content-article__body ol {
+	margin: 0 0 1.1rem;
+	padding-left: 1.5rem;
+	line-height: 1.7;
+}
+
+.com-content-article__body li {
+	margin: 0.25rem 0;
+}
+
+.com-content-article__body pre {
+	background: var(--hb-text);
+	color: #F5EFE8;
+	border-radius: var(--hb-radius-sm);
+	padding: 1rem 1.25rem;
+	overflow-x: auto;
+	margin: 1.25rem 0;
+	font-size: 0.88rem;
+	line-height: 1.6;
+}
+
+.com-content-article__body code {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.com-content-article__body :not(pre) > code {
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	padding: 0.15rem 0.4rem;
+	border-radius: 4px;
+	font-size: 0.9em;
+}

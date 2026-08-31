@@ -16,6 +16,6 @@ require JPATH_THEMES . '/cassiopeia/component.php';
 
 $wa = $this->getWebAssetManager();
 
-// This template's own custom CSS/JS, compiled from scss/tpl_hotelbooking (see joomla.asset.json)
+// This template's own custom CSS/JS (see media/templates/site/tpl_hotelbooking and joomla.asset.json)
 $wa->useStyle('tpl_hotelbooking.custom')
     ->useScript('tpl_hotelbooking.custom');

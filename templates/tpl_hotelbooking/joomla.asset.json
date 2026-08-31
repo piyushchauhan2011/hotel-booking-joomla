@@ -2,11 +2,11 @@
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "tpl_hotelbooking",
   "version": "1.0.0",
-  "description": "Assets for the Hotel Booking child template's own custom CSS/JS, compiled from the project's SCSS 7-1 source.",
+  "description": "Assets for the Hotel Booking child template's own custom CSS/JS.",
   "assets": [
     {
       "name": "tpl_hotelbooking.custom",
-      "description": "Custom site styling, compiled from scss/tpl_hotelbooking via `npm run build:css`.",
+      "description": "Custom site styling, hand-authored in media/templates/site/tpl_hotelbooking/css/custom.css.",
       "type": "style",
       "uri": "custom.css",
       "dependencies": [
@@ -15,7 +15,7 @@
     },
     {
       "name": "tpl_hotelbooking.custom",
-      "description": "Custom site behaviour (mobile nav toggle, etc).",
+      "description": "Custom site behaviour (mobile nav toggle, copy-link, etc).",
       "type": "script",
       "uri": "custom.js",
       "dependencies": [
