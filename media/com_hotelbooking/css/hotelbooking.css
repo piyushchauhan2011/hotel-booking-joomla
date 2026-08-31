@@ -909,6 +909,62 @@
 	font-size: 0.85rem !important;
 }
 
+/* Snippets embedded in article/blog content via {hotelbooking} tags */
+.hb-snippet {
+	max-width: 420px;
+	margin: 1.75rem 0;
+}
+
+.hb-snippet--offer {
+	max-width: 420px;
+}
+
+.hb-snippet-label {
+	display: inline-block;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-size: 0.72rem;
+	font-weight: 700;
+	color: var(--hb-accent-dark);
+	background: var(--hb-accent-soft);
+	padding: 0.2rem 0.6rem;
+	border-radius: 999px;
+	align-self: flex-start;
+	margin-bottom: 0.2rem;
+}
+
+.hb-snippet--offer .hb-snippet-label {
+	display: block;
+	width: fit-content;
+	margin-bottom: 0.6rem;
+}
+
+.hb-snippet-meta {
+	margin: 0;
+	color: var(--hb-text-muted);
+	font-size: 0.85rem;
+}
+
+/* Not a real heading tag: a promo card title should not appear in an article's
+   table of contents, so it is a styled <p>/<strong> rather than an h2/h3. */
+.hb-snippet-title {
+	display: block;
+	margin: 0;
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: var(--hb-text);
+}
+
+.hb-snippet .hb-snippet-title a {
+	color: var(--hb-text);
+	text-decoration: none;
+}
+
+.hb-snippet .hb-snippet-title a:hover {
+	color: var(--hb-accent);
+	text-decoration: underline;
+}
+
 /* FAQs */
 .hb-faqs {
 	display: flex;

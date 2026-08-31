@@ -27,6 +27,15 @@
       "attributes": {
         "defer": true
       }
+    },
+    {
+      "name": "com_hotelbooking.admin-snippets-modal",
+      "description": "Inserts a {hotelbooking} tag into the article editor from the Snippets picker modal.",
+      "type": "script",
+      "uri": "com_hotelbooking/admin-snippets-modal.js",
+      "dependencies": [
+        "core"
+      ]
     }
   ]
 }
