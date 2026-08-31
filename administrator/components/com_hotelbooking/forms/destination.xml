@@ -26,16 +26,37 @@
 
 		<field
 			name="description"
-			type="textarea"
+			type="editor"
 			label="COM_HOTELBOOKING_FIELD_DESCRIPTION_LABEL"
-			rows="6"
-			cols="30"
+			filter="safehtml"
 		/>
 
 		<field
 			name="image"
 			type="media"
 			label="COM_HOTELBOOKING_FIELD_IMAGE_LABEL"
+		/>
+
+		<field
+			name="gallery"
+			type="subform"
+			label="COM_HOTELBOOKING_FIELD_GALLERY_LABEL"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable-table"
+			formsource="administrator/components/com_hotelbooking/forms/subforms/gallery_item.xml"
+			min="0"
+			max="12"
+		/>
+
+		<field
+			name="offers"
+			type="subform"
+			label="COM_HOTELBOOKING_FIELD_OFFERS_LABEL"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable-table"
+			formsource="administrator/components/com_hotelbooking/forms/subforms/offer_item.xml"
+			min="0"
+			max="12"
 		/>
 
 		<field

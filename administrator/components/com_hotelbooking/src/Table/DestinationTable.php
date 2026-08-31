@@ -10,6 +10,8 @@ use Joomla\Event\DispatcherInterface;
 
 class DestinationTable extends Table
 {
+    protected $_jsonEncode = ['gallery', 'offers'];
+
     public function __construct(DatabaseInterface $db, ?DispatcherInterface $dispatcher = null)
     {
         parent::__construct('#__hotelbooking_destinations', 'id', $db, $dispatcher);

@@ -18,6 +18,15 @@
       "attributes": {
         "defer": true
       }
+    },
+    {
+      "name": "com_hotelbooking.gallery-lightbox",
+      "description": "Photo gallery lightbox (Destination and Room pages).",
+      "type": "script",
+      "uri": "com_hotelbooking/gallery-lightbox.js",
+      "attributes": {
+        "defer": true
+      }
     }
   ]
 }

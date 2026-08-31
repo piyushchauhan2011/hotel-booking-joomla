@@ -5,6 +5,7 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
 /** @var \Learn\Component\Hotelbooking\Site\View\Room\HtmlView $this */
@@ -35,7 +36,44 @@ $itemId = Factory::getApplication()->getInput()->getInt('Itemid', 0);
 		<?php endif; ?>
 
 		<?php if (!empty($this->item->description)) : ?>
-			<div class="hotelbooking-description"><?php echo nl2br(htmlspecialchars($this->item->description)); ?></div>
+			<div class="hotelbooking-description"><?php echo $this->item->description; ?></div>
+		<?php endif; ?>
+
+		<?php echo LayoutHelper::render('gallery', ['images' => $this->item->gallery], JPATH_ROOT . '/components/com_hotelbooking/layouts'); ?>
+
+		<?php if (!empty($this->item->amenities)) : ?>
+			<h2><?php echo Text::_('COM_HOTELBOOKING_AMENITIES_TITLE'); ?></h2>
+			<ul class="hb-amenities">
+				<?php foreach ($this->item->amenities as $amenity) : ?>
+					<li class="hb-amenity">
+						<svg class="hb-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo Text::_('COM_HOTELBOOKING_AMENITY_' . strtoupper($amenity)); ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+
+		<?php if (!empty($this->item->offers)) : ?>
+			<h2><?php echo Text::_('COM_HOTELBOOKING_OFFERS_TITLE'); ?></h2>
+			<?php echo LayoutHelper::render('offers', ['offers' => $this->item->offers], JPATH_ROOT . '/components/com_hotelbooking/layouts'); ?>
+		<?php endif; ?>
+
+		<?php if (!empty($this->item->nearby_places)) : ?>
+			<h2><?php echo Text::_('COM_HOTELBOOKING_NEARBY_TITLE'); ?></h2>
+			<ul class="hb-nearby">
+				<?php foreach ($this->item->nearby_places as $place) : ?>
+					<?php if (empty($place['name'])) : continue; endif; ?>
+					<li class="hb-nearby-item">
+						<span class="hb-nearby-category hb-nearby-category--<?php echo htmlspecialchars($place['category'] ?? 'other'); ?>">
+							<?php echo Text::_('COM_HOTELBOOKING_NEARBY_CATEGORY_' . strtoupper($place['category'] ?? 'other')); ?>
+						</span>
+						<span class="hb-nearby-name"><?php echo htmlspecialchars($place['name']); ?></span>
+						<?php if (!empty($place['distance'])) : ?>
+							<span class="hb-nearby-distance"><?php echo htmlspecialchars($place['distance']); ?></span>
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 		<?php endif; ?>
 	</div>
 

@@ -30,10 +30,20 @@
 
 		<field
 			name="description"
-			type="textarea"
+			type="editor"
 			label="COM_HOTELBOOKING_FIELD_DESCRIPTION_LABEL"
-			rows="6"
-			cols="30"
+			filter="safehtml"
+		/>
+
+		<field
+			name="gallery"
+			type="subform"
+			label="COM_HOTELBOOKING_FIELD_GALLERY_LABEL"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable-table"
+			formsource="administrator/components/com_hotelbooking/forms/subforms/gallery_item.xml"
+			min="0"
+			max="12"
 		/>
 
 		<field
@@ -53,6 +63,45 @@
 			required="true"
 			default="1"
 			min="1"
+		/>
+
+		<field
+			name="amenities"
+			type="checkboxes"
+			label="COM_HOTELBOOKING_FIELD_AMENITIES_LABEL"
+			>
+			<option value="wifi">COM_HOTELBOOKING_AMENITY_WIFI</option>
+			<option value="tv">COM_HOTELBOOKING_AMENITY_TV</option>
+			<option value="ac">COM_HOTELBOOKING_AMENITY_AC</option>
+			<option value="breakfast">COM_HOTELBOOKING_AMENITY_BREAKFAST</option>
+			<option value="parking">COM_HOTELBOOKING_AMENITY_PARKING</option>
+			<option value="pool">COM_HOTELBOOKING_AMENITY_POOL</option>
+			<option value="kitchen">COM_HOTELBOOKING_AMENITY_KITCHEN</option>
+			<option value="balcony">COM_HOTELBOOKING_AMENITY_BALCONY</option>
+			<option value="pet_friendly">COM_HOTELBOOKING_AMENITY_PET_FRIENDLY</option>
+			<option value="non_smoking">COM_HOTELBOOKING_AMENITY_NON_SMOKING</option>
+		</field>
+
+		<field
+			name="offers"
+			type="subform"
+			label="COM_HOTELBOOKING_FIELD_OFFERS_LABEL"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable-table"
+			formsource="administrator/components/com_hotelbooking/forms/subforms/offer_item.xml"
+			min="0"
+			max="12"
+		/>
+
+		<field
+			name="nearby_places"
+			type="subform"
+			label="COM_HOTELBOOKING_FIELD_NEARBY_LABEL"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable-table"
+			formsource="administrator/components/com_hotelbooking/forms/subforms/nearby_place_item.xml"
+			min="0"
+			max="20"
 		/>
 
 		<field
