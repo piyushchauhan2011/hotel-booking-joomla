@@ -108,4 +108,54 @@
 			default="0"
 		/>
 	</fieldset>
+
+	<fieldset name="partner" label="COM_HOTELBOOKING_FIELDSET_PARTNER_LABEL">
+		<field
+			name="partner_contact_name"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_PARTNER_CONTACT_NAME_LABEL"
+			size="40"
+		/>
+
+		<field
+			name="partner_email"
+			type="email"
+			label="COM_HOTELBOOKING_FIELD_PARTNER_EMAIL_LABEL"
+			size="40"
+		/>
+
+		<field
+			name="partner_whatsapp"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_PARTNER_WHATSAPP_LABEL"
+			hint="Digits only with country code, e.g. 66812345678"
+			size="20"
+		/>
+
+		<field
+			name="payment_instructions"
+			type="textarea"
+			label="COM_HOTELBOOKING_FIELD_PAYMENT_INSTRUCTIONS_LABEL"
+			hint="Bank/QR/payment details this hotel wants relayed to guests once a booking is confirmed"
+			rows="5"
+			cols="40"
+		/>
+
+		<field
+			name="commission_rate"
+			type="number"
+			label="COM_HOTELBOOKING_FIELD_COMMISSION_RATE_LABEL"
+			default="8.00"
+			step="0.01"
+			min="0"
+			max="100"
+			required="true"
+		/>
+
+		<field
+			name="manager_user_id"
+			type="user"
+			label="COM_HOTELBOOKING_FIELD_MANAGER_USER_LABEL"
+		/>
+	</fieldset>
 </form>

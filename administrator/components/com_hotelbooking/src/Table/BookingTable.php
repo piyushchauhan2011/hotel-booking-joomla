@@ -39,6 +39,10 @@ class BookingTable extends Table
             $this->created = \Joomla\CMS\Factory::getDate()->toSql();
         }
 
+        $this->total_price     = round((float) $this->total_price, 2);
+        $this->commission_rate = round((float) $this->commission_rate, 2);
+        $this->commission_amount = round($this->total_price * $this->commission_rate / 100, 2);
+
         return true;
     }
 }

@@ -4,7 +4,9 @@ namespace Learn\Component\Hotelbooking\Administrator\Model;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\Database\ParameterType;
 use Joomla\Database\QueryInterface;
+use Learn\Component\Hotelbooking\Administrator\Helper\AccessHelper;
 
 \defined('_JEXEC') or die;
 
@@ -64,7 +66,14 @@ class DestinationsModel extends ListModel
         if (is_numeric($published)) {
             $published = (int) $published;
             $query->where($db->quoteName('a.published') . ' = :published')
-                ->bind(':published', $published, \Joomla\Database\ParameterType::INTEGER);
+                ->bind(':published', $published, ParameterType::INTEGER);
+        }
+
+        $user = $this->getCurrentUser();
+
+        if (!AccessHelper::isPrivileged($user)) {
+            $query->where($db->quoteName('a.manager_user_id') . ' = :scopedUserId')
+                ->bind(':scopedUserId', $user->id, ParameterType::INTEGER);
         }
 
         $orderCol  = $this->state->get('list.ordering', 'a.ordering');

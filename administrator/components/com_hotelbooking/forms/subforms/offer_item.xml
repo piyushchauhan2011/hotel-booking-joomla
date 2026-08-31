@@ -33,10 +33,28 @@
 		/>
 
 		<field
+			name="valid_from"
+			type="calendar"
+			label="COM_HOTELBOOKING_FIELD_OFFER_VALID_FROM_LABEL"
+			format="%Y-%m-%d"
+		/>
+
+		<field
 			name="valid_until"
 			type="calendar"
 			label="COM_HOTELBOOKING_FIELD_OFFER_VALID_UNTIL_LABEL"
 			format="%Y-%m-%d"
 		/>
+
+		<field
+			name="negotiation_status"
+			type="list"
+			label="COM_HOTELBOOKING_FIELD_OFFER_NEGOTIATION_STATUS_LABEL"
+			default="proposed"
+			>
+			<option value="proposed">COM_HOTELBOOKING_OFFER_STATUS_PROPOSED</option>
+			<option value="accepted">COM_HOTELBOOKING_OFFER_STATUS_ACCEPTED</option>
+			<option value="rejected">COM_HOTELBOOKING_OFFER_STATUS_REJECTED</option>
+		</field>
 	</fields>
 </form>

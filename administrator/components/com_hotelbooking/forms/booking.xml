@@ -81,4 +81,81 @@
 			filter="unset"
 		/>
 	</fieldset>
+
+	<fieldset name="partner" label="COM_HOTELBOOKING_FIELDSET_PARTNER_LABEL">
+		<field
+			name="total_price"
+			type="number"
+			label="COM_HOTELBOOKING_FIELD_TOTAL_PRICE_LABEL"
+			step="0.01"
+			min="0"
+			default="0"
+		/>
+
+		<field
+			name="commission_rate"
+			type="number"
+			label="COM_HOTELBOOKING_FIELD_COMMISSION_RATE_LABEL"
+			hint="Snapshotted from the hotel's default rate; edit for a one-off deal"
+			step="0.01"
+			min="0"
+			max="100"
+			default="0"
+		/>
+
+		<field
+			name="commission_amount"
+			type="number"
+			label="COM_HOTELBOOKING_FIELD_COMMISSION_AMOUNT_LABEL"
+			readonly="true"
+			filter="unset"
+		/>
+
+		<field
+			name="partner_status"
+			type="list"
+			label="COM_HOTELBOOKING_FIELD_PARTNER_STATUS_LABEL"
+			default="awaiting_hotel_check"
+			>
+			<option value="awaiting_hotel_check">COM_HOTELBOOKING_PARTNER_STATUS_AWAITING_HOTEL_CHECK</option>
+			<option value="hotel_confirmed_awaiting_payment">COM_HOTELBOOKING_PARTNER_STATUS_HOTEL_CONFIRMED_AWAITING_PAYMENT</option>
+			<option value="confirmed_paid">COM_HOTELBOOKING_PARTNER_STATUS_CONFIRMED_PAID</option>
+			<option value="declined_by_hotel">COM_HOTELBOOKING_PARTNER_STATUS_DECLINED_BY_HOTEL</option>
+		</field>
+
+		<field
+			name="partner_notes"
+			type="textarea"
+			label="COM_HOTELBOOKING_FIELD_PARTNER_NOTES_LABEL"
+			rows="5"
+			cols="40"
+		/>
+
+		<field
+			name="hotel_notified_at"
+			type="calendar"
+			label="COM_HOTELBOOKING_FIELD_HOTEL_NOTIFIED_AT_LABEL"
+			format="%Y-%m-%d %H:%M:%S"
+			readonly="true"
+			filter="unset"
+		/>
+
+		<field
+			name="commission_paid"
+			type="radio"
+			layout="joomla.form.field.radio.switcher"
+			label="COM_HOTELBOOKING_FIELD_COMMISSION_PAID_LABEL"
+			default="0"
+			>
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+		<field
+			name="commission_paid_date"
+			type="calendar"
+			label="COM_HOTELBOOKING_FIELD_COMMISSION_PAID_DATE_LABEL"
+			format="%Y-%m-%d"
+		/>
+	</fieldset>
 </form>
