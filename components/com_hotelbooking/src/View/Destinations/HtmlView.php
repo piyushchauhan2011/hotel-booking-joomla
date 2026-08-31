@@ -16,8 +16,7 @@ class HtmlView extends BaseHtmlView
     public function display($tpl = null)
     {
         $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
-        $wa->registerAndUseStyle('com_hotelbooking.site', 'com_hotelbooking/hotelbooking.css', ['relative' => true, 'version' => 'auto']);
-        $wa->registerAndUseScript('com_hotelbooking.search-autocomplete', 'com_hotelbooking/search-autocomplete.js', ['relative' => true, 'version' => 'auto'], ['defer' => true]);
+        $wa->useStyle('com_hotelbooking.site')->useScript('com_hotelbooking.search-autocomplete');
 
         $this->items      = $this->get('Items');
         $this->state      = $this->get('State');

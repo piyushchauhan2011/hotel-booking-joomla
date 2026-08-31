@@ -87,9 +87,6 @@ if (!empty($hbBodyHtml) && (str_contains($hbBodyHtml, '<h2') || str_contains($hb
 // Share data
 $hbShareUrl   = htmlspecialchars(Uri::getInstance()->toString(), ENT_QUOTES);
 $hbShareTitle = htmlspecialchars($this->item->title, ENT_QUOTES);
-
-$this->getDocument()->getWebAssetManager()
-    ->registerAndUseScript('com_hotelbooking.copylink', 'com_hotelbooking/copy-link.js', ['relative' => true, 'version' => 'auto'], ['defer' => true]);
 ?>
 <div class="com-content-article item-page hb-article-card<?php echo $this->pageclass_sfx; ?>">
     <meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? Factory::getApplication()->get('language') : $this->item->language; ?>">

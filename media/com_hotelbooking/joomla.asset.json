@@ -1,0 +1,23 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_hotelbooking",
+  "version": "1.0.0",
+  "description": "Assets for com_hotelbooking's site views.",
+  "assets": [
+    {
+      "name": "com_hotelbooking.site",
+      "description": "Component-wide styling for the Home, Destinations, Destination, Room, and Bookings views.",
+      "type": "style",
+      "uri": "com_hotelbooking/hotelbooking.css"
+    },
+    {
+      "name": "com_hotelbooking.search-autocomplete",
+      "description": "Destination search-suggestions widget (Home hero + Destinations list).",
+      "type": "script",
+      "uri": "com_hotelbooking/search-autocomplete.js",
+      "attributes": {
+        "defer": true
+      }
+    }
+  ]
+}

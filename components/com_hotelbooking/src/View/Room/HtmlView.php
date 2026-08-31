@@ -13,8 +13,7 @@ class HtmlView extends BaseHtmlView
 
     public function display($tpl = null)
     {
-        Factory::getApplication()->getDocument()->getWebAssetManager()
-            ->registerAndUseStyle('com_hotelbooking.site', 'com_hotelbooking/hotelbooking.css', ['relative' => true, 'version' => 'auto']);
+        Factory::getApplication()->getDocument()->getWebAssetManager()->useStyle('com_hotelbooking.site');
 
         $this->item = $this->getModel()->getItem();
 
