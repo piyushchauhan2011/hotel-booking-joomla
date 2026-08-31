@@ -14,5 +14,13 @@
 			label="COM_HOTELBOOKING_FIELD_GALLERY_CAPTION_LABEL"
 			size="40"
 		/>
+
+		<field
+			name="description"
+			type="textarea"
+			label="COM_HOTELBOOKING_FIELD_GALLERY_DESCRIPTION_LABEL"
+			rows="3"
+			cols="40"
+		/>
 	</fields>
 </form>

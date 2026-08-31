@@ -39,7 +39,11 @@ $itemId = Factory::getApplication()->getInput()->getInt('Itemid', 0);
 			<div class="hotelbooking-description"><?php echo $this->item->description; ?></div>
 		<?php endif; ?>
 
-		<?php echo LayoutHelper::render('gallery', ['images' => $this->item->gallery], JPATH_ROOT . '/components/com_hotelbooking/layouts'); ?>
+		<?php echo LayoutHelper::render('gallery', [
+			'images'        => $this->item->gallery,
+			'features'      => $this->item->amenities,
+			'featuresTitle' => Text::_('COM_HOTELBOOKING_AMENITIES_TITLE'),
+		], JPATH_ROOT . '/components/com_hotelbooking/layouts'); ?>
 
 		<?php if (!empty($this->item->amenities)) : ?>
 			<h2><?php echo Text::_('COM_HOTELBOOKING_AMENITIES_TITLE'); ?></h2>

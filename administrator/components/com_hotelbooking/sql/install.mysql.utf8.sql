@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_destinations` (
   `alias` VARCHAR(255) NOT NULL DEFAULT '',
   `description` MEDIUMTEXT,
   `gallery` MEDIUMTEXT,
+  `amenities` VARCHAR(512),
   `offers` MEDIUMTEXT,
   `image` VARCHAR(255) NOT NULL DEFAULT '',
   `published` TINYINT NOT NULL DEFAULT 1,

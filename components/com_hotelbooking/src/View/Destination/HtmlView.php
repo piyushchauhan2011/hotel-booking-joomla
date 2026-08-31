@@ -24,8 +24,9 @@ class HtmlView extends BaseHtmlView
         $this->rooms = $this->item ? $model->getRooms((int) $this->item->id) : [];
 
         if ($this->item) {
-            $this->item->gallery = SubformHelper::decodeRows($this->item->gallery, 'gallery_item');
-            $this->item->offers  = SubformHelper::decodeRows($this->item->offers, 'offer_item');
+            $this->item->gallery    = SubformHelper::decodeRows($this->item->gallery, 'gallery_item');
+            $this->item->offers     = SubformHelper::decodeRows($this->item->offers, 'offer_item');
+            $this->item->amenities  = $this->item->amenities ? explode(',', $this->item->amenities) : [];
 
             $description = trim(strip_tags((string) $this->item->description));
             $description = $description !== ''

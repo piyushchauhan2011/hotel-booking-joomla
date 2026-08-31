@@ -17,6 +17,15 @@ class DestinationTable extends Table
         parent::__construct('#__hotelbooking_destinations', 'id', $db, $dispatcher);
     }
 
+    public function bind($src, $ignore = [])
+    {
+        if (isset($src['amenities']) && \is_array($src['amenities'])) {
+            $src['amenities'] = implode(',', $src['amenities']);
+        }
+
+        return parent::bind($src, $ignore);
+    }
+
     public function check()
     {
         if (trim($this->name) === '') {

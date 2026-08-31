@@ -49,6 +49,28 @@
 		/>
 
 		<field
+			name="amenities"
+			type="checkboxes"
+			label="COM_HOTELBOOKING_FIELD_HOTEL_AMENITIES_LABEL"
+			>
+			<option value="wifi">COM_HOTELBOOKING_AMENITY_WIFI</option>
+			<option value="parking">COM_HOTELBOOKING_AMENITY_PARKING</option>
+			<option value="pool">COM_HOTELBOOKING_AMENITY_POOL</option>
+			<option value="restaurant">COM_HOTELBOOKING_AMENITY_RESTAURANT</option>
+			<option value="bar">COM_HOTELBOOKING_AMENITY_BAR</option>
+			<option value="front_desk_24h">COM_HOTELBOOKING_AMENITY_FRONT_DESK_24H</option>
+			<option value="fitness_center">COM_HOTELBOOKING_AMENITY_FITNESS_CENTER</option>
+			<option value="spa">COM_HOTELBOOKING_AMENITY_SPA</option>
+			<option value="airport_shuttle">COM_HOTELBOOKING_AMENITY_AIRPORT_SHUTTLE</option>
+			<option value="business_center">COM_HOTELBOOKING_AMENITY_BUSINESS_CENTER</option>
+			<option value="laundry_service">COM_HOTELBOOKING_AMENITY_LAUNDRY_SERVICE</option>
+			<option value="elevator">COM_HOTELBOOKING_AMENITY_ELEVATOR</option>
+			<option value="conference_room">COM_HOTELBOOKING_AMENITY_CONFERENCE_ROOM</option>
+			<option value="pet_friendly">COM_HOTELBOOKING_AMENITY_PET_FRIENDLY</option>
+			<option value="non_smoking">COM_HOTELBOOKING_AMENITY_NON_SMOKING</option>
+		</field>
+
+		<field
 			name="offers"
 			type="subform"
 			label="COM_HOTELBOOKING_FIELD_OFFERS_LABEL"
