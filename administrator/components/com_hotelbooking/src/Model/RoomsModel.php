@@ -6,6 +6,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\ParameterType;
 use Joomla\Database\QueryInterface;
+use Learn\Component\Hotelbooking\Administrator\Helper\AccessHelper;
 
 \defined('_JEXEC') or die;
 
@@ -81,6 +82,13 @@ class RoomsModel extends ListModel
             $destinationId = (int) $destinationId;
             $query->where($db->quoteName('a.destination_id') . ' = :destinationId')
                 ->bind(':destinationId', $destinationId, ParameterType::INTEGER);
+        }
+
+        $user = $this->getCurrentUser();
+
+        if (!AccessHelper::isPrivileged($user)) {
+            $query->where($db->quoteName('d.manager_user_id') . ' = :scopedUserId')
+                ->bind(':scopedUserId', $user->id, ParameterType::INTEGER);
         }
 
         $orderCol  = $this->state->get('list.ordering', 'a.ordering');

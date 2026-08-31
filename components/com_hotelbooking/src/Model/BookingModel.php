@@ -34,10 +34,16 @@ class BookingModel extends AdminModel
 
         $db    = $this->getDatabase();
         $query = $db->createQuery()
-            ->select(['id', 'capacity'])
-            ->from($db->quoteName('#__hotelbooking_rooms'))
-            ->where($db->quoteName('published') . ' = 1')
-            ->where($db->quoteName('id') . ' = :id')
+            ->select([
+                $db->quoteName('r.id'),
+                $db->quoteName('r.capacity'),
+                $db->quoteName('r.price'),
+                $db->quoteName('d.commission_rate'),
+            ])
+            ->from($db->quoteName('#__hotelbooking_rooms', 'r'))
+            ->join('LEFT', $db->quoteName('#__hotelbooking_destinations', 'd') . ' ON ' . $db->quoteName('d.id') . ' = ' . $db->quoteName('r.destination_id'))
+            ->where($db->quoteName('r.published') . ' = 1')
+            ->where($db->quoteName('r.id') . ' = :id')
             ->bind(':id', $roomId, ParameterType::INTEGER);
         $db->setQuery($query);
         $room = $db->loadObject();
@@ -71,18 +77,23 @@ class BookingModel extends AdminModel
             throw new \RuntimeException(Text::sprintf('COM_HOTELBOOKING_ERROR_TOO_MANY_GUESTS', (int) $room->capacity));
         }
 
+        $nights = (int) ((strtotime($checkout) - strtotime($checkin)) / 86400);
+
         $table = $this->getTable();
         $table->reset();
-        $table->room_id       = $roomId;
-        $table->guest_name    = $guestName;
-        $table->guest_email   = $guestEmail;
-        $table->checkin_date  = $checkin;
-        $table->checkout_date = $checkout;
-        $table->guests        = $guests;
-        $table->status        = 'pending';
-        $table->created        = Factory::getDate()->toSql();
+        $table->room_id         = $roomId;
+        $table->guest_name      = $guestName;
+        $table->guest_email     = $guestEmail;
+        $table->checkin_date    = $checkin;
+        $table->checkout_date   = $checkout;
+        $table->guests          = $guests;
+        $table->total_price     = round((float) $room->price * $nights, 2);
+        $table->commission_rate = (float) $room->commission_rate;
+        $table->status          = 'pending';
+        $table->partner_status  = 'awaiting_hotel_check';
+        $table->created          = Factory::getDate()->toSql();
 
-        if (!$table->store()) {
+        if (!$table->check() || !$table->store()) {
             throw new \RuntimeException($table->getError());
         }
 

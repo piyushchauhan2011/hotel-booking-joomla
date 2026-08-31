@@ -14,8 +14,8 @@ $listDirn  = $this->state->get('list.direction');
 <form action="<?php echo Route::_('index.php?option=com_hotelbooking&view=destinations'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row">
 		<div class="col-md-6">
-			<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo Text::_('COM_HOTELBOOKING_FILTER_SEARCH_LABEL'); ?>" value="<?php echo htmlspecialchars($this->state->get('filter.search', '')); ?>">
-			<button type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<input type="text" class="form-control" name="filter_search" id="filter_search" placeholder="<?php echo Text::_('COM_HOTELBOOKING_FILTER_SEARCH_LABEL'); ?>" value="<?php echo htmlspecialchars($this->state->get('filter.search', '')); ?>">
+			<button type="submit" class="btn btn-primary"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 		</div>
 	</div>
 

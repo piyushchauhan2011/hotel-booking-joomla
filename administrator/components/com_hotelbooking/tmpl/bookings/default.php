@@ -14,8 +14,13 @@ $listDirn  = $this->state->get('list.direction');
 <form action="<?php echo Route::_('index.php?option=com_hotelbooking&view=bookings'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row">
 		<div class="col-md-6">
-			<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo Text::_('COM_HOTELBOOKING_FILTER_SEARCH_LABEL'); ?>" value="<?php echo htmlspecialchars($this->state->get('filter.search', '')); ?>">
-			<button type="submit"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+			<input type="text" class="form-control" name="filter_search" id="filter_search" placeholder="<?php echo Text::_('COM_HOTELBOOKING_FILTER_SEARCH_LABEL'); ?>" value="<?php echo htmlspecialchars($this->state->get('filter.search', '')); ?>">
+			<button type="submit" class="btn btn-primary"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
+		</div>
+		<div class="col-md-6 text-md-end">
+			<button type="button" class="btn btn-secondary" onclick="document.adminForm.task.value='bookings.exportCsv';document.adminForm.submit();">
+				<?php echo Text::_('COM_HOTELBOOKING_EXPORT_CSV'); ?>
+			</button>
 		</div>
 	</div>
 
@@ -28,6 +33,10 @@ $listDirn  = $this->state->get('list.direction');
 				<th><?php echo Text::_('COM_HOTELBOOKING_FIELD_CHECKIN_LABEL'); ?></th>
 				<th><?php echo Text::_('COM_HOTELBOOKING_FIELD_CHECKOUT_LABEL'); ?></th>
 				<th><?php echo Text::_('COM_HOTELBOOKING_FIELD_STATUS_LABEL'); ?></th>
+				<th><?php echo Text::_('COM_HOTELBOOKING_FIELD_PARTNER_STATUS_LABEL'); ?></th>
+				<th><?php echo Text::_('COM_HOTELBOOKING_FIELD_TOTAL_PRICE_LABEL'); ?></th>
+				<th><?php echo Text::_('COM_HOTELBOOKING_FIELD_COMMISSION_AMOUNT_LABEL'); ?></th>
+				<th><?php echo Text::_('COM_HOTELBOOKING_FIELD_COMMISSION_PAID_LABEL'); ?></th>
 				<th><?php echo HTMLHelper::_('searchtools.sort', 'COM_HOTELBOOKING_FIELD_CREATED_LABEL', 'a.created', $listDirn, $listOrder); ?></th>
 			</tr>
 		</thead>
@@ -41,16 +50,25 @@ $listDirn  = $this->state->get('list.direction');
 					</a>
 					<br><small><?php echo htmlspecialchars($item->guest_email); ?></small>
 				</td>
-				<td><?php echo htmlspecialchars($item->room_name ?? ''); ?></td>
+				<td>
+					<?php echo htmlspecialchars($item->destination_name ?? ''); ?>
+					<?php if (!empty($item->room_name)) : ?>
+						<br><small><?php echo htmlspecialchars($item->room_name); ?></small>
+					<?php endif; ?>
+				</td>
 				<td><?php echo htmlspecialchars($item->checkin_date); ?></td>
 				<td><?php echo htmlspecialchars($item->checkout_date); ?></td>
 				<td><?php echo Text::_('COM_HOTELBOOKING_STATUS_' . strtoupper($item->status)); ?></td>
+				<td><?php echo Text::_('COM_HOTELBOOKING_PARTNER_STATUS_' . strtoupper($item->partner_status)); ?></td>
+				<td><?php echo htmlspecialchars(number_format((float) $item->total_price, 2)); ?></td>
+				<td><?php echo htmlspecialchars(number_format((float) $item->commission_amount, 2)); ?></td>
+				<td><?php echo $item->commission_paid ? Text::_('JYES') : Text::_('JNO'); ?></td>
 				<td><?php echo htmlspecialchars($item->created); ?></td>
 			</tr>
 		<?php endforeach; ?>
 		<?php if (empty($this->items)) : ?>
 			<tr>
-				<td colspan="7"><?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?></td>
+				<td colspan="10"><?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?></td>
 			</tr>
 		<?php endif; ?>
 		</tbody>

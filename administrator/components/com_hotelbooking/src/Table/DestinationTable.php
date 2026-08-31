@@ -23,6 +23,10 @@ class DestinationTable extends Table
             $src['amenities'] = implode(',', $src['amenities']);
         }
 
+        if (isset($src['manager_user_id']) && (string) $src['manager_user_id'] === '') {
+            $src['manager_user_id'] = null;
+        }
+
         return parent::bind($src, $ignore);
     }
 
