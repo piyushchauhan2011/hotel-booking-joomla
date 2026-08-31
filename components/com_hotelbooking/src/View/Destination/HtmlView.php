@@ -4,6 +4,7 @@ namespace Learn\Component\Hotelbooking\Site\View\Destination;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Learn\Component\Hotelbooking\Site\Helper\SubformHelper;
 
 \defined('_JEXEC') or die;
 
@@ -14,13 +15,18 @@ class HtmlView extends BaseHtmlView
 
     public function display($tpl = null)
     {
-        Factory::getApplication()->getDocument()->getWebAssetManager()->useStyle('com_hotelbooking.site');
+        Factory::getApplication()->getDocument()->getWebAssetManager()
+            ->useStyle('com_hotelbooking.site')
+            ->useScript('com_hotelbooking.gallery-lightbox');
 
         $model      = $this->getModel();
         $this->item = $model->getItem();
         $this->rooms = $this->item ? $model->getRooms((int) $this->item->id) : [];
 
         if ($this->item) {
+            $this->item->gallery = SubformHelper::decodeRows($this->item->gallery, 'gallery_item');
+            $this->item->offers  = SubformHelper::decodeRows($this->item->offers, 'offer_item');
+
             $description = trim(strip_tags((string) $this->item->description));
             $description = $description !== ''
                 ? $description

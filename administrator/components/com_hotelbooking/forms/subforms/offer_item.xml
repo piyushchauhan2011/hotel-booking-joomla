@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fields name="offer_item">
+		<field
+			name="title"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_OFFER_TITLE_LABEL"
+			required="true"
+			size="40"
+		/>
+
+		<field
+			name="description"
+			type="textarea"
+			label="COM_HOTELBOOKING_FIELD_OFFER_DESCRIPTION_LABEL"
+			rows="3"
+			cols="30"
+		/>
+
+		<field
+			name="discount"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_OFFER_DISCOUNT_LABEL"
+			hint="e.g. 20% off, $50 off"
+			size="20"
+		/>
+
+		<field
+			name="code"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_OFFER_CODE_LABEL"
+			size="20"
+		/>
+
+		<field
+			name="valid_until"
+			type="calendar"
+			label="COM_HOTELBOOKING_FIELD_OFFER_VALID_UNTIL_LABEL"
+			format="%Y-%m-%d"
+		/>
+	</fields>
+</form>

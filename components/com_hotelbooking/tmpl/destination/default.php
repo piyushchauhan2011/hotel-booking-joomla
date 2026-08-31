@@ -3,6 +3,7 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
 /** @var \Learn\Component\Hotelbooking\Site\View\Destination\HtmlView $this */
@@ -24,7 +25,14 @@ endif;
 	<?php endif; ?>
 
 	<?php if (!empty($this->item->description)) : ?>
-		<div class="hotelbooking-description"><?php echo nl2br(htmlspecialchars($this->item->description)); ?></div>
+		<div class="hotelbooking-description"><?php echo $this->item->description; ?></div>
+	<?php endif; ?>
+
+	<?php echo LayoutHelper::render('gallery', ['images' => $this->item->gallery], JPATH_ROOT . '/components/com_hotelbooking/layouts'); ?>
+
+	<?php if (!empty($this->item->offers)) : ?>
+		<h2><?php echo Text::_('COM_HOTELBOOKING_OFFERS_TITLE'); ?></h2>
+		<?php echo LayoutHelper::render('offers', ['offers' => $this->item->offers], JPATH_ROOT . '/components/com_hotelbooking/layouts'); ?>
 	<?php endif; ?>
 
 	<h2><?php echo Text::_('COM_HOTELBOOKING_VIEW_ROOMS_HERE'); ?></h2>

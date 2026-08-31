@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fields name="gallery_item">
+		<field
+			name="image"
+			type="media"
+			label="COM_HOTELBOOKING_FIELD_GALLERY_IMAGE_LABEL"
+			required="true"
+		/>
+
+		<field
+			name="caption"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_GALLERY_CAPTION_LABEL"
+			size="40"
+		/>
+	</fields>
+</form>

@@ -588,3 +588,284 @@
 	margin-right: 0.35rem;
 	color: currentColor;
 }
+
+/* Rich content inside destination/room descriptions (editor field output) */
+.hotelbooking-description img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--hb-radius-sm);
+	margin: 1rem 0;
+}
+
+.hotelbooking-description table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.25rem 0;
+	font-size: 0.95rem;
+}
+
+.hotelbooking-description table caption {
+	caption-side: top;
+	text-align: left;
+	font-weight: 600;
+	color: var(--hb-text-muted);
+	margin-bottom: 0.4rem;
+}
+
+.hotelbooking-description th,
+.hotelbooking-description td {
+	text-align: left;
+	padding: 0.6rem 0.9rem;
+	border: 1px solid var(--hb-border);
+}
+
+.hotelbooking-description th {
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	font-weight: 700;
+}
+
+.hotelbooking-description blockquote {
+	border-left: 4px solid var(--hb-accent);
+	background: var(--hb-bg);
+	margin: 1.25rem 0;
+	padding: 0.9rem 1.25rem;
+	font-style: italic;
+	color: var(--hb-text-muted);
+	border-radius: 0 var(--hb-radius-sm) var(--hb-radius-sm) 0;
+}
+
+.hotelbooking-description blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+.hotelbooking-description ul,
+.hotelbooking-description ol {
+	margin: 0 0 1.1rem;
+	padding-left: 1.5rem;
+	line-height: 1.7;
+}
+
+.hotelbooking-description pre {
+	background: var(--hb-text);
+	color: #F5EFE8;
+	border-radius: var(--hb-radius-sm);
+	padding: 1rem 1.25rem;
+	overflow-x: auto;
+	margin: 1.25rem 0;
+	font-size: 0.88rem;
+	line-height: 1.6;
+}
+
+.hotelbooking-description code {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.hotelbooking-description :not(pre) > code {
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	padding: 0.15rem 0.4rem;
+	border-radius: 4px;
+	font-size: 0.9em;
+}
+
+/* Photo gallery + lightbox */
+.hb-gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+	gap: 0.75rem;
+	margin: 1.5rem 0;
+}
+
+.hb-gallery-thumb {
+	display: block;
+	padding: 0;
+	border: none;
+	border-radius: var(--hb-radius-sm);
+	overflow: hidden;
+	cursor: pointer;
+	aspect-ratio: 1 / 1;
+	background: var(--hb-accent-soft);
+}
+
+.hb-gallery-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.15s ease;
+}
+
+.hb-gallery-thumb:hover img,
+.hb-gallery-thumb:focus-visible img {
+	transform: scale(1.05);
+}
+
+.hb-lightbox {
+	position: fixed;
+	inset: 0;
+	background: rgba(43, 36, 32, 0.85);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+	z-index: 1000;
+}
+
+.hb-lightbox[hidden] {
+	display: none;
+}
+
+.hb-lightbox-figure {
+	max-width: min(90vw, 900px);
+	max-height: 90vh;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.hb-lightbox-figure img {
+	max-width: 100%;
+	max-height: 75vh;
+	object-fit: contain;
+	border-radius: var(--hb-radius-sm);
+}
+
+.hb-lightbox-figure figcaption {
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 0.9rem;
+}
+
+.hb-lightbox-close {
+	position: absolute;
+	top: 1rem;
+	right: 1.5rem;
+	background: none;
+	border: none;
+	color: #FFFFFF;
+	font-size: 2rem;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0.5rem;
+}
+
+/* Offers / coupons */
+.hb-offers {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 1.25rem;
+	margin: 1.5rem 0;
+}
+
+.hb-offer-card {
+	position: relative;
+	background: var(--hb-surface);
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 1.25rem;
+}
+
+.hb-offer-badge {
+	display: inline-block;
+	background: var(--hb-accent-dark);
+	color: #FFFFFF;
+	font-weight: 700;
+	font-size: 0.85rem;
+	padding: 0.25rem 0.7rem;
+	border-radius: 999px;
+	margin-bottom: 0.6rem;
+}
+
+.hb-offer-card h3 {
+	margin: 0 0 0.4rem;
+	font-size: 1.1rem;
+}
+
+.hb-offer-card p {
+	margin: 0 0 0.5rem;
+	color: var(--hb-text-muted);
+	font-size: 0.92rem;
+	line-height: 1.5;
+}
+
+.hb-offer-code code {
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	padding: 0.15rem 0.5rem;
+	border-radius: 4px;
+	font-weight: 700;
+}
+
+.hb-offer-valid {
+	font-size: 0.85rem !important;
+}
+
+/* Amenities checklist */
+.hb-amenities {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 0.6rem 1rem;
+	list-style: none;
+	margin: 0 0 1.5rem;
+	padding: 0;
+}
+
+.hb-amenity {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--hb-text);
+	font-size: 0.95rem;
+}
+
+.hb-amenity .hb-icon {
+	color: var(--hb-accent-dark);
+	flex-shrink: 0;
+}
+
+/* Nearby eating / shopping */
+.hb-nearby {
+	list-style: none;
+	margin: 0 0 1.5rem;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.hb-nearby-item {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+	padding: 0.7rem 1rem;
+	background: var(--hb-surface);
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+}
+
+.hb-nearby-category {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	padding: 0.2rem 0.6rem;
+	border-radius: 999px;
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+}
+
+.hb-nearby-name {
+	font-weight: 600;
+	color: var(--hb-text);
+}
+
+.hb-nearby-distance {
+	margin-left: auto;
+	color: var(--hb-text-muted);
+	font-size: 0.85rem;
+}

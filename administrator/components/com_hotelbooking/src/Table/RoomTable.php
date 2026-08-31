@@ -10,9 +10,20 @@ use Joomla\Event\DispatcherInterface;
 
 class RoomTable extends Table
 {
+    protected $_jsonEncode = ['gallery', 'offers', 'nearby_places'];
+
     public function __construct(DatabaseInterface $db, ?DispatcherInterface $dispatcher = null)
     {
         parent::__construct('#__hotelbooking_rooms', 'id', $db, $dispatcher);
+    }
+
+    public function bind($src, $ignore = [])
+    {
+        if (isset($src['amenities']) && \is_array($src['amenities'])) {
+            $src['amenities'] = implode(',', $src['amenities']);
+        }
+
+        return parent::bind($src, $ignore);
     }
 
     public function check()
