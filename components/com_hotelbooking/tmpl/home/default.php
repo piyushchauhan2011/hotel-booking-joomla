@@ -27,8 +27,13 @@ use Joomla\CMS\Router\Route;
 			<h1><?php echo Text::_('COM_HOTELBOOKING_HOME_HERO_TITLE'); ?></h1>
 			<p><?php echo Text::_('COM_HOTELBOOKING_HOME_HERO_SUBTITLE'); ?></p>
 
-			<form method="get" action="<?php echo Route::_('index.php?option=com_hotelbooking&view=destinations'); ?>">
-				<input type="text" name="search" placeholder="<?php echo Text::_('COM_HOTELBOOKING_SEARCH_PLACEHOLDER'); ?>">
+			<form method="get" action="<?php echo Route::_('index.php'); ?>" class="hb-search-form" role="search">
+				<input type="hidden" name="option" value="com_hotelbooking">
+				<input type="hidden" name="view" value="destinations">
+				<div class="hb-search-field">
+					<input type="text" name="search" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="hb-search-suggest-home" placeholder="<?php echo Text::_('COM_HOTELBOOKING_SEARCH_PLACEHOLDER'); ?>">
+					<ul class="hb-search-suggestions" id="hb-search-suggest-home" role="listbox" hidden></ul>
+				</div>
 				<button type="submit"><?php echo Text::_('COM_HOTELBOOKING_SEARCH_BUTTON'); ?></button>
 			</form>
 		</div>

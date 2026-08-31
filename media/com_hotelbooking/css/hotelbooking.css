@@ -167,9 +167,13 @@
 	box-shadow: var(--hb-shadow-hover);
 }
 
-.hotelbooking-hero form input {
+.hotelbooking-hero .hb-search-field {
 	flex: 1;
 	min-width: 0;
+}
+
+.hotelbooking-hero .hb-search-field input {
+	width: 100%;
 	border: none;
 	background: transparent;
 	padding: 0.6rem 1rem;
@@ -178,11 +182,11 @@
 	color: var(--hb-text);
 }
 
-.hotelbooking-hero form input:focus {
+.hotelbooking-hero .hb-search-field input:focus {
 	outline: none;
 }
 
-.hotelbooking-hero form button {
+.hotelbooking-hero form > button {
 	flex-shrink: 0;
 	border: none;
 	background: var(--hb-accent-dark);
@@ -195,12 +199,12 @@
 }
 
 @media (max-width: 400px) {
-	.hotelbooking-hero form button {
+	.hotelbooking-hero form > button {
 		padding: 0.65rem 1rem;
 	}
 }
 
-.hotelbooking-hero form button:hover {
+.hotelbooking-hero form > button:hover {
 	background: #7d3d1b;
 }
 
@@ -213,9 +217,13 @@
 	margin: 0 0 2rem;
 }
 
-.hotelbooking-destinations > form input {
+.hotelbooking-destinations > form .hb-search-field {
 	flex: 1;
 	min-width: 0;
+}
+
+.hotelbooking-destinations > form .hb-search-field input {
+	width: 100%;
 	padding: 0.65rem 1rem;
 	border: 1px solid var(--hb-border);
 	border-radius: var(--hb-radius-sm);
@@ -223,13 +231,13 @@
 	font-size: 1rem;
 }
 
-.hotelbooking-destinations > form input:focus {
+.hotelbooking-destinations > form .hb-search-field input:focus {
 	outline: none;
 	border-color: var(--hb-accent);
 	box-shadow: 0 0 0 3px var(--hb-accent-soft);
 }
 
-.hotelbooking-destinations > form button {
+.hotelbooking-destinations > form > button {
 	flex-shrink: 0;
 	border: none;
 	background: var(--hb-accent-dark);
@@ -240,8 +248,71 @@
 	cursor: pointer;
 }
 
-.hotelbooking-destinations > form button:hover {
+.hotelbooking-destinations > form > button:hover {
 	background: var(--hb-accent-dark);
+}
+
+/* Search autocomplete suggestions (shared by hero + destinations search forms) */
+.hb-search-field {
+	position: relative;
+}
+
+.hb-search-suggestions {
+	position: absolute;
+	top: calc(100% + 0.5rem);
+	left: 0;
+	right: 0;
+	background: var(--hb-surface);
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+	box-shadow: var(--hb-shadow-hover);
+	list-style: none;
+	margin: 0;
+	padding: 0.4rem;
+	max-height: 280px;
+	overflow-y: auto;
+	z-index: 30;
+	text-align: left;
+}
+
+.hb-search-suggestions[hidden] {
+	display: none;
+}
+
+.hb-search-suggestions li {
+	margin: 0;
+}
+
+.hb-search-suggestions button {
+	display: block;
+	width: 100%;
+	text-align: left;
+	background: none;
+	border: none;
+	padding: 0.55rem 0.75rem;
+	border-radius: var(--hb-radius-sm);
+	font-family: var(--hb-font);
+	font-size: 0.95rem;
+	color: var(--hb-text);
+	cursor: pointer;
+}
+
+.hb-search-suggestions button:hover,
+.hb-search-suggestions button.is-active {
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+}
+
+.hb-search-suggestions button mark {
+	background: none;
+	color: var(--hb-accent-dark);
+	font-weight: 700;
+}
+
+.hb-search-empty {
+	padding: 0.55rem 0.75rem;
+	color: var(--hb-text-muted);
+	font-size: 0.9rem;
 }
 
 /* Grids */
