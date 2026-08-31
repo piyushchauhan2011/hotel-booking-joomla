@@ -3,6 +3,7 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
 /** @var \Learn\Component\Hotelbooking\Site\View\Destinations\HtmlView $this */
@@ -53,5 +54,10 @@ use Joomla\CMS\Router\Route;
 		</div>
 
 		<?php echo $this->pagination->getListFooter(); ?>
+	<?php endif; ?>
+
+	<?php if (!empty($this->faqs)) : ?>
+		<h2><?php echo Text::_('COM_HOTELBOOKING_FAQS_HEADING'); ?></h2>
+		<?php echo LayoutHelper::render('faqs', ['faqs' => $this->faqs], JPATH_ROOT . '/components/com_hotelbooking/layouts'); ?>
 	<?php endif; ?>
 </div>

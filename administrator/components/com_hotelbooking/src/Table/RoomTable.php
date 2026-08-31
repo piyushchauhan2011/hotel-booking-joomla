@@ -10,7 +10,7 @@ use Joomla\Event\DispatcherInterface;
 
 class RoomTable extends Table
 {
-    protected $_jsonEncode = ['gallery', 'offers', 'nearby_places'];
+    protected $_jsonEncode = ['gallery', 'offers', 'nearby_places', 'faqs'];
 
     public function __construct(DatabaseInterface $db, ?DispatcherInterface $dispatcher = null)
     {

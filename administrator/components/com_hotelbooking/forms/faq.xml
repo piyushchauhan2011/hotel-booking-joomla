@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="basic">
+		<field
+			name="id"
+			type="number"
+			readonly="true"
+			default="0"
+		/>
+
+		<field
+			name="question"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_QUESTION_LABEL"
+			required="true"
+			size="40"
+		/>
+
+		<field
+			name="answer"
+			type="textarea"
+			label="COM_HOTELBOOKING_FIELD_ANSWER_LABEL"
+			rows="5"
+			cols="30"
+		/>
+
+		<field
+			name="scope"
+			type="list"
+			label="COM_HOTELBOOKING_FIELD_SCOPE_LABEL"
+			default="general"
+			>
+			<option value="general">COM_HOTELBOOKING_SCOPE_GENERAL</option>
+			<option value="destinations">COM_HOTELBOOKING_SCOPE_DESTINATIONS</option>
+		</field>
+
+		<field
+			name="published"
+			type="list"
+			label="COM_HOTELBOOKING_FIELD_PUBLISHED_LABEL"
+			default="1"
+			>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field
+			name="ordering"
+			type="hidden"
+			default="0"
+		/>
+	</fieldset>
+</form>
