@@ -4,6 +4,7 @@ namespace Learn\Component\Hotelbooking\Site\View\Room;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+use Learn\Component\Hotelbooking\Site\Helper\SchemaHelper;
 use Learn\Component\Hotelbooking\Site\Helper\SubformHelper;
 
 \defined('_JEXEC') or die;
@@ -37,6 +38,12 @@ class HtmlView extends BaseHtmlView
             }
 
             $this->getDocument()->setDescription($description);
+
+            $this->getDocument()->addCustomTag(
+                '<script type="application/ld+json">'
+                . json_encode(SchemaHelper::forRoom($this->item), JSON_UNESCAPED_SLASHES)
+                . '</script>'
+            );
         }
 
         return parent::display($tpl);
