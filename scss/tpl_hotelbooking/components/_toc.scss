@@ -1,0 +1,50 @@
+// Table of contents
+.hb-toc {
+	background: var(--hb-accent-soft);
+	border-radius: var(--hb-radius-sm);
+	padding: 1.1rem 1.4rem;
+	margin: 0 0 1.75rem;
+}
+
+.hb-toc-title {
+	font-weight: 700;
+	font-size: 0.95rem;
+	color: var(--hb-accent-dark);
+	margin: 0 0 0.6rem;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.hb-toc ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	counter-reset: hb-toc-counter;
+}
+
+.hb-toc li {
+	counter-increment: hb-toc-counter;
+	margin: 0.35rem 0;
+}
+
+.hb-toc li::before {
+	content: counter(hb-toc-counter) ". ";
+	color: var(--hb-accent-dark);
+	font-weight: 600;
+}
+
+.hb-toc li.hb-toc-level-3 {
+	margin-left: 1.25rem;
+	font-size: 0.9rem;
+}
+
+.hb-toc a {
+	color: var(--hb-text);
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.hb-toc a:hover {
+	color: var(--hb-accent-dark);
+	text-decoration: underline;
+}

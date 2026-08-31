@@ -1,0 +1,24 @@
+// Breakpoints shared by the header/nav collapse and footer grid rules.
+$bp-nav-collapse: 991.98px;
+$bp-nav-expand: 992px;
+$bp-footer-2col: 800px;
+$bp-footer-1col: 480px;
+
+// Design tokens for this template's own custom styling. Compiled once into
+// :root here; com_hotelbooking declares its own separate --hb-* tokens for
+// its component views, so this block only affects markup styled by
+// custom.css (header/footer/blog/article/auth chrome).
+:root {
+	--hb-bg: #FBF7F2;
+	--hb-surface: #FFFFFF;
+	--hb-text: #2B2420;
+	--hb-text-muted: #6B5F55;
+	--hb-accent: #C1622D;
+	--hb-accent-dark: #9C4C22;
+	--hb-accent-hover: #7d3d1b;
+	--hb-accent-soft: #F3E4D8;
+	--hb-border: #E7DDD2;
+	--hb-shadow: 0 4px 16px rgba(43, 36, 32, 0.08);
+	--hb-radius: 14px;
+	--hb-radius-sm: 8px;
+}

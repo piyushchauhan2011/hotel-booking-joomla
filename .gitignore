@@ -21,6 +21,9 @@
 # Update/restore script Joomla writes during self-updates
 /administrator/components/com_joomlaupdate/restore.php
 
+# === Node (SCSS build tooling) ===
+/node_modules/
+
 # === ddev ===
 # ddev maintains its own .gitignore inside .ddev/ for generated files;
 # just make sure nothing environment-specific leaks from the project root.

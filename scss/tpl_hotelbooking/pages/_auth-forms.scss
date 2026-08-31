@@ -1,0 +1,79 @@
+// Login / Registration forms (com_users)
+.com-users-login,
+.com-users-registration {
+	max-width: 480px;
+	margin: 2rem auto;
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 2rem 2.25rem;
+}
+
+.com-users-login__form,
+.com-users-registration__form {
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.com-users-login .control-label label,
+.com-users-registration .control-label label {
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--hb-text-muted);
+}
+
+.com-users-login .form-control,
+.com-users-registration .form-control,
+.com-users-login input[type="text"],
+.com-users-login input[type="password"],
+.com-users-registration input[type="text"],
+.com-users-registration input[type="password"],
+.com-users-registration input[type="email"] {
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+	padding: 0.6rem 0.9rem;
+}
+
+.com-users-login .form-control:focus,
+.com-users-registration .form-control:focus {
+	outline: none;
+	border-color: var(--hb-accent);
+	box-shadow: 0 0 0 3px var(--hb-accent-soft);
+}
+
+// A field left empty on submit gets the browser's native :invalid state (plus
+// a native "please fill in this field" bubble that isn't stylable at all) —
+// re-tint the border/focus ring to match the theme instead of leaving the
+// browser default red/black.
+.com-users-login .form-control:invalid,
+.com-users-registration .form-control:invalid {
+	border-color: var(--hb-accent);
+}
+
+.com-users-login .form-control:invalid:focus,
+.com-users-registration .form-control:invalid:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px var(--hb-accent-soft);
+}
+
+.com-users-login .btn-primary,
+.com-users-registration .btn-primary {
+	width: 100%;
+	border-radius: 999px;
+	padding: 0.65rem;
+	font-weight: 600;
+}
+
+.com-users-login__options.list-group {
+	margin-top: 1rem;
+	border: none;
+}
+
+.com-users-login__options .list-group-item {
+	border: none;
+	padding: 0.35rem 0;
+	color: var(--hb-accent-dark);
+	background: transparent;
+}

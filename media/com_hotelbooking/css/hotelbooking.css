@@ -60,6 +60,7 @@
 
 .hb-btn--primary:hover {
 	background: #7d3d1b;
+	color: #FFFFFF;
 	transform: translateY(-1px);
 }
 

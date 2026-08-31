@@ -1,0 +1,49 @@
+// Share buttons
+.hb-share {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.6rem;
+	margin: 1.25rem 0 1.75rem;
+	padding: 1rem 0;
+	border-top: 1px solid var(--hb-border);
+	border-bottom: 1px solid var(--hb-border);
+}
+
+.hb-share-label {
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--hb-text-muted);
+	margin-right: 0.25rem;
+}
+
+.hb-share-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 50%;
+	background: var(--hb-accent-soft);
+	color: var(--hb-accent-dark);
+	border: none;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.hb-share-btn svg {
+	width: 1.05rem;
+	height: 1.05rem;
+}
+
+.hb-share-btn:hover,
+.hb-share-btn:focus-visible {
+	background: var(--hb-accent-dark);
+	color: #FFFFFF;
+}
+
+.hb-share-btn--copy.is-copied {
+	background: var(--hb-accent-dark);
+	color: #FFFFFF;
+}
