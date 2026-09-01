@@ -15,6 +15,9 @@
       "description": "Destination search-suggestions widget (Home hero + Destinations list).",
       "type": "script",
       "uri": "com_hotelbooking/search-autocomplete.js",
+      "dependencies": [
+        "core"
+      ],
       "attributes": {
         "defer": true
       }
