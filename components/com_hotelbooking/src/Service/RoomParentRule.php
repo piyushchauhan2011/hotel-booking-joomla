@@ -12,7 +12,8 @@ use Joomla\Database\ParameterType;
 /**
  * Backfills destination_id when a room link only passes id= (e.g. Route::_() calls
  * in tmpl/room/default.php). Joomla core's PreprocessRules does the same job but
- * hardcodes a SELECT on an `alias` column, which #__hotelbooking_rooms doesn't have.
+ * expects the parent key to be resolvable directly from the segment; here the parent
+ * (destination_id) has to be looked up by the room's own id first.
  */
 class RoomParentRule implements RulesInterface
 {

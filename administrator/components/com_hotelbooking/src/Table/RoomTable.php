@@ -40,6 +40,12 @@ class RoomTable extends Table
             return false;
         }
 
+        if (trim($this->alias) === '') {
+            $this->alias = $this->name;
+        }
+
+        $this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($this->alias);
+
         return true;
     }
 }

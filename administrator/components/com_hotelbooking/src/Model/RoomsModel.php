@@ -15,7 +15,7 @@ class RoomsModel extends ListModel
     public function __construct($config = [])
     {
         if (empty($config['filter_fields'])) {
-            $config['filter_fields'] = ['id', 'name', 'published', 'ordering', 'destination_id'];
+            $config['filter_fields'] = ['id', 'name', 'published', 'ordering', 'destination_id', 'language'];
         }
 
         parent::__construct($config);
@@ -33,6 +33,9 @@ class RoomsModel extends ListModel
 
         $destinationId = $app->getUserStateFromRequest($this->context . '.filter.destination_id', 'filter_destination_id', '', 'string');
         $this->setState('filter.destination_id', $destinationId);
+
+        $language = $app->getUserStateFromRequest($this->context . '.filter.language', 'filter_language', '', 'string');
+        $this->setState('filter.language', $language);
 
         parent::populateState($ordering, $direction);
     }
@@ -53,12 +56,16 @@ class RoomsModel extends ListModel
                     $db->quoteName('a.capacity'),
                     $db->quoteName('a.published'),
                     $db->quoteName('a.ordering'),
+                    $db->quoteName('a.language'),
+                    $db->quoteName('l.title', 'language_title'),
+                    $db->quoteName('l.image', 'language_image'),
                     $db->quoteName('d.name', 'destination_name'),
                 ]
             )
         )
             ->from($db->quoteName('#__hotelbooking_rooms', 'a'))
-            ->join('LEFT', $db->quoteName('#__hotelbooking_destinations', 'd') . ' ON ' . $db->quoteName('d.id') . ' = ' . $db->quoteName('a.destination_id'));
+            ->join('LEFT', $db->quoteName('#__hotelbooking_destinations', 'd') . ' ON ' . $db->quoteName('d.id') . ' = ' . $db->quoteName('a.destination_id'))
+            ->join('LEFT', $db->quoteName('#__languages', 'l') . ' ON ' . $db->quoteName('l.lang_code') . ' = ' . $db->quoteName('a.language'));
 
         $search = $this->getState('filter.search');
 
@@ -82,6 +89,13 @@ class RoomsModel extends ListModel
             $destinationId = (int) $destinationId;
             $query->where($db->quoteName('a.destination_id') . ' = :destinationId')
                 ->bind(':destinationId', $destinationId, ParameterType::INTEGER);
+        }
+
+        $language = $this->getState('filter.language');
+
+        if (!empty($language)) {
+            $query->where($db->quoteName('a.language') . ' = :language')
+                ->bind(':language', $language);
         }
 
         $user = $this->getCurrentUser();

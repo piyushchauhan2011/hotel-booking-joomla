@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fieldset name="basic">
+	<fieldset name="basic" addfieldprefix="Learn\Component\Hotelbooking\Administrator\Field">
 		<field
 			name="id"
 			type="number"
@@ -107,6 +107,14 @@
 			type="hidden"
 			default="0"
 		/>
+
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			>
+			<option value="*">JALL</option>
+		</field>
 	</fieldset>
 
 	<fieldset name="partner" label="COM_HOTELBOOKING_FIELDSET_PARTNER_LABEL">

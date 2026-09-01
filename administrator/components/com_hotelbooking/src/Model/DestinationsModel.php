@@ -15,7 +15,7 @@ class DestinationsModel extends ListModel
     public function __construct($config = [])
     {
         if (empty($config['filter_fields'])) {
-            $config['filter_fields'] = ['id', 'name', 'published', 'ordering'];
+            $config['filter_fields'] = ['id', 'name', 'published', 'ordering', 'language'];
         }
 
         parent::__construct($config);
@@ -30,6 +30,9 @@ class DestinationsModel extends ListModel
 
         $published = $app->getUserStateFromRequest($this->context . '.filter.published', 'filter_published', '', 'string');
         $this->setState('filter.published', $published);
+
+        $language = $app->getUserStateFromRequest($this->context . '.filter.language', 'filter_language', '', 'string');
+        $this->setState('filter.language', $language);
 
         parent::populateState($ordering, $direction);
     }
@@ -48,10 +51,14 @@ class DestinationsModel extends ListModel
                     $db->quoteName('a.alias'),
                     $db->quoteName('a.published'),
                     $db->quoteName('a.ordering'),
+                    $db->quoteName('a.language'),
+                    $db->quoteName('l.title', 'language_title'),
+                    $db->quoteName('l.image', 'language_image'),
                 ]
             )
         )
-            ->from($db->quoteName('#__hotelbooking_destinations', 'a'));
+            ->from($db->quoteName('#__hotelbooking_destinations', 'a'))
+            ->join('LEFT', $db->quoteName('#__languages', 'l') . ' ON ' . $db->quoteName('l.lang_code') . ' = ' . $db->quoteName('a.language'));
 
         $search = $this->getState('filter.search');
 
@@ -67,6 +74,13 @@ class DestinationsModel extends ListModel
             $published = (int) $published;
             $query->where($db->quoteName('a.published') . ' = :published')
                 ->bind(':published', $published, ParameterType::INTEGER);
+        }
+
+        $language = $this->getState('filter.language');
+
+        if (!empty($language)) {
+            $query->where($db->quoteName('a.language') . ' = :language')
+                ->bind(':language', $language);
         }
 
         $user = $this->getCurrentUser();

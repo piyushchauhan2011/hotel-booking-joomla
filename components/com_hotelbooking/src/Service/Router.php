@@ -64,7 +64,7 @@ class Router extends RouterView
 
     public function getRoomSegment($id, $query)
     {
-        return [(int) $id => $this->buildSegment('#__hotelbooking_rooms', 'name', (int) $id)];
+        return [(int) $id => $this->buildSegment('#__hotelbooking_rooms', 'alias', (int) $id)];
     }
 
     public function getRoomId($segment, $query)

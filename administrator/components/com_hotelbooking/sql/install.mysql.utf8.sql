@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_destinations` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL DEFAULT '',
   `alias` VARCHAR(255) NOT NULL DEFAULT '',
+  `language` CHAR(7) NOT NULL DEFAULT '*',
   `description` MEDIUMTEXT,
   `gallery` MEDIUMTEXT,
   `amenities` VARCHAR(512),
@@ -17,13 +18,16 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_destinations` (
   `published` TINYINT NOT NULL DEFAULT 1,
   `ordering` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `idx_manager_user` (`manager_user_id`)
+  KEY `idx_manager_user` (`manager_user_id`),
+  KEY `idx_language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `#__hotelbooking_rooms` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `destination_id` INT(11) UNSIGNED NOT NULL DEFAULT 0,
   `name` VARCHAR(255) NOT NULL DEFAULT '',
+  `alias` VARCHAR(255) NOT NULL DEFAULT '',
+  `language` CHAR(7) NOT NULL DEFAULT '*',
   `description` MEDIUMTEXT,
   `gallery` MEDIUMTEXT,
   `price` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
@@ -36,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_rooms` (
   `published` TINYINT NOT NULL DEFAULT 1,
   `ordering` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `idx_destination` (`destination_id`)
+  KEY `idx_destination` (`destination_id`),
+  KEY `idx_language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `#__hotelbooking_bookings` (
@@ -66,7 +71,9 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_faqs` (
   `question` VARCHAR(255) NOT NULL DEFAULT '',
   `answer` MEDIUMTEXT,
   `scope` VARCHAR(20) NOT NULL DEFAULT 'general',
+  `language` CHAR(7) NOT NULL DEFAULT '*',
   `published` TINYINT NOT NULL DEFAULT 1,
   `ordering` INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

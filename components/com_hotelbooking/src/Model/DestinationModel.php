@@ -2,6 +2,8 @@
 
 namespace Learn\Component\Hotelbooking\Site\Model;
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\MVC\Model\ItemModel;
 use Joomla\Database\ParameterType;
 
@@ -22,6 +24,14 @@ class DestinationModel extends ItemModel
         if ($id > 0) {
             $query->where($db->quoteName('id') . ' = :id')
                 ->bind(':id', $id, ParameterType::INTEGER);
+        }
+
+        if (Multilanguage::isEnabled()) {
+            $query->whereIn(
+                $db->quoteName('language'),
+                [Factory::getApplication()->getLanguage()->getTag(), '*'],
+                ParameterType::STRING
+            );
         }
 
         return $query;
@@ -54,6 +64,14 @@ class DestinationModel extends ItemModel
             ->where($db->quoteName('destination_id') . ' = :destinationId')
             ->bind(':destinationId', $destinationId, ParameterType::INTEGER)
             ->order($db->quoteName('ordering') . ' ASC');
+
+        if (Multilanguage::isEnabled()) {
+            $query->whereIn(
+                $db->quoteName('language'),
+                [Factory::getApplication()->getLanguage()->getTag(), '*'],
+                ParameterType::STRING
+            );
+        }
 
         $db->setQuery($query);
 

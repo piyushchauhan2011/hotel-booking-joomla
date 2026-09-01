@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fieldset name="basic">
+	<fieldset name="basic" addfieldprefix="Learn\Component\Hotelbooking\Administrator\Field">
 		<field
 			name="id"
 			type="number"
@@ -25,6 +25,14 @@
 			type="text"
 			label="COM_HOTELBOOKING_FIELD_NAME_LABEL"
 			required="true"
+			size="40"
+		/>
+
+		<field
+			name="alias"
+			type="text"
+			label="COM_HOTELBOOKING_FIELD_ALIAS_LABEL"
+			hint="Auto-generated from name if left blank"
 			size="40"
 		/>
 
@@ -136,5 +144,13 @@
 			type="hidden"
 			default="0"
 		/>
+
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			>
+			<option value="*">JALL</option>
+		</field>
 	</fieldset>
 </form>
