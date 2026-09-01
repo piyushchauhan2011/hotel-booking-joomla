@@ -8,7 +8,7 @@ VALUES
     (9001, 'Chiang Mai Riverside Retreat', 'chiang-mai-riverside-retreat', 'en-GB',
         '<p>A tranquil riverside retreat in the heart of Chiang Mai, surrounded by lush gardens and traditional Lanna architecture.</p>',
         '', 8.00, 1, 1),
-    (9002, 'รีสอร์ทริมน้ำเชียงใหม่', 'chiang-mai-riverside-retreat-th', 'th-TH',
+    (9002, 'รีสอร์ทริมน้ำเชียงใหม่', 'chiang-mai-riverside-retreat', 'th-TH',
         '<p>รีสอร์ทริมน้ำอันเงียบสงบใจกลางเชียงใหม่ รายล้อมด้วยสวนเขียวขจีและสถาปัตยกรรมล้านนาแบบดั้งเดิม</p>',
         '', 8.00, 1, 1);
 
@@ -18,7 +18,7 @@ VALUES
     (9101, 9001, 'Deluxe Garden Room', 'deluxe-garden-room', 'en-GB',
         '<p>A spacious room overlooking the garden, with a private balcony and a king-size bed.</p>',
         1800.00, 2, '', 1, 1),
-    (9102, 9002, 'ห้องดีลักซ์วิวสวน', 'deluxe-garden-room-th', 'th-TH',
+    (9102, 9002, 'ห้องดีลักซ์วิวสวน', 'deluxe-garden-room', 'th-TH',
         '<p>ห้องพักกว้างขวางวิวสวน พร้อมระเบียงส่วนตัวและเตียงคิงไซส์</p>',
         1800.00, 2, '', 1, 1);
 
