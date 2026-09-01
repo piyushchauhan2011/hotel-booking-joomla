@@ -161,7 +161,9 @@
 
 			controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
 
-			var url = 'index.php?option=com_hotelbooking&task=destinations.suggest&term=' + encodeURIComponent(term);
+			var paths = (window.Joomla && Joomla.getOptions) ? Joomla.getOptions('system.paths') : null;
+			var root = paths ? paths.rootFull : '/';
+			var url = root + 'index.php?option=com_hotelbooking&task=destinations.suggest&term=' + encodeURIComponent(term);
 
 			fetch(url, { signal: controller ? controller.signal : undefined })
 				.then(function (response) {

@@ -54,32 +54,32 @@ class Router extends RouterView
 
     public function getDestinationSegment($id, $query)
     {
-        return [(int) $id => $this->buildSegment('#__hotelbooking_destinations', 'alias', (int) $id)];
+        return [(int) $id => $this->buildSegment('#__hotelbooking_destinations', (int) $id)];
     }
 
     public function getDestinationId($segment, $query)
     {
-        return (int) $segment;
+        return $this->getIdFromSegment('#__hotelbooking_destinations', $segment);
     }
 
     public function getRoomSegment($id, $query)
     {
-        return [(int) $id => $this->buildSegment('#__hotelbooking_rooms', 'alias', (int) $id)];
+        return [(int) $id => $this->buildSegment('#__hotelbooking_rooms', (int) $id)];
     }
 
     public function getRoomId($segment, $query)
     {
-        return (int) $segment;
+        return $this->getIdFromSegment('#__hotelbooking_rooms', $segment);
     }
 
-    private function buildSegment(string $table, string $column, int $id): string
+    private function buildSegment(string $table, int $id): string
     {
         if ($id <= 0) {
             return (string) $id;
         }
 
         $query = $this->db->createQuery()
-            ->select($this->db->quoteName($column))
+            ->select($this->db->quoteName('alias'))
             ->from($this->db->quoteName($table))
             ->where($this->db->quoteName('id') . ' = :id')
             ->bind(':id', $id, ParameterType::INTEGER);
@@ -89,6 +89,27 @@ class Router extends RouterView
         $value = (string) $this->db->loadResult();
         $slug  = $value !== '' ? OutputFilter::stringURLSafe($value) : '';
 
-        return $slug !== '' ? $id . '-' . $slug : (string) $id;
+        return $slug !== '' ? $slug : (string) $id;
+    }
+
+    private function getIdFromSegment(string $table, string $segment): int
+    {
+        $language = $this->app->getLanguage()->getTag();
+
+        $query = $this->db->createQuery()
+            ->select($this->db->quoteName('id'))
+            ->from($this->db->quoteName($table))
+            ->where($this->db->quoteName('alias') . ' = :alias')
+            ->bind(':alias', $segment, ParameterType::STRING)
+            ->whereIn($this->db->quoteName('language'), [$language, '*'], ParameterType::STRING)
+            ->order('CASE ' . $this->db->quoteName('language') . ' WHEN ' . $this->db->quote($language) . ' THEN 0 ELSE 1 END');
+
+        $this->db->setQuery($query, 0, 1);
+
+        $id = (int) $this->db->loadResult();
+
+        // Alias not found for any language: fall back to treating the segment as a raw id
+        // (covers legacy id-alias links and menu-item links built with a bare id).
+        return $id > 0 ? $id : (int) $segment;
     }
 }
