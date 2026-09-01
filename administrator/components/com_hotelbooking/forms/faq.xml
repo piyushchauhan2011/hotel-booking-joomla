@@ -3,8 +3,7 @@
 	<fieldset name="basic" addfieldprefix="Learn\Component\Hotelbooking\Administrator\Field">
 		<field
 			name="id"
-			type="number"
-			readonly="true"
+			type="hidden"
 			default="0"
 		/>
 
