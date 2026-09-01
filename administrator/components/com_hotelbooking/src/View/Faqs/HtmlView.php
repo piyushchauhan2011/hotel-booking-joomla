@@ -2,7 +2,9 @@
 
 namespace Learn\Component\Hotelbooking\Administrator\View\Faqs;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Toolbar\ToolbarHelper;
@@ -25,7 +27,24 @@ class HtmlView extends BaseHtmlView
         $this->filterForm     = $this->get('FilterForm');
         $this->activeFilters  = $this->get('ActiveFilters');
 
-        $this->addToolbar();
+        if (!Multilanguage::isEnabled()) {
+            unset($this->activeFilters['language']);
+            $this->filterForm->removeField('language', 'filter');
+        }
+
+        if ($this->getLayout() !== 'modal') {
+            $this->addToolbar();
+        } else {
+            $forcedLanguage = Factory::getApplication()->getInput()->get('forcedLanguage', '', 'CMD');
+
+            if ($forcedLanguage) {
+                $languageXml = new \SimpleXMLElement('<field name="language" type="hidden" default="' . $forcedLanguage . '" />');
+                $this->filterForm->setField($languageXml, 'filter', true);
+                unset($this->activeFilters['language']);
+            }
+
+            $this->filterForm->addControlField('forcedLanguage', $forcedLanguage);
+        }
 
         return parent::display($tpl);
     }

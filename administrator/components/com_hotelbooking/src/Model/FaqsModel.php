@@ -14,7 +14,7 @@ class FaqsModel extends ListModel
     public function __construct($config = [])
     {
         if (empty($config['filter_fields'])) {
-            $config['filter_fields'] = ['id', 'question', 'scope', 'published', 'ordering'];
+            $config['filter_fields'] = ['id', 'question', 'scope', 'published', 'ordering', 'language'];
         }
 
         parent::__construct($config);
@@ -33,6 +33,9 @@ class FaqsModel extends ListModel
         $scope = $app->getUserStateFromRequest($this->context . '.filter.scope', 'filter_scope', '', 'string');
         $this->setState('filter.scope', $scope);
 
+        $language = $app->getUserStateFromRequest($this->context . '.filter.language', 'filter_language', '', 'string');
+        $this->setState('filter.language', $language);
+
         parent::populateState($ordering, $direction);
     }
 
@@ -50,10 +53,14 @@ class FaqsModel extends ListModel
                     $db->quoteName('a.scope'),
                     $db->quoteName('a.published'),
                     $db->quoteName('a.ordering'),
+                    $db->quoteName('a.language'),
+                    $db->quoteName('l.title', 'language_title'),
+                    $db->quoteName('l.image', 'language_image'),
                 ]
             )
         )
-            ->from($db->quoteName('#__hotelbooking_faqs', 'a'));
+            ->from($db->quoteName('#__hotelbooking_faqs', 'a'))
+            ->join('LEFT', $db->quoteName('#__languages', 'l') . ' ON ' . $db->quoteName('l.lang_code') . ' = ' . $db->quoteName('a.language'));
 
         $search = $this->getState('filter.search');
 
@@ -76,6 +83,13 @@ class FaqsModel extends ListModel
         if (!empty($scope)) {
             $query->where($db->quoteName('a.scope') . ' = :scope')
                 ->bind(':scope', $scope);
+        }
+
+        $language = $this->getState('filter.language');
+
+        if (!empty($language)) {
+            $query->where($db->quoteName('a.language') . ' = :language')
+                ->bind(':language', $language);
         }
 
         $orderCol  = $this->state->get('list.ordering', 'a.ordering');

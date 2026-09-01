@@ -9,7 +9,7 @@ use Joomla\Database\ParameterType;
 
 class FaqHelper
 {
-    public static function getPublished(DatabaseInterface $db, string $scope): array
+    public static function getPublished(DatabaseInterface $db, string $scope, ?string $language = null): array
     {
         $query = $db->createQuery()
             ->select([$db->quoteName('question'), $db->quoteName('answer')])
@@ -18,6 +18,10 @@ class FaqHelper
             ->where($db->quoteName('scope') . ' = :scope')
             ->bind(':scope', $scope, ParameterType::STRING)
             ->order($db->quoteName('ordering') . ' ASC');
+
+        if ($language) {
+            $query->whereIn($db->quoteName('language'), [$language, '*'], ParameterType::STRING);
+        }
 
         $db->setQuery($query);
 

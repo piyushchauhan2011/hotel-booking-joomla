@@ -3,7 +3,9 @@
 namespace Learn\Component\Hotelbooking\Site\Model;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\Database\ParameterType;
 use Joomla\Database\QueryInterface;
 use Learn\Component\Hotelbooking\Site\Helper\FaqHelper;
 
@@ -46,6 +48,14 @@ class DestinationsModel extends ListModel
                 ->bind(':search', $search);
         }
 
+        if (Multilanguage::isEnabled()) {
+            $query->whereIn(
+                $db->quoteName('a.language'),
+                [Factory::getApplication()->getLanguage()->getTag(), '*'],
+                ParameterType::STRING
+            );
+        }
+
         $query->order($db->quoteName('a.ordering') . ' ASC');
 
         return $query;
@@ -53,6 +63,8 @@ class DestinationsModel extends ListModel
 
     public function getFaqs(): array
     {
-        return FaqHelper::getPublished($this->getDatabase(), 'destinations');
+        $language = Multilanguage::isEnabled() ? Factory::getApplication()->getLanguage()->getTag() : null;
+
+        return FaqHelper::getPublished($this->getDatabase(), 'destinations', $language);
     }
 }

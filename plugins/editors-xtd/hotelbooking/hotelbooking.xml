@@ -15,5 +15,7 @@
 	<languages>
 		<language tag="en-GB">language/en-GB/plg_editors-xtd_hotelbooking.ini</language>
 		<language tag="en-GB">language/en-GB/plg_editors-xtd_hotelbooking.sys.ini</language>
+		<language tag="th-TH">language/th-TH/plg_editors-xtd_hotelbooking.ini</language>
+		<language tag="th-TH">language/th-TH/plg_editors-xtd_hotelbooking.sys.ini</language>
 	</languages>
 </extension>

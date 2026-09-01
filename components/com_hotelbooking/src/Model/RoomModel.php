@@ -3,6 +3,7 @@
 namespace Learn\Component\Hotelbooking\Site\Model;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\MVC\Model\ItemModel;
 use Joomla\Database\ParameterType;
 
@@ -28,6 +29,14 @@ class RoomModel extends ItemModel
             ->where($db->quoteName('r.published') . ' = 1')
             ->where($db->quoteName('r.id') . ' = :id')
             ->bind(':id', $id, ParameterType::INTEGER);
+
+        if (Multilanguage::isEnabled()) {
+            $query->whereIn(
+                $db->quoteName('r.language'),
+                [Factory::getApplication()->getLanguage()->getTag(), '*'],
+                ParameterType::STRING
+            );
+        }
 
         $db->setQuery($query);
 

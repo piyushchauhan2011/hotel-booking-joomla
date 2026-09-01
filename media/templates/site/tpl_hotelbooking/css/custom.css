@@ -343,8 +343,17 @@ html {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
 		gap: 0.5rem 2rem;
+	}
+
+	/* Core Cassiopeia's `.grid-child` forces `width: 100%` on both the logo
+	   wrapper and `.container-nav`, which makes each one wrap onto its own
+	   full-width row even though the header above is flex. Override that so
+	   they sit side by side: logo left, nav (+ language switcher) right. */
+	.header.container-header > .grid-child {
+		width: auto;
+		flex: 0 1 auto;
 	}
 
 	.container-nav {
@@ -381,13 +390,19 @@ html {
 
 	/* Collapsed behind a hamburger toggle, added at runtime by custom.js. The
 	   html.hb-js gate keeps the nav visible by default when JS hasn't run
-	   (no toggle button exists yet in that case either, so nothing is lost). */
+	   (no toggle button exists yet in that case either, so nothing is lost).
+	   max-height/opacity (rather than display:none/block) so the open/close
+	   can animate smoothly. */
 	html.hb-js .container-nav {
-		display: none;
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 0.3s ease, opacity 0.25s ease;
 	}
 
 	html.hb-js .container-nav.is-open {
-		display: block;
+		max-height: 32rem;
+		opacity: 1;
 	}
 }
 

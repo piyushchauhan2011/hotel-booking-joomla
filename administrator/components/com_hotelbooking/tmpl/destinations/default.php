@@ -3,13 +3,16 @@
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
 /** @var \Learn\Component\Hotelbooking\Administrator\View\Destinations\HtmlView $this */
 
 $listOrder = $this->state->get('list.ordering');
 $listDirn  = $this->state->get('list.direction');
+$multilang = Multilanguage::isEnabled();
 ?>
 <form action="<?php echo Route::_('index.php?option=com_hotelbooking&view=destinations'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row">
@@ -17,6 +20,11 @@ $listDirn  = $this->state->get('list.direction');
 			<input type="text" class="form-control" name="filter_search" id="filter_search" placeholder="<?php echo Text::_('COM_HOTELBOOKING_FILTER_SEARCH_LABEL'); ?>" value="<?php echo htmlspecialchars($this->state->get('filter.search', '')); ?>">
 			<button type="submit" class="btn btn-primary"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 		</div>
+		<?php if ($multilang) : ?>
+			<div class="col-md-3">
+				<?php echo $this->filterForm->getField('language', 'filter')->input; ?>
+			</div>
+		<?php endif; ?>
 	</div>
 
 	<table class="table">
@@ -25,6 +33,9 @@ $listDirn  = $this->state->get('list.direction');
 				<th><?php echo HTMLHelper::_('grid.checkall'); ?></th>
 				<th><?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?></th>
 				<th><?php echo HTMLHelper::_('searchtools.sort', 'COM_HOTELBOOKING_FIELD_NAME_LABEL', 'a.name', $listDirn, $listOrder); ?></th>
+				<?php if ($multilang) : ?>
+					<th><?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?></th>
+				<?php endif; ?>
 				<th><?php echo HTMLHelper::_('searchtools.sort', 'COM_HOTELBOOKING_FIELD_ORDERING_LABEL', 'a.ordering', $listDirn, $listOrder); ?></th>
 			</tr>
 		</thead>
@@ -38,12 +49,15 @@ $listDirn  = $this->state->get('list.direction');
 						<?php echo htmlspecialchars($item->name); ?>
 					</a>
 				</td>
+				<?php if ($multilang) : ?>
+					<td><?php echo LayoutHelper::render('joomla.content.language', $item); ?></td>
+				<?php endif; ?>
 				<td><?php echo (int) $item->ordering; ?></td>
 			</tr>
 		<?php endforeach; ?>
 		<?php if (empty($this->items)) : ?>
 			<tr>
-				<td colspan="4"><?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?></td>
+				<td colspan="<?php echo $multilang ? 5 : 4; ?>"><?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?></td>
 			</tr>
 		<?php endif; ?>
 		</tbody>

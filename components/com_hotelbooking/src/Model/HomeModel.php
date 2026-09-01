@@ -2,6 +2,8 @@
 
 namespace Learn\Component\Hotelbooking\Site\Model;
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\Database\ParameterType;
 
@@ -18,6 +20,14 @@ class HomeModel extends BaseDatabaseModel
             ->where($db->quoteName('published') . ' = 1')
             ->order($db->quoteName('ordering') . ' ASC')
             ->setLimit($limit);
+
+        if (Multilanguage::isEnabled()) {
+            $query->whereIn(
+                $db->quoteName('language'),
+                [Factory::getApplication()->getLanguage()->getTag(), '*'],
+                ParameterType::STRING
+            );
+        }
 
         $db->setQuery($query);
 
