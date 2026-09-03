@@ -282,6 +282,8 @@ foreach ($articles as $article) {
         upsertFieldValue($db, $articleId, (int) $fieldId, $value);
     }
 
+    ensureWorkflowAssociation($db, $articleId);
+
     echo "Article #{$articleId}: {$article['title']}\n";
 }
 
@@ -422,6 +424,50 @@ function ensureArticle($articleTable, DatabaseInterface $db, int $userId, array 
     }
 
     return (int) $articleTable->id;
+}
+
+function ensureWorkflowAssociation(DatabaseInterface $db, int $articleId): void
+{
+    $extension = 'com_content.article';
+
+    $query = $db->createQuery()
+        ->select('COUNT(*)')
+        ->from($db->quoteName('#__workflow_associations'))
+        ->where($db->quoteName('item_id') . ' = :itemId')
+        ->where($db->quoteName('extension') . ' = :extension')
+        ->bind(':itemId', $articleId, ParameterType::INTEGER)
+        ->bind(':extension', $extension);
+
+    if ((int) $db->setQuery($query)->loadResult() > 0) {
+        return;
+    }
+
+    $query = $db->createQuery()
+        ->select($db->quoteName('id'))
+        ->from($db->quoteName('#__workflow_stages'))
+        ->where($db->quoteName('default') . ' = 1')
+        ->setLimit(1);
+    $stageId = (int) $db->setQuery($query)->loadResult();
+
+    if ($stageId < 1) {
+        $query = $db->createQuery()
+            ->select($db->quoteName('id'))
+            ->from($db->quoteName('#__workflow_stages'))
+            ->order($db->quoteName('id') . ' ASC')
+            ->setLimit(1);
+        $stageId = (int) $db->setQuery($query)->loadResult();
+    }
+
+    if ($stageId < 1) {
+        return;
+    }
+
+    $row = (object) [
+        'item_id'   => $articleId,
+        'stage_id'  => $stageId,
+        'extension' => $extension,
+    ];
+    $db->insertObject('#__workflow_associations', $row);
 }
 
 function upsertFieldValue(DatabaseInterface $db, int $itemId, int $fieldId, string $value): void
