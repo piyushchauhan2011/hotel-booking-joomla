@@ -841,6 +841,155 @@ html {
 }
 
 /* ==========================================================================
+   Page: About (featured contacts) / Contact / My Profile
+   ========================================================================== */
+
+.hb-about-intro {
+	max-width: 40rem;
+	margin: 0 0 1.5rem;
+	color: var(--hb-text-muted);
+	line-height: 1.6;
+}
+
+.hb-about-team {
+	margin: 0 0 1rem;
+	font-size: 1.15rem;
+	font-weight: 700;
+}
+
+.hb-people-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+	gap: 1.25rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.hb-person-card {
+	background: var(--hb-surface);
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 1.15rem 1.2rem 1.25rem;
+}
+
+.hb-person-card__link {
+	display: flex;
+	flex-direction: column;
+	gap: 0.65rem;
+	text-decoration: none;
+	color: inherit;
+}
+
+.hb-person-card__photo {
+	display: block;
+	overflow: hidden;
+	border-radius: var(--hb-radius-sm);
+	background: var(--hb-accent-soft);
+}
+
+.hb-person-card__photo img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1;
+	object-fit: cover;
+}
+
+.hb-person-card__name {
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: var(--hb-text);
+}
+
+.hb-person-card__role {
+	margin: 0.75rem 0 0;
+	display: grid;
+	gap: 0.35rem;
+	font-size: 0.9rem;
+}
+
+.hb-person-card__role dt {
+	margin: 0;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--hb-text-muted);
+}
+
+.hb-person-card__role dd {
+	margin: 0;
+	color: var(--hb-text);
+}
+
+.hb-contact-photo img {
+	max-width: 10rem;
+	height: auto;
+	border-radius: var(--hb-radius-sm);
+}
+
+.com-contact__form {
+	max-width: 480px;
+	margin: 1.25rem 0 2rem;
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 2rem 2.25rem;
+}
+
+.com-contact__form .form-control,
+.com-contact__form textarea {
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+	padding: 0.6rem 0.9rem;
+}
+
+.com-contact__form .form-control:focus,
+.com-contact__form textarea:focus {
+	outline: none;
+	border-color: var(--hb-accent);
+	box-shadow: 0 0 0 3px var(--hb-accent-soft);
+}
+
+.com-contact__form .btn-primary {
+	width: 100%;
+	border-radius: 999px;
+	padding: 0.65rem;
+	font-weight: 600;
+}
+
+.hb-profile-card {
+	max-width: 640px;
+	margin: 2rem auto;
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 2rem 2.25rem;
+}
+
+.hb-profile-card .com-users-profile__core,
+.hb-profile-card .com-users-profile__params {
+	margin: 0 0 1.25rem;
+	padding: 0;
+	border: 0;
+}
+
+.hb-profile-card legend {
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--hb-text-muted);
+}
+
+.hb-profile-card .btn-primary {
+	border-radius: 999px;
+	font-weight: 600;
+}
+
+/* ==========================================================================
    Page: rich content blocks inside article body
    ========================================================================== */
 

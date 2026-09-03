@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Hotel Booking Demo organisation">
+	<rect width="320" height="320" fill="#F3E4D8"/>
+	<rect x="70" y="90" width="180" height="150" rx="8" fill="#C1622D"/>
+	<rect x="90" y="110" width="40" height="40" fill="#FBF7F2" opacity="0.85"/>
+	<rect x="140" y="110" width="40" height="40" fill="#FBF7F2" opacity="0.85"/>
+	<rect x="190" y="110" width="40" height="40" fill="#FBF7F2" opacity="0.85"/>
+	<rect x="90" y="165" width="40" height="40" fill="#FBF7F2" opacity="0.55"/>
+	<rect x="140" y="165" width="40" height="75" fill="#9C4C22"/>
+	<rect x="190" y="165" width="40" height="40" fill="#FBF7F2" opacity="0.55"/>
+	<polygon points="70,90 160,40 250,90" fill="#9C4C22"/>
+</svg>

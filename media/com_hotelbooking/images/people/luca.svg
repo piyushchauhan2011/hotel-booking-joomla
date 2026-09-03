@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Portrait of Luca Rossi">
+	<rect width="320" height="320" fill="#E7DDD2"/>
+	<circle cx="160" cy="160" r="120" fill="#F3E4D8"/>
+	<circle cx="160" cy="124" r="48" fill="#8B6B4A"/>
+	<path d="M84 252c20-56 50-82 76-82s56 26 76 82" fill="#9C4C22"/>
+	<circle cx="142" cy="120" r="6" fill="#2B2420"/>
+	<circle cx="178" cy="120" r="6" fill="#2B2420"/>
+	<path d="M146 148c7 6 21 6 28 0" fill="none" stroke="#2B2420" stroke-width="3" stroke-linecap="round"/>
+	<rect x="118" y="78" width="84" height="18" rx="9" fill="#2B2420"/>
+</svg>

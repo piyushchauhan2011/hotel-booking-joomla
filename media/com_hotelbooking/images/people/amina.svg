@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Portrait of Amina Diallo">
+	<rect width="320" height="320" fill="#FBF7F2"/>
+	<circle cx="160" cy="160" r="120" fill="#EAD3BC"/>
+	<circle cx="160" cy="126" r="48" fill="#5C3D2E"/>
+	<path d="M82 248c22-54 50-80 78-80s56 26 78 80" fill="#C1622D"/>
+	<circle cx="140" cy="122" r="6" fill="#2B2420"/>
+	<circle cx="180" cy="122" r="6" fill="#2B2420"/>
+	<path d="M148 146c8 9 16 9 24 0" fill="none" stroke="#2B2420" stroke-width="3" stroke-linecap="round"/>
+	<ellipse cx="160" cy="86" rx="52" ry="22" fill="#3D2A22"/>
+</svg>

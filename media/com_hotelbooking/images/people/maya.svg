@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Portrait of Maya Chen">
+	<rect width="320" height="320" fill="#F3E4D8"/>
+	<circle cx="160" cy="160" r="120" fill="#EAD3BC"/>
+	<circle cx="160" cy="128" r="46" fill="#C4A484"/>
+	<path d="M86 250c18-52 48-78 74-78s56 26 74 78" fill="#C1622D"/>
+	<circle cx="142" cy="124" r="6" fill="#2B2420"/>
+	<circle cx="178" cy="124" r="6" fill="#2B2420"/>
+	<path d="M148 146c8 8 16 8 24 0" fill="none" stroke="#2B2420" stroke-width="3" stroke-linecap="round"/>
+</svg>
