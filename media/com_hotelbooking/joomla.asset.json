@@ -45,6 +45,12 @@
     },
     {
       "name": "com_hotelbooking.admin-snippets-modal",
+      "description": "Layout for the Hotel Booking snippet picker modal.",
+      "type": "style",
+      "uri": "com_hotelbooking/admin-snippets-modal.css"
+    },
+    {
+      "name": "com_hotelbooking.admin-snippets-modal",
       "description": "Inserts a {hotelbooking} tag into the article editor from the Snippets picker modal.",
       "type": "script",
       "uri": "com_hotelbooking/admin-snippets-modal.js",
