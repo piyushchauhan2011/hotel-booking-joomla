@@ -58,9 +58,8 @@ class PartnerNotificationHelper
             return false;
         }
 
-        $app = Factory::getApplication();
-
         try {
+            $app  = Factory::getApplication();
             $mail = new MailTemplate('com_hotelbooking.partner_notify', $app->getLanguage()->getTag());
             $mail->addTemplateData(self::templateData($booking, $room, $destination, (string) $app->get('sitename')));
             $mail->addRecipient($destination->partner_email);

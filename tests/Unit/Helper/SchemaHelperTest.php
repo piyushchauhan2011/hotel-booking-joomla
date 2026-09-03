@@ -4,10 +4,35 @@ declare(strict_types=1);
 
 namespace Learn\Component\Hotelbooking\Site\Helper;
 
+use Joomla\CMS\Uri\Uri;
 use PHPUnit\Framework\TestCase;
 
 final class SchemaHelperTest extends TestCase
 {
+    /** @var array<string, mixed> */
+    private array $serverBackup = [];
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->serverBackup = $_SERVER;
+        $_SERVER['HTTP_HOST']     = 'example.test';
+        $_SERVER['HTTPS']         = 'on';
+        $_SERVER['PHP_SELF']      = '/index.php';
+        $_SERVER['REQUEST_URI']   = '/tokyo';
+        $_SERVER['SCRIPT_NAME']   = '/index.php';
+        $_SERVER['QUERY_STRING']  = '';
+        Uri::reset();
+    }
+
+    protected function tearDown(): void
+    {
+        $_SERVER = $this->serverBackup;
+
+        parent::tearDown();
+    }
+
     public function testForDestinationBuildsLodgingBusiness(): void
     {
         $item = (object) [
@@ -69,5 +94,35 @@ final class SchemaHelperTest extends TestCase
         $this->assertSame(['wifi', 'pool'], SchemaHelper::normaliseAmenities('wifi,pool'));
         $this->assertSame(['wifi'], SchemaHelper::normaliseAmenities([' wifi ', '']));
         $this->assertSame([], SchemaHelper::normaliseAmenities(null));
+        $this->assertSame([], SchemaHelper::normaliseAmenities(''));
+        $this->assertSame([], SchemaHelper::normaliseAmenities(1));
+    }
+
+    public function testForDestinationUsesFallbackUrlAndRelativeImage(): void
+    {
+        $schema = SchemaHelper::forDestination((object) [
+            'name'        => 'Paris House',
+            'description' => null,
+            'image'       => 'images/paris.jpg',
+            'amenities'   => [],
+        ]);
+
+        $this->assertSame('LodgingBusiness', $schema['@type']);
+        $this->assertNotSame('', $schema['url']);
+        $this->assertStringEndsWith('/images/paris.jpg', $schema['image']);
+        $this->assertArrayNotHasKey('amenityFeature', $schema);
+    }
+
+    public function testForRoomOmitsOfferWhenPriceIsMissing(): void
+    {
+        $schema = SchemaHelper::forRoom((object) [
+            'name'        => 'Twin',
+            'description' => '',
+            'amenities'   => [],
+        ]);
+
+        $this->assertSame('Product', $schema['@type']);
+        $this->assertArrayNotHasKey('offers', $schema);
+        $this->assertArrayNotHasKey('image', $schema);
     }
 }

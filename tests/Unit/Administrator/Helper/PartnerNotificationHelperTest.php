@@ -47,4 +47,51 @@ final class PartnerNotificationHelperTest extends TestCase
     {
         $this->assertSame('', PartnerNotificationHelper::buildWhatsAppLink('abc', 'Hello'));
     }
+
+    public function testBuildMessageSummaryReturnsAString(): void
+    {
+        $booking = (object) [
+            'guest_name'    => 'Maya Chen',
+            'checkin_date'  => '2026-09-10',
+            'checkout_date' => '2026-09-12',
+            'guests'        => 2,
+            'total_price'   => 199.5,
+        ];
+
+        $summary = PartnerNotificationHelper::buildMessageSummary(
+            $booking,
+            (object) ['name' => 'Deluxe King'],
+            (object) ['name' => 'Tokyo House'],
+        );
+
+        $this->assertNotSame('', $summary);
+    }
+
+    public function testSendEmailReturnsFalseWithoutPartnerEmail(): void
+    {
+        $this->assertFalse(
+            PartnerNotificationHelper::sendEmail(
+                (object) [],
+                (object) ['name' => 'Deluxe King'],
+                (object) ['name' => 'Tokyo House', 'partner_email' => ''],
+            )
+        );
+    }
+
+    public function testSendEmailReturnsFalseWhenMailerCannotBoot(): void
+    {
+        $this->assertFalse(
+            PartnerNotificationHelper::sendEmail(
+                (object) [
+                    'guest_name'    => 'Maya Chen',
+                    'checkin_date'  => '2026-09-10',
+                    'checkout_date' => '2026-09-12',
+                    'guests'        => 2,
+                    'total_price'   => 10,
+                ],
+                (object) ['name' => 'Deluxe King'],
+                (object) ['name' => 'Tokyo House', 'partner_email' => 'hotel@example.com'],
+            )
+        );
+    }
 }
