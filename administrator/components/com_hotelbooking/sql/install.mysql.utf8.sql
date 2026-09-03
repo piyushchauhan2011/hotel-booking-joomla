@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS `#__hotelbooking_destinations` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `asset_id` INT(10) UNSIGNED NOT NULL DEFAULT 0,
   `name` VARCHAR(255) NOT NULL DEFAULT '',
   `alias` VARCHAR(255) NOT NULL DEFAULT '',
   `language` CHAR(7) NOT NULL DEFAULT '*',
@@ -14,11 +15,14 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_destinations` (
   `payment_instructions` MEDIUMTEXT,
   `commission_rate` DECIMAL(5,2) NOT NULL DEFAULT 8.00,
   `manager_user_id` INT(11) UNSIGNED NULL DEFAULT NULL,
+  `created_by` INT(10) UNSIGNED NOT NULL DEFAULT 0,
   `image` VARCHAR(255) NOT NULL DEFAULT '',
   `published` TINYINT NOT NULL DEFAULT 1,
   `ordering` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
+  KEY `idx_asset_id` (`asset_id`),
   KEY `idx_manager_user` (`manager_user_id`),
+  KEY `idx_created_by` (`created_by`),
   KEY `idx_language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -77,3 +81,6 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_faqs` (
   PRIMARY KEY (`id`),
   KEY `idx_language` (`language`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT IGNORE INTO `#__mail_templates` (`template_id`, `extension`, `language`, `subject`, `body`, `htmlbody`, `attachments`, `params`) VALUES
+('com_hotelbooking.partner_notify', 'com_hotelbooking', '', 'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_SUBJECT', 'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_BODY', '', '', '{"tags":["sitename","destination","room","guest","checkin","checkout","guests","total"]}');

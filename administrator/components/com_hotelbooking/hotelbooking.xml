@@ -5,10 +5,11 @@
 	<creationDate>2026-08-29</creationDate>
 	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<description>COM_HOTELBOOKING_XML_DESCRIPTION</description>
 
 	<namespace path="src">Learn\Component\Hotelbooking</namespace>
+	<scriptfile>script.php</scriptfile>
 
 	<install>
 		<sql>
@@ -55,6 +56,7 @@
 			<folder>sql</folder>
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
+			<filename>script.php</filename>
 		</files>
 		<languages folder="admin/language">
 			<language tag="en-GB">en-GB/en-GB.com_hotelbooking.ini</language>

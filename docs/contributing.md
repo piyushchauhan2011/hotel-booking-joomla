@@ -66,3 +66,16 @@ New code should not grow the baseline without a reason.
 - **Push** to `main` only
 
 That avoids a double run (`push` + `pull_request`) on feature branches.
+
+## Manual DDEV checks
+
+CI has no MySQL, so these stay local after `ddev exec php scripts/seed-platform-labs.php`:
+
+- Associations tab on a destination/room/FAQ, then the site language switcher
+- Schema tab on destination/room edit; view source should show one `application/ld+json` block from the system plugin
+- Content → Fields → Star rating on a destination, visible on the site destination page
+- Users → Privacy → Requests: export and remove for a booking guest email (anonymises rows, does not delete bookings)
+- System → Mail Templates: edit `com_hotelbooking.partner_notify`, then Notify hotel on a booking and check Mailpit
+- `ddev exec php cli/joomla.php finder:index` then Smart Search for a destination or room name
+- Two hotel-manager users scoped to different destinations; Super User still sees both
+

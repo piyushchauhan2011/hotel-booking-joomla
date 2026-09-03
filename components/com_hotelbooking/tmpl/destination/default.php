@@ -28,6 +28,18 @@ endif;
 		<div class="hotelbooking-description"><?php echo $this->item->description; ?></div>
 	<?php endif; ?>
 
+	<?php if (!empty($this->item->jcfields)) : ?>
+		<dl class="hotelbooking-fields">
+			<?php foreach ($this->item->jcfields as $field) : ?>
+				<?php if (!isset($field->value) || (string) $field->value === '') : ?>
+					<?php continue; ?>
+				<?php endif; ?>
+				<dt><?php echo htmlspecialchars($field->title); ?></dt>
+				<dd><?php echo $field->value; ?></dd>
+			<?php endforeach; ?>
+		</dl>
+	<?php endif; ?>
+
 	<?php echo LayoutHelper::render('gallery', [
 		'images'        => $this->item->gallery,
 		'features'      => $this->item->amenities,

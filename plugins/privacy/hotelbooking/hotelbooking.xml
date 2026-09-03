@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="privacy" method="upgrade">
+	<name>plg_privacy_hotelbooking</name>
+	<author>Piyush Chauhan</author>
+	<creationDate>2026-09-04</creationDate>
+	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.0.0</version>
+	<description>PLG_PRIVACY_HOTELBOOKING_XML_DESCRIPTION</description>
+	<namespace path="src">Learn\Plugin\Privacy\Hotelbooking</namespace>
+	<files>
+		<folder plugin="hotelbooking">services</folder>
+		<folder>src</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_privacy_hotelbooking.ini</language>
+		<language tag="en-GB">language/en-GB/plg_privacy_hotelbooking.sys.ini</language>
+		<language tag="th-TH">language/th-TH/plg_privacy_hotelbooking.ini</language>
+		<language tag="th-TH">language/th-TH/plg_privacy_hotelbooking.sys.ini</language>
+	</languages>
+</extension>

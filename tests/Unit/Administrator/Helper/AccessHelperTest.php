@@ -13,12 +13,18 @@ final class AccessHelperTest extends TestCase
     /**
      * @return User&MockObject
      */
-    private function userWithAuthorise(callable $authorise): User
+    private function userWithAuthorise(callable $authorise, int $id = 0): User
     {
         $user = $this->createMock(User::class);
         $user->method('authorise')->willReturnCallback($authorise);
+        $user->id = $id;
 
         return $user;
+    }
+
+    public function testDestinationAssetName(): void
+    {
+        $this->assertSame('com_hotelbooking.destination.12', AccessHelper::destinationAsset(12));
     }
 
     public function testIsPrivilegedWhenCoreAdmin(): void
@@ -39,9 +45,11 @@ final class AccessHelperTest extends TestCase
         $this->assertTrue(AccessHelper::isPrivileged($user));
     }
 
-    public function testIsNotPrivilegedWithoutAdminOrCreate(): void
+    public function testIsNotPrivilegedWithOnlyManage(): void
     {
-        $user = $this->userWithAuthorise(static fn (): bool => false);
+        $user = $this->userWithAuthorise(
+            static fn (string $action, ?string $asset = null): bool => $action === 'core.manage' && $asset === 'com_hotelbooking'
+        );
 
         $this->assertFalse(AccessHelper::isPrivileged($user));
     }
@@ -49,43 +57,89 @@ final class AccessHelperTest extends TestCase
     public function testCanEditDestinationWhenPrivileged(): void
     {
         $user = $this->userWithAuthorise(
-            static fn (string $action, ?string $asset = null): bool => $action === 'core.admin'
+            static fn (string $action, ?string $asset = null): bool => $action === 'core.admin',
+            99
         );
-        $user->id = 99;
 
         $this->assertTrue(AccessHelper::canEditDestination($user, 1));
     }
 
-    public function testCanEditDestinationWhenAssignedManager(): void
+    public function testCanEditDestinationWhenCoreEditOnAsset(): void
     {
-        $user = $this->userWithAuthorise(static fn (): bool => false);
-        $user->id = 7;
+        $user = $this->userWithAuthorise(
+            static fn (string $action, ?string $asset = null): bool => $action === 'core.edit' && $asset === 'com_hotelbooking.destination.5',
+            7
+        );
 
-        $this->assertTrue(AccessHelper::canEditDestination($user, 7));
+        $this->assertTrue(AccessHelper::canEditDestination($user, 5, 99));
     }
 
-    public function testCannotEditDestinationWhenManagerIdIsZero(): void
+    public function testCanEditDestinationWhenEditOwnAndCreator(): void
     {
-        $user = $this->userWithAuthorise(static fn (): bool => false);
-        $user->id = 0;
+        $user = $this->userWithAuthorise(
+            static fn (string $action, ?string $asset = null): bool => $action === 'core.edit.own' && $asset === 'com_hotelbooking.destination.5',
+            7
+        );
 
-        $this->assertFalse(AccessHelper::canEditDestination($user, 0));
+        $this->assertTrue(AccessHelper::canEditDestination($user, 5, 7));
     }
 
-    public function testCannotEditDestinationWhenAnotherManagerOwnsIt(): void
+    public function testCannotEditDestinationWhenEditOwnButDifferentCreator(): void
     {
-        $user = $this->userWithAuthorise(static fn (): bool => false);
-        $user->id = 3;
+        $user = $this->userWithAuthorise(
+            static fn (string $action, ?string $asset = null): bool => $action === 'core.edit.own',
+            7
+        );
 
-        $this->assertFalse(AccessHelper::canEditDestination($user, 8));
+        $this->assertFalse(AccessHelper::canEditDestination($user, 5, 9));
     }
 
-    public function testCanEditRoomFollowsDestinationRules(): void
+    public function testCannotEditDestinationWhenIdIsZero(): void
     {
-        $user = $this->userWithAuthorise(static fn (): bool => false);
-        $user->id = 4;
+        $user = $this->userWithAuthorise(static fn (): bool => false, 3);
 
-        $this->assertTrue(AccessHelper::canEditRoom($user, 4));
-        $this->assertFalse(AccessHelper::canEditRoom($user, 5));
+        $this->assertFalse(AccessHelper::canEditDestination($user, 0, 3));
+    }
+
+    public function testCanEditRoomFollowsDestinationAsset(): void
+    {
+        $user = $this->userWithAuthorise(
+            static fn (string $action, ?string $asset = null): bool => $action === 'core.edit' && $asset === 'com_hotelbooking.destination.4',
+            2
+        );
+
+        $this->assertTrue(AccessHelper::canEditRoom($user, 4, 0));
+        $this->assertFalse(AccessHelper::canEditRoom($user, 5, 0));
+    }
+
+    public function testFilterEditableDestinationIdsReturnsAllWhenPrivileged(): void
+    {
+        $user = $this->userWithAuthorise(
+            static fn (string $action, ?string $asset = null): bool => $action === 'core.admin'
+        );
+
+        $this->assertSame(
+            [1, 2],
+            AccessHelper::filterEditableDestinationIds($user, [
+                ['id' => 1, 'created_by' => 9],
+                ['id' => 2, 'created_by' => 8],
+            ])
+        );
+    }
+
+    public function testFilterEditableDestinationIdsKeepsAuthorisedOnly(): void
+    {
+        $user = $this->userWithAuthorise(
+            static fn (string $action, ?string $asset = null): bool => $action === 'core.edit' && $asset === 'com_hotelbooking.destination.2',
+            4
+        );
+
+        $this->assertSame(
+            [2],
+            AccessHelper::filterEditableDestinationIds($user, [
+                ['id' => 1, 'created_by' => 9],
+                ['id' => 2, 'created_by' => 8],
+            ])
+        );
     }
 }

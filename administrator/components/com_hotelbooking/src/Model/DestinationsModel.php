@@ -86,8 +86,17 @@ class DestinationsModel extends ListModel
         $user = $this->getCurrentUser();
 
         if (!AccessHelper::isPrivileged($user)) {
-            $query->where($db->quoteName('a.manager_user_id') . ' = :scopedUserId')
-                ->bind(':scopedUserId', $user->id, ParameterType::INTEGER);
+            $scopeQuery = $db->createQuery()
+                ->select([$db->quoteName('id'), $db->quoteName('created_by')])
+                ->from($db->quoteName('#__hotelbooking_destinations'));
+            $rows = $db->setQuery($scopeQuery)->loadAssocList() ?: [];
+            $ids  = AccessHelper::filterEditableDestinationIds($user, $rows);
+
+            if ($ids === []) {
+                $query->where('0 = 1');
+            } else {
+                $query->whereIn($db->quoteName('a.id'), $ids);
+            }
         }
 
         $orderCol  = $this->state->get('list.ordering', 'a.ordering');

@@ -52,29 +52,28 @@ class HotelbookingInstallerScript
         $db->setQuery($query);
         $groupId = (int) $db->loadResult();
 
-        if ($groupId > 0) {
-            return;
+        if ($groupId < 1) {
+            /** @var \Joomla\CMS\Table\Usergroup $group */
+            $group = Table::getInstance('Usergroup');
+            $group->title     = $title;
+            $group->parent_id = 1;
+
+            if (!$group->store()) {
+                return;
+            }
+
+            $groupId = (int) $group->id;
         }
-
-        /** @var \Joomla\CMS\Table\Usergroup $group */
-        $group = Table::getInstance('Usergroup');
-        $group->title = $title;
-        $group->setLocation(1, 'last-child');
-
-        if (!$group->store()) {
-            return;
-        }
-
-        $groupId = (int) $group->id;
 
         $this->grantRule(1, 'core.login.admin', $groupId, true);
         // core.manage is required by Joomla's ComponentDispatcher just to reach
         // any admin view of the component at all - it is not optional here.
         // AccessHelper::isPrivileged() deliberately does not treat core.manage as
         // "privileged" for this reason; it checks core.create instead, which stays
-        // withheld below.
+        // withheld below. Do not grant component-level core.edit: destination
+        // assets inherit it and a hotel manager would then edit every hotel.
         $this->grantRule('com_hotelbooking', 'core.manage', $groupId, false);
-        $this->grantRule('com_hotelbooking', 'core.edit', $groupId, false);
+        $this->revokeRule('com_hotelbooking', 'core.edit', $groupId, false);
         $this->grantRule('com_hotelbooking', 'core.edit.own', $groupId, false);
 
         $this->addGroupToSpecialViewLevel($groupId);
@@ -151,6 +150,37 @@ class HotelbookingInstallerScript
         }
 
         $rules[$action][(string) $groupId] = 1;
+
+        $asset->rules = json_encode($rules);
+        $asset->store();
+    }
+
+    private function revokeRule($assetIdentifier, string $action, int $groupId, bool $byId): void
+    {
+        /** @var \Joomla\CMS\Table\Asset $asset */
+        $asset = Table::getInstance('Asset');
+
+        if ($byId) {
+            $asset->load((int) $assetIdentifier);
+        } else {
+            $asset->loadByName((string) $assetIdentifier);
+        }
+
+        if (empty($asset->id)) {
+            return;
+        }
+
+        $rules = json_decode($asset->rules ?: '{}', true);
+
+        if (!\is_array($rules) || !isset($rules[$action][(string) $groupId])) {
+            return;
+        }
+
+        unset($rules[$action][(string) $groupId]);
+
+        if ($rules[$action] === []) {
+            unset($rules[$action]);
+        }
 
         $asset->rules = json_encode($rules);
         $asset->store();

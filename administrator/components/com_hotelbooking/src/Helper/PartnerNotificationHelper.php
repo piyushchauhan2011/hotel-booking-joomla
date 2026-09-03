@@ -4,6 +4,7 @@ namespace Learn\Component\Hotelbooking\Administrator\Helper;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Mail\MailTemplate;
 
 \defined('_JEXEC') or die;
 
@@ -23,6 +24,23 @@ class PartnerNotificationHelper
         );
     }
 
+    /**
+     * @return array<string, string>
+     */
+    public static function templateData(object $booking, object $room, object $destination, string $sitename): array
+    {
+        return [
+            'sitename'    => $sitename,
+            'destination' => (string) $destination->name,
+            'room'        => (string) $room->name,
+            'guest'       => (string) $booking->guest_name,
+            'checkin'     => (string) $booking->checkin_date,
+            'checkout'    => (string) $booking->checkout_date,
+            'guests'      => (string) (int) $booking->guests,
+            'total'       => number_format((float) $booking->total_price, 2),
+        ];
+    }
+
     public static function buildWhatsAppLink(string $whatsapp, string $message): string
     {
         $digits = preg_replace('/\D+/', '', $whatsapp);
@@ -40,18 +58,13 @@ class PartnerNotificationHelper
             return false;
         }
 
-        $mailer  = Factory::getMailer();
-        $app     = Factory::getApplication();
-        $subject = Text::sprintf('COM_HOTELBOOKING_NOTIFY_EMAIL_SUBJECT', $destination->name);
-        $body    = self::buildMessageSummary($booking, $room, $destination)
-            . "\n\n" . Text::sprintf('COM_HOTELBOOKING_NOTIFY_EMAIL_FOOTER', $app->get('sitename'));
-
         try {
-            $mailer->setSubject($subject);
-            $mailer->setBody($body);
-            $mailer->addRecipient($destination->partner_email);
+            $app  = Factory::getApplication();
+            $mail = new MailTemplate('com_hotelbooking.partner_notify', $app->getLanguage()->getTag());
+            $mail->addTemplateData(self::templateData($booking, $room, $destination, (string) $app->get('sitename')));
+            $mail->addRecipient($destination->partner_email);
 
-            return (bool) $mailer->Send();
+            return (bool) $mail->send();
         } catch (\Exception $e) {
             return false;
         }

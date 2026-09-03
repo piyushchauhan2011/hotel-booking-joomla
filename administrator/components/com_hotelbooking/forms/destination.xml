@@ -8,6 +8,18 @@
 		/>
 
 		<field
+			name="asset_id"
+			type="hidden"
+			filter="unset"
+		/>
+
+		<field
+			name="created_by"
+			type="hidden"
+			filter="unset"
+		/>
+
+		<field
 			name="name"
 			type="text"
 			label="COM_HOTELBOOKING_FIELD_NAME_LABEL"
@@ -163,6 +175,19 @@
 			name="manager_user_id"
 			type="user"
 			label="COM_HOTELBOOKING_FIELD_MANAGER_USER_LABEL"
+		/>
+	</fieldset>
+
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL">
+		<field
+			name="rules"
+			type="rules"
+			label="JFIELD_RULES_LABEL"
+			translate_label="false"
+			filter="rules"
+			component="com_hotelbooking"
+			section="destination"
+			validate="rules"
 		/>
 	</fieldset>
 </form>

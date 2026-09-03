@@ -113,10 +113,13 @@ class DestinationModel extends AdminModel
         $data['alias'] = ApplicationHelper::stringURLSafe($data['alias']);
 
         $user = $this->getCurrentUser();
+        $id   = (int) ($data['id'] ?? 0);
+
+        if ($id <= 0 && empty($data['created_by'])) {
+            $data['created_by'] = (int) $user->id;
+        }
 
         if (!AccessHelper::isPrivileged($user)) {
-            $id = (int) ($data['id'] ?? 0);
-
             if ($id <= 0) {
                 $this->setError(Text::_('JERROR_ALERTNOAUTHOR'));
 
@@ -125,13 +128,13 @@ class DestinationModel extends AdminModel
 
             $table = $this->getTable();
 
-            if (!$table->load($id) || !AccessHelper::canEditDestination($user, (int) $table->manager_user_id)) {
+            if (!$table->load($id) || !AccessHelper::canEditDestination($user, $id, (int) $table->created_by)) {
                 $this->setError(Text::_('JERROR_ALERTNOAUTHOR'));
 
                 return false;
             }
 
-            unset($data['manager_user_id']);
+            unset($data['manager_user_id'], $data['created_by'], $data['rules']);
             $data['published'] = 0;
         }
 
