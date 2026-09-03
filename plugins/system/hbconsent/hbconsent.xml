@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="system" method="upgrade">
+	<name>plg_system_hbconsent</name>
+	<author>Piyush Chauhan</author>
+	<creationDate>2026-09-03</creationDate>
+	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.0.0</version>
+	<description>PLG_SYSTEM_HBCONSENT_XML_DESCRIPTION</description>
+	<namespace path="src">Learn\Plugin\System\Hbconsent</namespace>
+	<files>
+		<folder plugin="hbconsent">services</folder>
+		<folder>src</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_system_hbconsent.ini</language>
+		<language tag="en-GB">language/en-GB/plg_system_hbconsent.sys.ini</language>
+		<language tag="th-TH">language/th-TH/plg_system_hbconsent.ini</language>
+		<language tag="th-TH">language/th-TH/plg_system_hbconsent.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="privacy_article"
+					type="hidden"
+					default="0"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

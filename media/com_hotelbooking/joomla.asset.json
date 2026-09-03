@@ -32,6 +32,18 @@
       }
     },
     {
+      "name": "plg_system_hbconsent.banner",
+      "description": "Cookie banner Accept/Dismiss (System – Hotel Booking Consents).",
+      "type": "script",
+      "uri": "com_hotelbooking/cookie-banner.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
       "name": "com_hotelbooking.admin-snippets-modal",
       "description": "Inserts a {hotelbooking} tag into the article editor from the Snippets picker modal.",
       "type": "script",
