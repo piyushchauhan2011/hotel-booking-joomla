@@ -15,6 +15,7 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
 
     protected function getLayoutData(): array
     {
+        $this->getApplication()->bootComponent('com_hotelbooking');
         $this->getApplication()->getLanguage()->load('com_hotelbooking', JPATH_SITE);
         $this->getApplication()->getDocument()->getWebAssetManager()->useStyle('com_hotelbooking.site');
 

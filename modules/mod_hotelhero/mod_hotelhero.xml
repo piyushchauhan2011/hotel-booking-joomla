@@ -5,7 +5,7 @@
 	<creationDate>2026-09</creationDate>
 	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<description>MOD_HOTELHERO_XML_DESCRIPTION</description>
 	<namespace path="src">Learn\Module\Hotelhero</namespace>
 	<files>
@@ -22,11 +22,35 @@
 		<fields name="params">
 			<fieldset name="basic">
 				<field
+					name="use_url_hotel"
+					type="radio"
+					label="MOD_HOTELHERO_FIELD_USE_URL_LABEL"
+					description="MOD_HOTELHERO_FIELD_USE_URL_DESC"
+					layout="joomla.form.field.radio.switcher"
+					default="1"
+					filter="integer"
+					>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="destination_id"
+					type="sql"
+					label="MOD_HOTELHERO_FIELD_DESTINATION_LABEL"
+					description="MOD_HOTELHERO_FIELD_DESTINATION_DESC"
+					query="SELECT id, name FROM #__hotelbooking_destinations WHERE published = 1 ORDER BY name"
+					key_field="id"
+					value_field="name"
+					header="MOD_HOTELHERO_FIELD_DESTINATION_HEADER"
+				/>
+				<field
 					name="hero_title"
 					type="text"
 					label="MOD_HOTELHERO_FIELD_TITLE_LABEL"
+					description="MOD_HOTELHERO_FIELD_MANUAL_DESC"
 					filter="string"
 					default=""
+					showon="use_url_hotel:0"
 				/>
 				<field
 					name="hero_subtitle"
@@ -35,6 +59,7 @@
 					filter="string"
 					rows="2"
 					default=""
+					showon="use_url_hotel:0"
 				/>
 				<field
 					name="hero_image"
@@ -43,6 +68,7 @@
 					schemes="http,https,ftp,ftps,data,file"
 					validate="url"
 					relative="true"
+					showon="use_url_hotel:0"
 				/>
 				<field
 					name="cta_label"
@@ -79,7 +105,7 @@
 					name="cache"
 					type="list"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
-					default="1"
+					default="0"
 					filter="integer"
 					validate="options"
 					>

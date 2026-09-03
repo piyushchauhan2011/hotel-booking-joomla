@@ -8,6 +8,7 @@ use Joomla\Database\DatabaseAwareInterface;
 use Joomla\Database\DatabaseAwareTrait;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
+use Learn\Component\Hotelbooking\Site\Helper\DestinationContextHelper;
 
 \defined('_JEXEC') or die;
 
@@ -17,7 +18,7 @@ class HotelroomsHelper implements DatabaseAwareInterface
 
     public function getRooms(Registry $params, CMSApplicationInterface $app): array
     {
-        $destinationId = (int) $params->get('destination_id', 0);
+        $destinationId = DestinationContextHelper::getDestinationId($params, $app);
         $limit         = max(1, (int) $params->get('count', 6));
 
         if ($destinationId <= 0) {

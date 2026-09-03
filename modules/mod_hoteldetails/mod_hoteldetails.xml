@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
-	<name>mod_hotelrooms</name>
+	<name>mod_hoteldetails</name>
 	<author>Piyush Chauhan</author>
 	<creationDate>2026-09</creationDate>
 	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<version>1.1.0</version>
-	<description>MOD_HOTELROOMS_XML_DESCRIPTION</description>
-	<namespace path="src">Learn\Module\Hotelrooms</namespace>
+	<version>1.0.0</version>
+	<description>MOD_HOTELDETAILS_XML_DESCRIPTION</description>
+	<namespace path="src">Learn\Module\Hoteldetails</namespace>
 	<files>
-		<folder module="mod_hotelrooms">services</folder>
+		<folder module="mod_hoteldetails">services</folder>
 		<folder>src</folder>
 		<folder>tmpl</folder>
 		<folder>language</folder>
 	</files>
 	<languages>
-		<language tag="en-GB">language/en-GB/mod_hotelrooms.ini</language>
-		<language tag="en-GB">language/en-GB/mod_hotelrooms.sys.ini</language>
+		<language tag="en-GB">language/en-GB/mod_hoteldetails.ini</language>
+		<language tag="en-GB">language/en-GB/mod_hoteldetails.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params">
@@ -24,8 +24,8 @@
 				<field
 					name="use_url_hotel"
 					type="radio"
-					label="MOD_HOTELROOMS_FIELD_USE_URL_LABEL"
-					description="MOD_HOTELROOMS_FIELD_USE_URL_DESC"
+					label="MOD_HOTELDETAILS_FIELD_USE_URL_LABEL"
+					description="MOD_HOTELDETAILS_FIELD_USE_URL_DESC"
 					layout="joomla.form.field.radio.switcher"
 					default="1"
 					filter="integer"
@@ -36,23 +36,13 @@
 				<field
 					name="destination_id"
 					type="sql"
-					label="MOD_HOTELROOMS_FIELD_DESTINATION_LABEL"
-					description="MOD_HOTELROOMS_FIELD_DESTINATION_DESC"
+					label="MOD_HOTELDETAILS_FIELD_DESTINATION_LABEL"
+					description="MOD_HOTELDETAILS_FIELD_DESTINATION_DESC"
 					query="SELECT id, name FROM #__hotelbooking_destinations WHERE published = 1 ORDER BY name"
 					key_field="id"
 					value_field="name"
-					header="MOD_HOTELROOMS_FIELD_DESTINATION_HEADER"
+					header="MOD_HOTELDETAILS_FIELD_DESTINATION_HEADER"
 					showon="use_url_hotel:0"
-				/>
-				<field
-					name="count"
-					type="number"
-					label="MOD_HOTELROOMS_FIELD_COUNT_LABEL"
-					description="MOD_HOTELROOMS_FIELD_COUNT_DESC"
-					default="6"
-					filter="integer"
-					min="1"
-					max="50"
 				/>
 			</fieldset>
 			<fieldset name="advanced">
