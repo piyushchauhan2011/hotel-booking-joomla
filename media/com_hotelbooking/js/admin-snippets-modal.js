@@ -1,35 +1,61 @@
 (function () {
 	'use strict';
 
-	document.addEventListener('DOMContentLoaded', function () {
-		var links = document.querySelectorAll('.hb-select-link');
+	document.addEventListener('click', function (event) {
+		var clearButton = event.target.closest('[data-hb-snippets-clear]');
 
-		Array.prototype.forEach.call(links, function (link) {
-			link.addEventListener('click', function (event) {
-				event.preventDefault();
+		if (clearButton) {
+			event.preventDefault();
 
-				var options = Joomla.getOptions('xtd-hotelbooking');
+			var form = document.getElementById('adminForm');
 
-				if (!options || !options.editor) {
-					return;
-				}
+			if (!form) {
+				return;
+			}
 
-				var type = link.getAttribute('data-type');
-				var id = link.getAttribute('data-id');
-				var tag = '{hotelbooking type="' + type + '" id="' + id + '"}';
+			var search = form.querySelector('#filter_search');
 
-				if (type === 'offer') {
-					var entity = link.getAttribute('data-entity');
-					var index = link.getAttribute('data-index');
-					tag = '{hotelbooking type="offer" entity="' + entity + '" id="' + id + '" index="' + index + '"}';
-				}
+			if (search) {
+				search.value = '';
+			}
 
-				window.parent.Joomla.editors.instances[options.editor].replaceSelection(tag);
-
-				if (window.parent.Joomla.Modal && window.parent.Joomla.Modal.getCurrent()) {
-					window.parent.Joomla.Modal.getCurrent().close();
-				}
+			form.querySelectorAll('select[name="filter[destination_id]"], select[name="filter_destination_id"], select[name="filter[entity]"], select[name="filter_entity"]').forEach(function (field) {
+				field.value = '';
 			});
-		});
+
+			form.submit();
+
+			return;
+		}
+
+		var link = event.target.closest('.hb-select-link');
+
+		if (!link) {
+			return;
+		}
+
+		event.preventDefault();
+
+		var options = Joomla.getOptions('xtd-hotelbooking');
+
+		if (!options || !options.editor) {
+			return;
+		}
+
+		var type = link.getAttribute('data-type');
+		var id = link.getAttribute('data-id');
+		var tag = '{hotelbooking type="' + type + '" id="' + id + '"}';
+
+		if (type === 'offer') {
+			var entity = link.getAttribute('data-entity');
+			var index = link.getAttribute('data-index');
+			tag = '{hotelbooking type="offer" entity="' + entity + '" id="' + id + '" index="' + index + '"}';
+		}
+
+		window.parent.Joomla.editors.instances[options.editor].replaceSelection(tag);
+
+		if (window.parent.Joomla.Modal && window.parent.Joomla.Modal.getCurrent()) {
+			window.parent.Joomla.Modal.getCurrent().close();
+		}
 	});
 })();
