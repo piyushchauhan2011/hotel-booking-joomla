@@ -2,11 +2,14 @@
 <?php
 
 /**
- * Seed a Privacy Policy article, a hidden menu item, and enable the core
- * consent plugins so logged-in users record a row under Users → Privacy →
- * Consents. Guests get a Contact-form checkbox that does not store a consent.
+ * Seed a Privacy Policy article, a hidden menu item, and enable consent
+ * plugins so Users → Privacy → Consents gets rows for:
  *
- * Idempotent. Re-run with:
+ *   - Logged-in users (core System – Privacy Consent, subject key)
+ *   - Guest Contact-form ticks (plg_system_hbconsent, subject "Contact form")
+ *   - Cookie-banner Accept (plg_system_hbconsent, subject "Cookie banner")
+ *
+ * Guest rows use user_id 0. Idempotent. Re-run with:
  *
  *   ddev exec php scripts/seed-privacy-consent.php
  *
@@ -58,6 +61,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] ?? 'localhost';
 /** @var AdministratorApplication $app */
 $app = $container->get(AdministratorApplication::class);
 Factory::$application = $app;
+rebuildExtensionNamespaceMap();
 $app->createExtensionNamespaceMap();
 
 \Joomla\CMS\Plugin\PluginHelper::importPlugin('behaviour', null, true, $app->getDispatcher());
@@ -154,11 +158,16 @@ try {
         'privacy_article' => (string) $articleId,
     ]);
 
+    ensurePluginRow($db, 'system', 'hbconsent', 'plg_system_hbconsent');
+    enablePlugin($db, 'system', 'hbconsent', [
+        'privacy_article' => (string) $articleId,
+    ]);
+    rebuildExtensionNamespaceMap();
+
     cleanPluginCache();
 
-    echo "Privacy article #{$articleId}. Plugins System – Privacy Consent and Content – Confirm Consent are enabled.\n";
-    echo "Do not pre-seed a consent. Log in as maya / ChangeMe123! to be redirected to Profile edit.\n";
-    echo "Then open Users → Privacy → Consents. Guest Contact form has a checkbox but creates no consent row.\n";
+    echo "Privacy article #{$articleId}. Plugins Privacy Consent, Confirm Consent, and Hotel Booking Consents are enabled.\n";
+    echo "Logged-in: maya agrees on Profile edit (Privacy Policy). Guest Contact tick and cookie-banner Accept write Consents with user id 0.\n";
 } catch (Throwable $e) {
     fwrite(STDERR, $e->getMessage() . PHP_EOL);
     exit(1);
@@ -353,6 +362,43 @@ function ensureMenuItem($menuItemModel, DatabaseInterface $db, int $userId, int 
     return $id;
 }
 
+function ensurePluginRow(DatabaseInterface $db, string $folder, string $element, string $name): void
+{
+    $query = $db->createQuery()
+        ->select($db->quoteName('extension_id'))
+        ->from($db->quoteName('#__extensions'))
+        ->where($db->quoteName('type') . ' = ' . $db->quote('plugin'))
+        ->where($db->quoteName('folder') . ' = :folder')
+        ->where($db->quoteName('element') . ' = :element')
+        ->bind(':folder', $folder)
+        ->bind(':element', $element)
+        ->setLimit(1);
+
+    if ((int) $db->setQuery($query)->loadResult() > 0) {
+        return;
+    }
+
+    $row = (object) [
+        'package_id'      => 0,
+        'name'            => $name,
+        'type'            => 'plugin',
+        'element'         => $element,
+        'folder'          => $folder,
+        'client_id'       => 0,
+        'enabled'         => 1,
+        'access'          => 1,
+        'protected'       => 0,
+        'locked'          => 0,
+        'manifest_cache'  => '{}',
+        'params'          => '{}',
+        'custom_data'     => '',
+        'ordering'        => 0,
+        'state'           => 0,
+    ];
+    $db->insertObject('#__extensions', $row);
+    echo "Registered plugin {$folder}/{$element}\n";
+}
+
 function enablePlugin(DatabaseInterface $db, string $folder, string $element, array $params): void
 {
     $query = $db->createQuery()
@@ -401,4 +447,14 @@ function cleanPluginCache(): void
     foreach (['com_plugins', '_system'] as $group) {
         $factory->createCacheController('callback', ['defaultgroup' => $group])->clean();
     }
+}
+
+/**
+ * Rescan extension XML into administrator/cache/autoload_psr4.php.
+ * createExtensionNamespaceMap() only loads that file; it does not rebuild it.
+ */
+function rebuildExtensionNamespaceMap(): void
+{
+    \JLoader::register('JNamespacePsr4Map', JPATH_LIBRARIES . '/namespacemap.php');
+    (new \JNamespacePsr4Map())->create();
 }
