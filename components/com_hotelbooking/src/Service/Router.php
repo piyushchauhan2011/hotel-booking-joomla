@@ -43,6 +43,7 @@ class Router extends RouterView
 
         $this->registerView(new RouterViewConfiguration('bookings'));
         $this->registerView(new RouterViewConfiguration('faqs'));
+        $this->registerView(new RouterViewConfiguration('hotel'));
 
         parent::__construct($app, $menu);
 

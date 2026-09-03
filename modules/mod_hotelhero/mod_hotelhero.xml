@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_hotelhero</name>
+	<author>Piyush Chauhan</author>
+	<creationDate>2026-09</creationDate>
+	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.0.0</version>
+	<description>MOD_HOTELHERO_XML_DESCRIPTION</description>
+	<namespace path="src">Learn\Module\Hotelhero</namespace>
+	<files>
+		<folder module="mod_hotelhero">services</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/mod_hotelhero.ini</language>
+		<language tag="en-GB">language/en-GB/mod_hotelhero.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="hero_title"
+					type="text"
+					label="MOD_HOTELHERO_FIELD_TITLE_LABEL"
+					filter="string"
+					default=""
+				/>
+				<field
+					name="hero_subtitle"
+					type="textarea"
+					label="MOD_HOTELHERO_FIELD_SUBTITLE_LABEL"
+					filter="string"
+					rows="2"
+					default=""
+				/>
+				<field
+					name="hero_image"
+					type="media"
+					label="MOD_HOTELHERO_FIELD_IMAGE_LABEL"
+					schemes="http,https,ftp,ftps,data,file"
+					validate="url"
+					relative="true"
+				/>
+				<field
+					name="cta_label"
+					type="text"
+					label="MOD_HOTELHERO_FIELD_CTA_LABEL_LABEL"
+					filter="string"
+					default=""
+				/>
+				<field
+					name="cta_url"
+					type="text"
+					label="MOD_HOTELHERO_FIELD_CTA_URL_LABEL"
+					filter="string"
+					hint="#hotel-rooms"
+					default=""
+				/>
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"
+					validate="moduleLayout"
+				/>
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					rows="3"
+					validate="CssIdentifier"
+				/>
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					default="1"
+					filter="integer"
+					validate="options"
+					>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field
+					name="cache_time"
+					type="number"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					default="900"
+					filter="integer"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

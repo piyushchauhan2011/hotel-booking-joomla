@@ -42,6 +42,12 @@
 		<!-- used directly in the error.php and included here so the position will appear in the list of available positions -->
 		<position>error-403</position>
 		<position>error-404</position>
+		<!-- Hotel landing page positions (see index.php when view=hotel) -->
+		<position>hotel-hero</position>
+		<position>hotel-intro</position>
+		<position>hotel-rooms</position>
+		<position>hotel-sidebar</position>
+		<position>hotel-bottom</position>
 	</positions>
 	<config>
 		<fields name="params">

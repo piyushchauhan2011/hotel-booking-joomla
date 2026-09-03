@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_hotelrooms</name>
+	<author>Piyush Chauhan</author>
+	<creationDate>2026-09</creationDate>
+	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.0.0</version>
+	<description>MOD_HOTELROOMS_XML_DESCRIPTION</description>
+	<namespace path="src">Learn\Module\Hotelrooms</namespace>
+	<files>
+		<folder module="mod_hotelrooms">services</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/mod_hotelrooms.ini</language>
+		<language tag="en-GB">language/en-GB/mod_hotelrooms.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="destination_id"
+					type="sql"
+					label="MOD_HOTELROOMS_FIELD_DESTINATION_LABEL"
+					description="MOD_HOTELROOMS_FIELD_DESTINATION_DESC"
+					query="SELECT id, name FROM #__hotelbooking_destinations WHERE published = 1 ORDER BY name"
+					key_field="id"
+					value_field="name"
+					header="MOD_HOTELROOMS_FIELD_DESTINATION_HEADER"
+					required="true"
+				/>
+				<field
+					name="count"
+					type="number"
+					label="MOD_HOTELROOMS_FIELD_COUNT_LABEL"
+					description="MOD_HOTELROOMS_FIELD_COUNT_DESC"
+					default="6"
+					filter="integer"
+					min="1"
+					max="50"
+				/>
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"
+					validate="moduleLayout"
+				/>
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					rows="3"
+					validate="CssIdentifier"
+				/>
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					default="1"
+					filter="integer"
+					validate="options"
+					>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+				<field
+					name="cache_time"
+					type="number"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					default="900"
+					filter="integer"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
