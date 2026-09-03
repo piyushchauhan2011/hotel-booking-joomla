@@ -989,6 +989,61 @@ html {
 	font-weight: 600;
 }
 
+/* Privacy Consent (logged-in profile edit) + Confirm Consent (contact form) */
+
+.com-users-profile__edit {
+	max-width: 640px;
+	margin: 2rem auto;
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 2rem 2.25rem;
+}
+
+.com-users-profile__edit fieldset {
+	margin: 0 0 1.25rem;
+	padding: 0;
+	border: 0;
+}
+
+.com-users-profile__edit legend {
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--hb-text-muted);
+}
+
+.com-users-profile__edit .alert-info {
+	background: var(--hb-accent-soft);
+	border: 1px solid var(--hb-border);
+	color: var(--hb-text);
+	border-radius: var(--hb-radius-sm);
+}
+
+.com-users-profile__edit .form-check,
+.com-users-profile__edit .form-check-inline {
+	margin-right: 1rem;
+}
+
+.com-users-profile__edit .btn-primary {
+	border-radius: 999px;
+	font-weight: 600;
+}
+
+.com-contact__form #jform_consentbox,
+.com-contact__form .checkboxes {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+
+.com-contact__form .form-check-label,
+.com-contact__form #jform_consentbox-lbl {
+	font-weight: 600;
+	color: var(--hb-text);
+}
+
 /* ==========================================================================
    Page: rich content blocks inside article body
    ========================================================================== */
