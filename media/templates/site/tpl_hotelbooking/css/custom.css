@@ -248,6 +248,51 @@ html {
 	margin: 0 0 1.1rem;
 }
 
+.hb-article-facts {
+	margin: 1.25rem 0 1.5rem;
+	padding: 1rem 1.15rem;
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+	background: var(--hb-accent-soft);
+}
+
+.hb-article-facts-title {
+	margin: 0 0 0.65rem;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--hb-text-muted);
+}
+
+.hb-article-facts dl {
+	margin: 0;
+	display: grid;
+	gap: 0.45rem 1.25rem;
+}
+
+.hb-article-facts-row {
+	display: grid;
+	grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr);
+	gap: 0.35rem 1rem;
+	align-items: baseline;
+}
+
+.hb-article-facts dt {
+	margin: 0;
+	font-weight: 600;
+	color: var(--hb-text);
+}
+
+.hb-article-facts dd {
+	margin: 0;
+	color: var(--hb-text-muted);
+}
+
+.hb-article-facts a {
+	font-weight: 600;
+}
+
 /* ==========================================================================
    Component: header / navbar
    (templates/cassiopeia/index.php: .header > .navbar-brand + .container-nav)
