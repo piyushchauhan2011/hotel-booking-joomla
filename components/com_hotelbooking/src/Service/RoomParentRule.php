@@ -17,9 +17,7 @@ use Joomla\Database\ParameterType;
  */
 class RoomParentRule implements RulesInterface
 {
-    public function __construct(private RouterViewConfiguration $view, private DatabaseInterface $db)
-    {
-    }
+    public function __construct(private RouterViewConfiguration $view, private DatabaseInterface $db) {}
 
     public function preprocess(&$query)
     {
@@ -49,11 +47,7 @@ class RoomParentRule implements RulesInterface
         }
     }
 
-    public function parse(&$segments, &$vars)
-    {
-    }
+    public function parse(&$segments, &$vars) {}
 
-    public function build(&$query, &$segments)
-    {
-    }
+    public function build(&$query, &$segments) {}
 }

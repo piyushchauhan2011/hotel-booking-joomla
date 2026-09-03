@@ -36,7 +36,7 @@ class FaqModel extends AdminModel
                 $item->id,
                 'id',
                 '',
-                ''
+                '',
             );
 
             foreach ($associations as $tag => $association) {

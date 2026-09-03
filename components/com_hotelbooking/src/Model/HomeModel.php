@@ -25,7 +25,7 @@ class HomeModel extends BaseDatabaseModel
             $query->whereIn(
                 $db->quoteName('language'),
                 [Factory::getApplication()->getLanguage()->getTag(), '*'],
-                ParameterType::STRING
+                ParameterType::STRING,
             );
         }
 

@@ -42,7 +42,7 @@ class HtmlView extends BaseHtmlView
             $this->getDocument()->addCustomTag(
                 '<script type="application/ld+json">'
                 . json_encode(SchemaHelper::forRoom($this->item), JSON_UNESCAPED_SLASHES)
-                . '</script>'
+                . '</script>',
             );
         }
 

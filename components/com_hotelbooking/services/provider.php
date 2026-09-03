@@ -12,7 +12,7 @@ use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use Learn\Component\Hotelbooking\Site\Extension\HotelbookingComponent;
 
-return new class () implements ServiceProviderInterface {
+return new class implements ServiceProviderInterface {
     public function register(Container $container)
     {
         $container->registerServiceProvider(new MVCFactory('\\Learn\\Component\\Hotelbooking'));
@@ -27,7 +27,7 @@ return new class () implements ServiceProviderInterface {
                 $component->setMVCFactory($container->get(MVCFactoryInterface::class));
 
                 return $component;
-            }
+            },
         );
     }
 };

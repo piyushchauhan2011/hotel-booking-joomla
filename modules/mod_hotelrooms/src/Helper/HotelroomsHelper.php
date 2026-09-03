@@ -39,7 +39,7 @@ class HotelroomsHelper implements DatabaseAwareInterface
             $query->whereIn(
                 $db->quoteName('language'),
                 [$app->getLanguage()->getTag(), '*'],
-                ParameterType::STRING
+                ParameterType::STRING,
             );
         }
 

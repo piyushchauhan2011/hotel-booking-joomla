@@ -1,0 +1,26 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 5
+    tmpDir: ../build/phpstan
+    paths:
+        - ../administrator/components/com_hotelbooking/src
+        - ../administrator/components/com_hotelbooking/services
+        - ../components/com_hotelbooking/src
+        - ../components/com_hotelbooking/services
+        - ../plugins/content/hotelbooking/src
+        - ../plugins/content/hotelbooking/services
+        - ../plugins/editors-xtd/hotelbooking/src
+        - ../plugins/editors-xtd/hotelbooking/services
+        - ../plugins/system/hbconsent/src
+        - ../plugins/system/hbconsent/services
+        - ../modules/mod_hoteldetails/src
+        - ../modules/mod_hoteldetails/services
+        - ../modules/mod_hotelhero/src
+        - ../modules/mod_hotelhero/services
+        - ../modules/mod_hotelrooms/src
+        - ../modules/mod_hotelrooms/services
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    treatPhpDocTypesAsCertain: false

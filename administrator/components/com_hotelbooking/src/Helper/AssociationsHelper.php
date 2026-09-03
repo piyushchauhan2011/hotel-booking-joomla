@@ -39,7 +39,7 @@ class AssociationsHelper extends AssociationExtensionHelper
             $id,
             'id',
             $aliasField,
-            ''
+            '',
         );
     }
 

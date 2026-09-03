@@ -19,7 +19,7 @@ class PartnerNotificationHelper
             $booking->checkin_date,
             $booking->checkout_date,
             (int) $booking->guests,
-            number_format((float) $booking->total_price, 2)
+            number_format((float) $booking->total_price, 2),
         );
     }
 

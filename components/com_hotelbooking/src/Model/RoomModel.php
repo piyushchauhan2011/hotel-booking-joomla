@@ -34,7 +34,7 @@ class RoomModel extends ItemModel
             $query->whereIn(
                 $db->quoteName('r.language'),
                 [Factory::getApplication()->getLanguage()->getTag(), '*'],
-                ParameterType::STRING
+                ParameterType::STRING,
             );
         }
 

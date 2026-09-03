@@ -60,8 +60,8 @@ class RoomsModel extends ListModel
                     $db->quoteName('l.title', 'language_title'),
                     $db->quoteName('l.image', 'language_image'),
                     $db->quoteName('d.name', 'destination_name'),
-                ]
-            )
+                ],
+            ),
         )
             ->from($db->quoteName('#__hotelbooking_rooms', 'a'))
             ->join('LEFT', $db->quoteName('#__hotelbooking_destinations', 'd') . ' ON ' . $db->quoteName('d.id') . ' = ' . $db->quoteName('a.destination_id'))

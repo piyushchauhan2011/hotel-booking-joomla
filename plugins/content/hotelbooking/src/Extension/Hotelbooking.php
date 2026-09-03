@@ -66,8 +66,8 @@ final class Hotelbooking extends CMSPlugin implements SubscriberInterface, Datab
 
         $article->text = preg_replace_callback(
             self::TAG_REGEX,
-            fn (array $match) => $this->renderSnippet($this->parseAttributes($match[1])),
-            $article->text
+            fn(array $match) => $this->renderSnippet($this->parseAttributes($match[1])),
+            $article->text,
         );
     }
 

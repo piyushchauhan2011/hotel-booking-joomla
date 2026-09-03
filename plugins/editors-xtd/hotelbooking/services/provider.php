@@ -9,19 +9,19 @@ use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use Learn\Plugin\EditorsXtd\Hotelbooking\Extension\Hotelbooking;
 
-return new class () implements ServiceProviderInterface {
+return new class implements ServiceProviderInterface {
     public function register(Container $container): void
     {
         $container->set(
             PluginInterface::class,
             $container->lazy(Hotelbooking::class, function (Container $container) {
                 $plugin = new Hotelbooking(
-                    (array) PluginHelper::getPlugin('editors-xtd', 'hotelbooking')
+                    (array) PluginHelper::getPlugin('editors-xtd', 'hotelbooking'),
                 );
                 $plugin->setApplication(Factory::getApplication());
 
                 return $plugin;
-            })
+            }),
         );
     }
 };

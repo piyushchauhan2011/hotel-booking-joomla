@@ -75,7 +75,7 @@ final class Hotelbooking extends CMSPlugin implements SubscriberInterface
                     . '0 0 0 64 0V224a96 96 0 0 0-96-96H96V64a32 32 0 0 0-32-32zm32 160h128v64H96v-64zm192 0h96a32 32 0 0 1 32 32v32H288v-64zM96 320h320v'
                     . '32H96v-32z"></path></svg>',
                 'name' => $this->_type . '_' . $this->_name,
-            ]
+            ],
         );
     }
 }

@@ -30,7 +30,7 @@ class DestinationModel extends ItemModel
             $query->whereIn(
                 $db->quoteName('language'),
                 [Factory::getApplication()->getLanguage()->getTag(), '*'],
-                ParameterType::STRING
+                ParameterType::STRING,
             );
         }
 
@@ -69,7 +69,7 @@ class DestinationModel extends ItemModel
             $query->whereIn(
                 $db->quoteName('language'),
                 [Factory::getApplication()->getLanguage()->getTag(), '*'],
-                ParameterType::STRING
+                ParameterType::STRING,
             );
         }
 
