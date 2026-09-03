@@ -33,9 +33,9 @@
     },
     {
       "name": "plg_system_hbconsent.banner",
-      "description": "Cookie banner Accept/Dismiss (System – Hotel Booking Consents).",
+      "description": "Site notice Accept/Dismiss (System – Hotel Booking Consents).",
       "type": "script",
-      "uri": "com_hotelbooking/cookie-banner.js",
+      "uri": "com_hotelbooking/hb-notice.js",
       "dependencies": [
         "core"
       ],
