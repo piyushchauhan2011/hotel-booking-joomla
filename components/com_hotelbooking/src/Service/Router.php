@@ -48,6 +48,8 @@ class Router extends RouterView
         $hotel->setKey('id');
         $this->registerView($hotel);
 
+        $this->registerView(new RouterViewConfiguration('cityguide'));
+
         parent::__construct($app, $menu);
 
         $this->attachRule(new RoomParentRule($room, $this->db));
