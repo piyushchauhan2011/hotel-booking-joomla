@@ -885,3 +885,128 @@ html {
 	border-radius: 4px;
 	font-size: 0.9em;
 }
+
+/* ==========================================================================
+   Hotel landing (jdoc positions on view=hotel)
+   ========================================================================== */
+
+.hotel-landing-page .hotel-landing-hero {
+	margin: 0 0 1.5rem;
+}
+
+@supports (display: grid) {
+	.hotel-landing-page .site-grid.hotel-landing {
+		grid-template-areas:
+			". banner banner banner banner ."
+			". comp comp comp comp ."
+			". body body body body ."
+			". bot bot bot bot .";
+	}
+
+	@media (width >= 992px) {
+		.hotel-landing-page .site-grid.hotel-landing {
+			grid-template-areas:
+				". banner banner banner banner ."
+				". comp comp comp comp ."
+				". body body body body ."
+				". bot bot bot bot .";
+		}
+	}
+
+	.hotel-landing-page .hotel-landing-hero {
+		grid-area: banner;
+		grid-column: full-start / full-end;
+	}
+
+	.hotel-landing-page .hotel-landing-body {
+		grid-area: body;
+		grid-column: main-start / main-end;
+	}
+
+	.hotel-landing-page .hotel-landing-bottom {
+		grid-area: bot;
+		grid-column: main-start / main-end;
+	}
+}
+
+.hotel-landing-page .hotel-landing-body {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
+	gap: 1.5rem;
+	align-items: start;
+	margin-bottom: 1.5rem;
+}
+
+.hotel-landing-page .hotel-landing-main {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	min-width: 0;
+}
+
+.hotel-landing-page .hotel-landing-sidebar .card {
+	margin-bottom: 1rem;
+}
+
+.hotel-landing-page .hotel-landing-bottom {
+	margin-bottom: 1.5rem;
+}
+
+.hotel-landing-page .hotelbooking-hotel-canvas {
+	margin: 0 0 1.25rem;
+	padding: 0.85rem 1rem;
+	border: 1px dashed var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+	background: var(--hb-accent-soft);
+	color: var(--hb-text-muted);
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.mod-hotelhero {
+	position: relative;
+	overflow: hidden;
+	border-radius: var(--hb-radius);
+	min-height: 16rem;
+	display: flex;
+	align-items: flex-end;
+	background: #2b2420 center / cover no-repeat;
+	color: #fff;
+}
+
+.mod-hotelhero-overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(43, 36, 32, 0.15) 0%, rgba(43, 36, 32, 0.72) 100%);
+}
+
+.mod-hotelhero-content {
+	position: relative;
+	z-index: 1;
+	padding: 2rem 1.75rem 1.75rem;
+	max-width: 40rem;
+}
+
+.mod-hotelhero-content h2 {
+	margin: 0 0 0.5rem;
+	font-size: clamp(1.6rem, 3vw, 2.4rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: #fff;
+}
+
+.mod-hotelhero-content p {
+	margin: 0 0 1rem;
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 1.05rem;
+}
+
+.mod-hotelhero-content .hb-btn {
+	color: #fff;
+}
+
+@media (max-width: 991.98px) {
+	.hotel-landing-page .hotel-landing-body {
+		grid-template-columns: 1fr;
+	}
+}
