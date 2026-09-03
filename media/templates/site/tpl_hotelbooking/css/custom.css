@@ -46,7 +46,7 @@ a {
    since this generic prose-link hover color has higher specificity than
    their own `color` declaration and would otherwise silently override it
    (e.g. turning "Book Now"'s white text near-invisible on its dark hover bg). */
-a:hover:not(.btn):not(.hb-btn) {
+a:hover:not(.btn):not(.hb-btn):not(.page-link) {
 	color: var(--hb-accent-hover);
 }
 
@@ -177,21 +177,112 @@ a:hover:not(.btn):not(.hb-btn) {
 	font-weight: 700;
 }
 
-.com-content-category-blog__pagination a,
-.com-content-category-blog__pagination span {
-	display: inline-flex;
-	align-items: center;
-	padding: 0.4rem 0.9rem;
-	border-radius: 999px;
-	border: 2px solid var(--hb-accent-dark);
-	color: var(--hb-accent-dark);
-	text-decoration: none;
-	font-weight: 600;
-	font-size: 0.85rem;
+/* "More articles" leftover titles after leading + intro items. */
+.items-more {
+	background: var(--hb-surface);
+	border-radius: var(--hb-radius);
+	box-shadow: var(--hb-shadow);
+	padding: 1.1rem 1.4rem;
+	margin-bottom: 1.5rem;
 }
 
-.com-content-category-blog__pagination a:hover {
-	background: var(--hb-accent-soft);
+.com-content-blog__links {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.com-content-blog__link {
+	margin: 0;
+}
+
+.com-content-blog__link a {
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.com-content-blog__link a:hover {
+	text-decoration: underline;
+}
+
+.com-content-category-blog__navigation {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem 1rem;
+	margin: 0 0 2rem;
+}
+
+.com-content-category-blog__counter {
+	float: none;
+	margin: 0;
+	padding: 0;
+	color: var(--hb-text-muted);
+	font-size: 0.9rem;
+}
+
+.com-content-category-blog__pagination .pagination {
+	--pagination-padding-x: 0.75rem;
+	--pagination-padding-y: 0.4rem;
+	--pagination-font-size: 0.85rem;
+	--pagination-color: var(--hb-accent-dark);
+	--pagination-bg: var(--hb-surface);
+	--pagination-border-width: 1px;
+	--pagination-border-color: var(--hb-border);
+	--pagination-border-radius: 999px;
+	--pagination-hover-color: var(--hb-accent-hover);
+	--pagination-hover-bg: var(--hb-accent-soft);
+	--pagination-hover-border-color: var(--hb-accent);
+	--pagination-active-color: #fff;
+	--pagination-active-bg: var(--hb-accent);
+	--pagination-active-border-color: var(--hb-accent);
+	--pagination-disabled-color: var(--hb-text-muted);
+	--pagination-disabled-bg: var(--hb-bg);
+	--pagination-disabled-border-color: var(--hb-border);
+	--pagination-focus-color: var(--hb-accent-dark);
+	--pagination-focus-bg: var(--hb-accent-soft);
+	--pagination-focus-box-shadow: 0 0 0 0.2rem rgba(193, 98, 45, 0.25);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.4rem;
+	margin: 0;
+}
+
+/* Bootstrap joins page links with a negative margin. That fights pill radius
+   and double-borders the nested icon <span> we used to style by accident. */
+.com-content-category-blog__pagination .page-item:not(:first-child) .page-link {
+	margin-left: 0;
+}
+
+.com-content-category-blog__pagination .page-item:first-child .page-link,
+.com-content-category-blog__pagination .page-item:last-child .page-link {
+	border-radius: var(--pagination-border-radius);
+}
+
+.com-content-category-blog__pagination .page-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 2.25rem;
+	min-height: 2.25rem;
+	padding: var(--pagination-padding-y) var(--pagination-padding-x);
+	border-radius: var(--pagination-border-radius);
+	font-weight: 600;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.com-content-category-blog__pagination .page-item:not(.active):not(.disabled) .page-link:hover {
+	color: var(--pagination-hover-color);
+}
+
+.com-content-category-blog__pagination .page-link span {
+	border: 0;
+	padding: 0;
+	background: transparent;
+	border-radius: 0;
 }
 
 /* ==========================================================================
