@@ -32,7 +32,7 @@
 		"phpstan-baseline": "phpstan analyse --memory-limit=1G --generate-baseline phpstan-baseline.neon",
 		"test": "phpunit -c ../phpunit.xml.dist",
 		"test:coverage": [
-			"phpunit -c ../phpunit.xml.dist --coverage-clover ../build/coverage/clover.xml --coverage-html ../build/coverage/html --coverage-text",
+			"@php run-phpunit-coverage.php",
 			"@php check-coverage.php ../build/coverage/clover.xml 80"
 		]
 	}

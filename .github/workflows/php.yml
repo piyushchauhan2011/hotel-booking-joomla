@@ -22,6 +22,7 @@ jobs:
           php-version: "8.3"
           coverage: pcov
           tools: composer:v2
+          ini-values: pcov.directory=${{ github.workspace }}
 
       - name: Install toolchain
         working-directory: tools
