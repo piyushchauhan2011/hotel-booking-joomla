@@ -157,6 +157,38 @@ $hbShareTitle = htmlspecialchars($this->item->title, ENT_QUOTES);
         </button>
     </div>
 
+    <?php
+    $hbTripNames = ['trip-neighborhood', 'trip-best-season', 'trip-official-site'];
+    $hbFacts     = [];
+
+    foreach ($this->item->jcfields ?? [] as $hbField) {
+        if (!\in_array($hbField->name, $hbTripNames, true)) {
+            continue;
+        }
+
+        $hbRaw = \is_array($hbField->rawvalue) ? implode(', ', $hbField->rawvalue) : trim((string) $hbField->rawvalue);
+
+        if ($hbRaw === '') {
+            continue;
+        }
+
+        $hbFacts[] = $hbField;
+    }
+    ?>
+    <?php if ($hbFacts) : ?>
+    <aside class="hb-article-facts" aria-label="<?php echo Text::_('COM_HOTELBOOKING_ARTICLE_FACTS_TITLE'); ?>">
+        <p class="hb-article-facts-title"><?php echo Text::_('COM_HOTELBOOKING_ARTICLE_FACTS_TITLE'); ?></p>
+        <dl>
+            <?php foreach ($hbFacts as $hbField) : ?>
+                <div class="hb-article-facts-row">
+                    <dt><?php echo htmlspecialchars($hbField->label ?: $hbField->title, ENT_QUOTES, 'UTF-8'); ?></dt>
+                    <dd><?php echo $hbField->value; ?></dd>
+                </div>
+            <?php endforeach; ?>
+        </dl>
+    </aside>
+    <?php endif; ?>
+
     <?php if (!empty($hbToc)) : ?>
     <nav class="hb-toc" aria-label="<?php echo Text::_('COM_HOTELBOOKING_TOC_ARIA'); ?>">
         <p class="hb-toc-title"><?php echo Text::_('COM_HOTELBOOKING_TOC_TITLE'); ?></p>
