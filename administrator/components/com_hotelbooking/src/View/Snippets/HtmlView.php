@@ -48,7 +48,7 @@ class HtmlView extends BaseHtmlView
         return Route::_(
             'index.php?option=com_hotelbooking&view=snippets&layout=modal&tmpl=component&editor='
             . urlencode($this->editor)
-            . '&' . Session::getFormToken() . '=1&filter_type=' . $type . '&limitstart=0'
+            . '&' . Session::getFormToken() . '=1&filter_type=' . $type . '&limitstart=0',
         );
     }
 

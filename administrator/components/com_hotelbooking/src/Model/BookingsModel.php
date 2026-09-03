@@ -62,8 +62,8 @@ class BookingsModel extends ListModel
                     $db->quoteName('a.created'),
                     $db->quoteName('r.name', 'room_name'),
                     $db->quoteName('d.name', 'destination_name'),
-                ]
-            )
+                ],
+            ),
         )
             ->from($db->quoteName('#__hotelbooking_bookings', 'a'))
             ->join('LEFT', $db->quoteName('#__hotelbooking_rooms', 'r') . ' ON ' . $db->quoteName('r.id') . ' = ' . $db->quoteName('a.room_id'))

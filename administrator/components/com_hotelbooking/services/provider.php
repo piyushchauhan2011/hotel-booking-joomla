@@ -16,7 +16,7 @@ use Joomla\DI\ServiceProviderInterface;
 use Learn\Component\Hotelbooking\Administrator\Extension\HotelbookingComponent;
 use Learn\Component\Hotelbooking\Administrator\Helper\AssociationsHelper;
 
-return new class () implements ServiceProviderInterface {
+return new class implements ServiceProviderInterface {
     public function register(Container $container)
     {
         $container->set(AssociationExtensionInterface::class, new AssociationsHelper());
@@ -36,7 +36,7 @@ return new class () implements ServiceProviderInterface {
                 $component->setAssociationExtension($container->get(AssociationExtensionInterface::class));
 
                 return $component;
-            }
+            },
         );
     }
 };

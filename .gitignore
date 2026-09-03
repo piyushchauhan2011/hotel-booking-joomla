@@ -45,3 +45,8 @@ Thumbs.db
 
 .claude
 .playwright-mcp
+
+# === PHP toolchain ===
+/tools/vendor/
+/tools/.php-cs-fixer.cache
+/build/

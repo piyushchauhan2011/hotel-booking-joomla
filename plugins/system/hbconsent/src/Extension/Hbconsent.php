@@ -64,8 +64,8 @@ final class Hbconsent extends CMSPlugin implements SubscriberInterface, Database
                 htmlspecialchars((string) ($data['contact_name'] ?? ''), ENT_QUOTES, 'UTF-8'),
                 htmlspecialchars((string) ($data['contact_email'] ?? ''), ENT_QUOTES, 'UTF-8'),
                 htmlspecialchars($this->clientIp(), ENT_QUOTES, 'UTF-8'),
-                htmlspecialchars($this->userAgent(), ENT_QUOTES, 'UTF-8')
-            )
+                htmlspecialchars($this->userAgent(), ENT_QUOTES, 'UTF-8'),
+            ),
         );
     }
 
@@ -88,8 +88,8 @@ final class Hbconsent extends CMSPlugin implements SubscriberInterface, Database
             Text::sprintf(
                 'PLG_SYSTEM_HBCONSENT_BODY_COOKIES',
                 htmlspecialchars($this->clientIp(), ENT_QUOTES, 'UTF-8'),
-                htmlspecialchars($this->userAgent(), ENT_QUOTES, 'UTF-8')
-            )
+                htmlspecialchars($this->userAgent(), ENT_QUOTES, 'UTF-8'),
+            ),
         );
 
         $this->setConsentCookie();
@@ -202,7 +202,7 @@ final class Hbconsent extends CMSPlugin implements SubscriberInterface, Database
                 'secure'   => $app->isHttpsForced() || Uri::getInstance()->isSsl(),
                 'httponly' => false,
                 'samesite' => 'Lax',
-            ]
+            ],
         );
     }
 

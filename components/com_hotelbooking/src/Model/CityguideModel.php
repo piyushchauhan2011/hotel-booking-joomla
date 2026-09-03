@@ -6,6 +6,4 @@ use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 \defined('_JEXEC') or die;
 
-class CityguideModel extends BaseDatabaseModel
-{
-}
+class CityguideModel extends BaseDatabaseModel {}

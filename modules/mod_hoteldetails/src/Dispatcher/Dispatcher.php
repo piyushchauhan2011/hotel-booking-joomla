@@ -18,7 +18,7 @@ class Dispatcher extends AbstractModuleDispatcher
         $data = parent::getLayoutData();
         $data['destination'] = DestinationContextHelper::getDestination(
             $data['params'],
-            $this->getApplication()
+            $this->getApplication(),
         );
 
         return $data;

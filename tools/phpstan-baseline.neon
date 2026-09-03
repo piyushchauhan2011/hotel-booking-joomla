@@ -1,0 +1,523 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Table\\Usergroup\:\:setLocation\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Extension/HotelbookingInstallerScript.php
+
+		-
+			message: '#^Parameter \#2 \$value of method Joomla\\Database\\QueryInterface\:\:bind\(\) is passed by reference, so it expects variables only\.$#'
+			identifier: argument.byRef
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Extension/HotelbookingInstallerScript.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserState\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/BookingModel.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\Model\\BookingModel\:\:getForm\(\) should return Joomla\\CMS\\Form\\Form but returns false\.$#'
+			identifier: return.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/BookingModel.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserStateFromRequest\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: ../administrator/components/com_hotelbooking/src/Model/BookingsModel.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserState\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/DestinationModel.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\Model\\DestinationModel\:\:getForm\(\) should return Joomla\\CMS\\Form\\Form but returns false\.$#'
+			identifier: return.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/DestinationModel.php
+
+		-
+			message: '#^Parameter \#1 \$publishedStates of static method Joomla\\CMS\\Language\\LanguageHelper\:\:getContentLanguages\(\) expects array, false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/DestinationModel.php
+
+		-
+			message: '#^Parameter \#3 \$pivot of static method Joomla\\CMS\\Language\\LanguageHelper\:\:getContentLanguages\(\) expects string, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/DestinationModel.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserStateFromRequest\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: ../administrator/components/com_hotelbooking/src/Model/DestinationsModel.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserState\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/FaqModel.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\Model\\FaqModel\:\:getForm\(\) should return Joomla\\CMS\\Form\\Form but returns false\.$#'
+			identifier: return.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/FaqModel.php
+
+		-
+			message: '#^Parameter \#1 \$publishedStates of static method Joomla\\CMS\\Language\\LanguageHelper\:\:getContentLanguages\(\) expects array, false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/FaqModel.php
+
+		-
+			message: '#^Parameter \#3 \$pivot of static method Joomla\\CMS\\Language\\LanguageHelper\:\:getContentLanguages\(\) expects string, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/FaqModel.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserStateFromRequest\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: ../administrator/components/com_hotelbooking/src/Model/FaqsModel.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserState\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/RoomModel.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\Model\\RoomModel\:\:getForm\(\) should return Joomla\\CMS\\Form\\Form but returns false\.$#'
+			identifier: return.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/RoomModel.php
+
+		-
+			message: '#^Parameter \#1 \$publishedStates of static method Joomla\\CMS\\Language\\LanguageHelper\:\:getContentLanguages\(\) expects array, false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/RoomModel.php
+
+		-
+			message: '#^Parameter \#3 \$pivot of static method Joomla\\CMS\\Language\\LanguageHelper\:\:getContentLanguages\(\) expects string, null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/Model/RoomModel.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserStateFromRequest\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: ../administrator/components/com_hotelbooking/src/Model/RoomsModel.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserStateFromRequest\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: ../administrator/components/com_hotelbooking/src/Model/SnippetsModel.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Booking\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Booking/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Booking/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Bookings\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Bookings/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Bookings/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Destination\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Destination/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Destination/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Destinations\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Destinations/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Destinations/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Faq\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Faq/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Faq/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Faqs\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Faqs/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Faqs/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Room\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Room/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Room/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Rooms\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Rooms/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Rooms/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Administrator\\View\\Snippets\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Snippets/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../administrator/components/com_hotelbooking/src/View/Snippets/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:redirect\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: ../components/com_hotelbooking/src/Controller/BookingController.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:sendHeaders\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/Controller/DestinationsController.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:setHeader\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/Controller/DestinationsController.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\Model\\BookingModel\:\:getForm\(\) should return Joomla\\CMS\\Form\\Form but returns false\.$#'
+			identifier: return.type
+			count: 1
+			path: ../components/com_hotelbooking/src/Model/BookingModel.php
+
+		-
+			message: '#^Constructor of class Learn\\Component\\Hotelbooking\\Site\\Service\\Router has an unused parameter \$categoryFactory\.$#'
+			identifier: constructor.unusedParameter
+			count: 1
+			path: ../components/com_hotelbooking/src/Service/Router.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Bookings/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\MVC\\Model\\BaseDatabaseModel\:\:getItem\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Bookings/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\View\\Bookings\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Bookings/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Bookings/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Cityguide/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\View\\Cityguide\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Cityguide/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Cityguide/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destination/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Document\\Document\:\:addCustomTag\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destination/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\MVC\\Model\\BaseDatabaseModel\:\:getItem\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destination/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\MVC\\Model\\BaseDatabaseModel\:\:getRooms\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destination/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\View\\Destination\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destination/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destination/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destinations/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\MVC\\Model\\BaseDatabaseModel\:\:getFaqs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destinations/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\View\\Destinations\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destinations/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Destinations/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Faqs/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\MVC\\Model\\BaseDatabaseModel\:\:getItems\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Faqs/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\View\\Faqs\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Faqs/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Faqs/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Home/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\MVC\\Model\\BaseDatabaseModel\:\:getFeaturedDestinations\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Home/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\View\\Home\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Home/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Home/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Hotel/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\View\\Hotel\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Hotel/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Hotel/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Room/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Document\\Document\:\:addCustomTag\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Room/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\MVC\\Model\\BaseDatabaseModel\:\:getItem\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Room/HtmlView.php
+
+		-
+			message: '#^Method Learn\\Component\\Hotelbooking\\Site\\View\\Room\\HtmlView\:\:display\(\) with return type void returns null but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Room/HtmlView.php
+
+		-
+			message: '#^Result of method Joomla\\CMS\\MVC\\View\\HtmlView\:\:display\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: ../components/com_hotelbooking/src/View/Room/HtmlView.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../modules/mod_hoteldetails/src/Dispatcher/Dispatcher.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../modules/mod_hotelrooms/src/Dispatcher/Dispatcher.php
+
+		-
+			message: '#^Cannot call method getRooms\(\) on stdClass\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: ../modules/mod_hotelrooms/src/Dispatcher/Dispatcher.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../plugins/content/hotelbooking/src/Extension/Hotelbooking.php
+
+		-
+			message: '#^Call to function is_object\(\) with object will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: ../plugins/content/hotelbooking/src/Extension/Hotelbooking.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getBody\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../plugins/system/hbconsent/src/Extension/Hbconsent.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getDocument\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: ../plugins/system/hbconsent/src/Extension/Hbconsent.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:isHttpsForced\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../plugins/system/hbconsent/src/Extension/Hbconsent.php
+
+		-
+			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:setBody\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: ../plugins/system/hbconsent/src/Extension/Hbconsent.php
+
+		-
+			message: '#^Call to static method getArticleRoute\(\) on an unknown class Joomla\\Component\\Content\\Site\\Helper\\RouteHelper\.$#'
+			identifier: class.notFound
+			count: 1
+			path: ../plugins/system/hbconsent/src/Extension/Hbconsent.php

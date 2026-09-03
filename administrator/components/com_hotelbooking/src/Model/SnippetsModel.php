@@ -60,7 +60,7 @@ class SnippetsModel extends ListModel
 
         $this->setState('filter.entity', $entity);
 
-		parent::populateState($ordering, $direction);
+        parent::populateState($ordering, $direction);
     }
 
     protected function getStoreId($id = '')
@@ -222,7 +222,7 @@ class SnippetsModel extends ListModel
             if ($needle !== '') {
                 $like = '%' . str_replace(' ', '%', $needle) . '%';
                 $query->where(
-                    '(' . $db->quoteName('name') . ' LIKE :offerSearchName OR ' . $db->quoteName('offers') . ' LIKE :offerSearchJson)'
+                    '(' . $db->quoteName('name') . ' LIKE :offerSearchName OR ' . $db->quoteName('offers') . ' LIKE :offerSearchJson)',
                 )
                     ->bind(':offerSearchName', $like)
                     ->bind(':offerSearchJson', $like);

@@ -54,8 +54,8 @@ class DestinationsModel extends ListModel
                     $db->quoteName('a.language'),
                     $db->quoteName('l.title', 'language_title'),
                     $db->quoteName('l.image', 'language_image'),
-                ]
-            )
+                ],
+            ),
         )
             ->from($db->quoteName('#__hotelbooking_destinations', 'a'))
             ->join('LEFT', $db->quoteName('#__languages', 'l') . ' ON ' . $db->quoteName('l.lang_code') . ' = ' . $db->quoteName('a.language'));

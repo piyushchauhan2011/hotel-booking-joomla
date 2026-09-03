@@ -52,7 +52,7 @@ class DestinationsModel extends ListModel
             $query->whereIn(
                 $db->quoteName('a.language'),
                 [Factory::getApplication()->getLanguage()->getTag(), '*'],
-                ParameterType::STRING
+                ParameterType::STRING,
             );
         }
 

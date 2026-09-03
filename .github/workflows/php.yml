@@ -1,0 +1,50 @@
+name: PHP
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: php-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  php:
+    name: Lint, types, and tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: pcov
+          tools: composer:v2
+          ini-values: pcov.directory=${{ github.workspace }}
+
+      - name: Install toolchain
+        working-directory: tools
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Check coding style
+        working-directory: tools
+        run: composer cs-check
+
+      - name: PHPStan
+        working-directory: tools
+        run: composer phpstan
+
+      - name: Tests with coverage
+        working-directory: tools
+        run: composer test:coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: build/coverage/html
+          if-no-files-found: ignore

@@ -31,7 +31,7 @@ abstract class AssociationHelper
                     (int) $id,
                     'id',
                     'alias',
-                    ''
+                    '',
                 );
 
                 foreach ($associations as $tag => $item) {
@@ -48,7 +48,7 @@ abstract class AssociationHelper
                     (int) $id,
                     'id',
                     'alias',
-                    ''
+                    '',
                 );
 
                 foreach ($associations as $tag => $item) {
@@ -66,7 +66,7 @@ abstract class AssociationHelper
                     (int) $id,
                     'id',
                     '',
-                    ''
+                    '',
                 );
 
                 foreach ($associations as $tag => $item) {

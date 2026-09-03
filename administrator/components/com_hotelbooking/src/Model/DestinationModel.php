@@ -39,7 +39,7 @@ class DestinationModel extends AdminModel
                 $item->id,
                 'id',
                 'alias',
-                ''
+                '',
             );
 
             foreach ($associations as $tag => $association) {
