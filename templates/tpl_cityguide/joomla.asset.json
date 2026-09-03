@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "tpl_cityguide",
+  "version": "1.0.0",
+  "description": "Assets for the City Guide child template.",
+  "assets": [
+    {
+      "name": "tpl_cityguide.custom",
+      "description": "City Guide styling, hand-authored in media/templates/site/tpl_cityguide/css/custom.css.",
+      "type": "style",
+      "uri": "custom.css",
+      "dependencies": [
+        "template.active"
+      ]
+    },
+    {
+      "name": "tpl_cityguide.custom",
+      "description": "Mobile nav toggle (same behaviour as the hotel booking child template).",
+      "type": "script",
+      "uri": "custom.js",
+      "dependencies": [
+        "template.active"
+      ]
+    }
+  ]
+}
