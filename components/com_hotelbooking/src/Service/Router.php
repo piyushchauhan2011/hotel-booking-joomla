@@ -43,7 +43,10 @@ class Router extends RouterView
 
         $this->registerView(new RouterViewConfiguration('bookings'));
         $this->registerView(new RouterViewConfiguration('faqs'));
-        $this->registerView(new RouterViewConfiguration('hotel'));
+
+        $hotel = new RouterViewConfiguration('hotel');
+        $hotel->setKey('id');
+        $this->registerView($hotel);
 
         parent::__construct($app, $menu);
 
@@ -61,6 +64,16 @@ class Router extends RouterView
     public function getDestinationId($segment, $query)
     {
         return $this->getIdFromSegment('#__hotelbooking_destinations', $segment);
+    }
+
+    public function getHotelSegment($id, $query)
+    {
+        return $this->getDestinationSegment($id, $query);
+    }
+
+    public function getHotelId($segment, $query)
+    {
+        return $this->getDestinationId($segment, $query);
     }
 
     public function getRoomSegment($id, $query)

@@ -5,4 +5,18 @@
 			<![CDATA[COM_HOTELBOOKING_HOTEL_VIEW_DEFAULT_DESC]]>
 		</message>
 	</layout>
+
+	<fields name="request">
+		<fieldset name="request">
+			<field
+				name="id"
+				type="sql"
+				label="COM_HOTELBOOKING_FIELD_DESTINATION_LABEL"
+				query="SELECT id, name FROM #__hotelbooking_destinations WHERE published = 1 ORDER BY name"
+				key_field="id"
+				value_field="name"
+				required="true"
+			/>
+		</fieldset>
+	</fields>
 </metadata>
