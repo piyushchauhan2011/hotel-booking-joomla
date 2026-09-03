@@ -2,6 +2,8 @@
 
 namespace Learn\Component\Hotelbooking\Administrator\Table;
 
+use Joomla\CMS\Application\ApplicationHelper;
+use Joomla\CMS\Table\Asset;
 use Joomla\CMS\Table\Table;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Event\DispatcherInterface;
@@ -32,18 +34,41 @@ class DestinationTable extends Table
 
     public function check()
     {
-        if (trim($this->name) === '') {
+        if (trim((string) $this->name) === '') {
             $this->setError('Name is required.');
 
             return false;
         }
 
-        if (trim($this->alias) === '') {
+        if (trim((string) $this->alias) === '') {
             $this->alias = $this->name;
         }
 
-        $this->alias = \Joomla\CMS\Application\ApplicationHelper::stringURLSafe($this->alias);
+        $this->alias = ApplicationHelper::stringURLSafe($this->alias);
 
         return true;
+    }
+
+    protected function _getAssetName()
+    {
+        $k = $this->_tbl_key;
+
+        return 'com_hotelbooking.destination.' . (int) $this->$k;
+    }
+
+    protected function _getAssetTitle()
+    {
+        return $this->name;
+    }
+
+    protected function _getAssetParentId(?Table $table = null, $id = null)
+    {
+        $asset = new Asset($this->getDatabase(), $this->getDispatcher());
+
+        if ($asset->loadByName('com_hotelbooking')) {
+            return (int) $asset->id;
+        }
+
+        return parent::_getAssetParentId($table, $id);
     }
 }

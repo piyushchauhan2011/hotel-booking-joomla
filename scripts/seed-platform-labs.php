@@ -363,11 +363,12 @@ function upsertFieldValue(DatabaseInterface $db, int $itemId, int $fieldId, stri
         return;
     }
 
-    $db->insertObject('#__fields_values', (object) [
+    $row = (object) [
         'item_id'  => $itemId,
         'field_id' => $fieldId,
         'value'    => $value,
-    ]);
+    ];
+    $db->insertObject('#__fields_values', $row);
 }
 
 function findUsergroupId(DatabaseInterface $db, string $title): int
@@ -394,8 +395,8 @@ function ensureUsergroup(DatabaseInterface $db, string $title): int
 
     /** @var \Joomla\CMS\Table\Usergroup $group */
     $group = Table::getInstance('Usergroup');
-    $group->title = $title;
-    $group->setLocation(1, 'last-child');
+    $group->title     = $title;
+    $group->parent_id = 1;
 
     if (!$group->store()) {
         throw new \RuntimeException('Could not create user group "' . $title . '": ' . $group->getError());
@@ -480,7 +481,7 @@ function ensurePluginRow(DatabaseInterface $db, string $folder, string $element,
         return;
     }
 
-    $db->insertObject('#__extensions', (object) [
+    $row = (object) [
         'package_id'     => 0,
         'name'           => $name,
         'type'           => 'plugin',
@@ -496,7 +497,8 @@ function ensurePluginRow(DatabaseInterface $db, string $folder, string $element,
         'custom_data'    => '',
         'ordering'       => 0,
         'state'          => 0,
-    ]);
+    ];
+    $db->insertObject('#__extensions', $row);
     echo "Registered plugin {$folder}/{$element}\n";
 }
 

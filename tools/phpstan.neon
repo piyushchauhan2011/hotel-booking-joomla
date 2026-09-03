@@ -15,6 +15,12 @@ parameters:
         - ../plugins/editors-xtd/hotelbooking/services
         - ../plugins/system/hbconsent/src
         - ../plugins/system/hbconsent/services
+        - ../plugins/schemaorg/lodging/src
+        - ../plugins/schemaorg/lodging/services
+        - ../plugins/privacy/hotelbooking/src
+        - ../plugins/privacy/hotelbooking/services
+        - ../plugins/finder/hotelbooking/src
+        - ../plugins/finder/hotelbooking/services
         - ../modules/mod_hoteldetails/src
         - ../modules/mod_hoteldetails/services
         - ../modules/mod_hotelhero/src
@@ -24,3 +30,7 @@ parameters:
     bootstrapFiles:
         - phpstan-bootstrap.php
     treatPhpDocTypesAsCertain: false
+    scanDirectories:
+        - ../administrator/components/com_fields/src
+        - ../administrator/components/com_finder/src
+        - ../administrator/components/com_privacy/src

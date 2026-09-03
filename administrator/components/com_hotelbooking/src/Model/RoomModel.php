@@ -119,7 +119,15 @@ class RoomModel extends AdminModel
 
             $table = $this->getTable();
 
-            if (!$table->load($id) || !AccessHelper::canEditRoom($user, $this->getDestinationManagerId((int) $table->destination_id))) {
+            if (!$table->load($id)) {
+                $this->setError(Text::_('JERROR_ALERTNOAUTHOR'));
+
+                return false;
+            }
+
+            $auth = $this->getDestinationAuth((int) $table->destination_id);
+
+            if (!AccessHelper::canEditRoom($user, $auth['id'], $auth['created_by'])) {
                 $this->setError(Text::_('JERROR_ALERTNOAUTHOR'));
 
                 return false;
@@ -139,18 +147,24 @@ class RoomModel extends AdminModel
         return parent::save($data);
     }
 
-    private function getDestinationManagerId(int $destinationId): int
+    /**
+     * @return array{id:int,created_by:int}
+     */
+    private function getDestinationAuth(int $destinationId): array
     {
         if ($destinationId <= 0) {
-            return 0;
+            return ['id' => 0, 'created_by' => 0];
         }
 
         $destinationTable = new DestinationTable($this->getDatabase());
 
         if (!$destinationTable->load($destinationId)) {
-            return 0;
+            return ['id' => 0, 'created_by' => 0];
         }
 
-        return (int) $destinationTable->manager_user_id;
+        return [
+            'id'         => (int) $destinationTable->id,
+            'created_by' => (int) $destinationTable->created_by,
+        ];
     }
 }

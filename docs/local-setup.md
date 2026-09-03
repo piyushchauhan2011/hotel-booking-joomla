@@ -41,6 +41,7 @@ Each script is idempotent (skips records that already exist). Run from the proje
 ddev exec php scripts/seed-article-fields.php
 ddev exec php scripts/seed-people-fields.php
 ddev exec php scripts/seed-privacy-consent.php
+ddev exec php scripts/seed-platform-labs.php
 ```
 
 | Script | Creates |
@@ -48,6 +49,7 @@ ddev exec php scripts/seed-privacy-consent.php
 | `seed-article-fields.php` | Two field groups, four article fields, two Blog articles for the Custom Fields UI |
 | `seed-people-fields.php` | Contact/User field groups, user `maya`, org/team contacts, About / Contact / My Profile menus |
 | `seed-privacy-consent.php` | Privacy Policy article, hidden menu item, enables core Privacy Consent plus `plg_system_hbconsent`. Does **not** pre-consent `maya` (the lesson is the redirect after login) |
+| `seed-platform-labs.php` | Enables Schema.org lodging, privacy, and finder plugins; seeds a destination Star rating field, `#__schemaorg` rows, destination ACL assets, and two hotel-manager demo groups |
 
 ## Languages
 
