@@ -6,6 +6,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
+use Learn\Component\Hotelbooking\Administrator\Helper\PartnerNotificationHelper;
 
 \defined('_JEXEC') or die;
 
@@ -37,6 +38,10 @@ class HotelbookingInstallerScript
 
     public function postflight($type, $parent): bool
     {
+        if (\in_array($type, ['install', 'update', 'discover_install'], true)) {
+            PartnerNotificationHelper::ensureRegisteredMailTemplate();
+        }
+
         return true;
     }
 

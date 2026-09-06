@@ -41,6 +41,7 @@ use Joomla\CMS\User\UserFactoryInterface;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
+use Learn\Component\Hotelbooking\Administrator\Helper\PartnerNotificationHelper;
 use Learn\Component\Hotelbooking\Site\Helper\SchemaHelper;
 
 $container = Factory::getContainer();
@@ -102,6 +103,9 @@ try {
     enablePlugin($db, 'system', 'hotelbooking', []);
     enablePlugin($db, 'system', 'schemaorg', []);
     enablePlugin($db, 'system', 'fields', []);
+    if (PartnerNotificationHelper::ensureRegisteredMailTemplate()) {
+        echo "Registered mail template com_hotelbooking.partner_notify\n";
+    }
     rebuildExtensionNamespaceMap();
     cleanPluginCache();
 

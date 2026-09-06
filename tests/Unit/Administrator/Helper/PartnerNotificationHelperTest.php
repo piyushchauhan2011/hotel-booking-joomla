@@ -8,6 +8,28 @@ use PHPUnit\Framework\TestCase;
 
 final class PartnerNotificationHelperTest extends TestCase
 {
+    public function testMailTemplateTagsMatchTemplateDataKeys(): void
+    {
+        $booking = (object) [
+            'guest_name'    => 'Maya Chen',
+            'checkin_date'  => '2026-09-10',
+            'checkout_date' => '2026-09-12',
+            'guests'        => 2,
+            'total_price'   => 199.5,
+        ];
+
+        $this->assertSame(
+            array_keys(PartnerNotificationHelper::templateData(
+                $booking,
+                (object) ['name' => 'Deluxe King'],
+                (object) ['name' => 'Tokyo House'],
+                'Demo Site',
+            )),
+            PartnerNotificationHelper::mailTemplateTags(),
+        );
+        $this->assertSame('com_hotelbooking.partner_notify', PartnerNotificationHelper::PARTNER_NOTIFY_TEMPLATE);
+    }
+
     public function testTemplateDataMapsBookingFields(): void
     {
         $booking = (object) [

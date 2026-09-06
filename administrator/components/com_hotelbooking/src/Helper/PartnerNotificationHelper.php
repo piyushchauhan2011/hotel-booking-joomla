@@ -10,6 +10,43 @@ use Joomla\CMS\Mail\MailTemplate;
 
 class PartnerNotificationHelper
 {
+    public const PARTNER_NOTIFY_TEMPLATE = 'com_hotelbooking.partner_notify';
+
+    /**
+     * @return list<string>
+     */
+    public static function mailTemplateTags(): array
+    {
+        return ['sitename', 'destination', 'room', 'guest', 'checkin', 'checkout', 'guests', 'total'];
+    }
+
+    public static function ensureRegisteredMailTemplate(): bool
+    {
+        $existing = MailTemplate::getTemplate(self::PARTNER_NOTIFY_TEMPLATE, '');
+
+        if ($existing === null) {
+            return MailTemplate::createTemplate(
+                self::PARTNER_NOTIFY_TEMPLATE,
+                'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_SUBJECT',
+                'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_BODY',
+                self::mailTemplateTags(),
+                'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_HTMLBODY',
+            );
+        }
+
+        if (trim((string) $existing->htmlbody) !== '') {
+            return true;
+        }
+
+        return MailTemplate::updateTemplate(
+            self::PARTNER_NOTIFY_TEMPLATE,
+            'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_SUBJECT',
+            'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_BODY',
+            self::mailTemplateTags(),
+            'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_HTMLBODY',
+        );
+    }
+
     public static function buildMessageSummary(object $booking, object $room, object $destination): string
     {
         return Text::sprintf(
@@ -60,7 +97,7 @@ class PartnerNotificationHelper
 
         try {
             $app  = Factory::getApplication();
-            $mail = new MailTemplate('com_hotelbooking.partner_notify', $app->getLanguage()->getTag());
+            $mail = new MailTemplate(self::PARTNER_NOTIFY_TEMPLATE, $app->getLanguage()->getTag());
             $mail->addTemplateData(self::templateData($booking, $room, $destination, (string) $app->get('sitename')));
             $mail->addRecipient($destination->partner_email);
 

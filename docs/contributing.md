@@ -75,7 +75,7 @@ CI has no MySQL, so these stay local after `ddev exec php scripts/seed-platform-
 - Schema tab on destination/room edit; view source should show one `application/ld+json` block from the system plugin
 - Content → Fields → Star rating on a destination, visible on the site destination page
 - Users → Privacy → Requests: New export/remove for a booking guest email (e.g. `jane@example.com`). Confirm the Mailpit link (booking guests are not CMS users). Export XML includes `hotelbooking_bookings`; Remove anonymises the guest and does not delete the row. Pending requests have no download/delete buttons.
-- System → Mail Templates: edit `com_hotelbooking.partner_notify`, then Notify hotel on a booking and check Mailpit
+- System → Mail Templates: Options must be HTML or Both. Edit `com_hotelbooking.partner_notify` (HTML Body is the Joomla mail template, not PHP), then Notify hotel on a Paris/Tokyo booking and check Mailpit
 - `ddev exec php cli/joomla.php finder:index` then Smart Search for a destination or room name
 - Two hotel-manager users scoped to different destinations (`paris_manager` sees only Paris; Bookings open without a 403; FAQs stay Super User only; Home Dashboard does not list site-wide articles)
 

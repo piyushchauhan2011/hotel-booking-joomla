@@ -83,4 +83,4 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_faqs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT IGNORE INTO `#__mail_templates` (`template_id`, `extension`, `language`, `subject`, `body`, `htmlbody`, `attachments`, `params`) VALUES
-('com_hotelbooking.partner_notify', 'com_hotelbooking', '', 'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_SUBJECT', 'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_BODY', '', '', '{"tags":["sitename","destination","room","guest","checkin","checkout","guests","total"]}');
+('com_hotelbooking.partner_notify', 'com_hotelbooking', '', 'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_SUBJECT', 'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_BODY', 'COM_HOTELBOOKING_MAIL_PARTNER_NOTIFY_HTMLBODY', '', '{"tags":["sitename","destination","room","guest","checkin","checkout","guests","total"]}');
