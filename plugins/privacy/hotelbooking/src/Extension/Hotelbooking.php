@@ -52,7 +52,7 @@ final class Hotelbooking extends PrivacyPlugin implements SubscriberInterface
             ->from($db->quoteName('#__hotelbooking_bookings', 'b'))
             ->join('LEFT', $db->quoteName('#__hotelbooking_rooms', 'r') . ' ON ' . $db->quoteName('r.id') . ' = ' . $db->quoteName('b.room_id'))
             ->join('LEFT', $db->quoteName('#__hotelbooking_destinations', 'd') . ' ON ' . $db->quoteName('d.id') . ' = ' . $db->quoteName('r.destination_id'))
-            ->where($db->quoteName('b.guest_email') . ' = :email')
+            ->where('LOWER(' . $db->quoteName('b.guest_email') . ') = LOWER(:email)')
             ->bind(':email', $email);
 
         foreach ($db->setQuery($query)->loadObjectList() as $booking) {
@@ -67,7 +67,7 @@ final class Hotelbooking extends PrivacyPlugin implements SubscriberInterface
                 $db->quoteName('partner_whatsapp'),
             ])
             ->from($db->quoteName('#__hotelbooking_destinations'))
-            ->where($db->quoteName('partner_email') . ' = :partnerEmail')
+            ->where('LOWER(' . $db->quoteName('partner_email') . ') = LOWER(:partnerEmail)')
             ->bind(':partnerEmail', $email);
 
         foreach ($db->setQuery($partnerQuery)->loadObjectList() as $destination) {
@@ -91,30 +91,36 @@ final class Hotelbooking extends PrivacyPlugin implements SubscriberInterface
             return;
         }
 
-        $db     = $this->getDatabase();
-        $guest  = PrivacyDataHelper::anonymisedBookingValues();
-        $query  = $db->createQuery()
+        $db          = $this->getDatabase();
+        $guest       = PrivacyDataHelper::anonymisedBookingValues();
+        $guestName   = $guest['guest_name'];
+        $guestEmail  = $guest['guest_email'];
+        $notes       = $guest['partner_notes'];
+        $query       = $db->createQuery()
             ->update($db->quoteName('#__hotelbooking_bookings'))
             ->set($db->quoteName('guest_name') . ' = :guestName')
             ->set($db->quoteName('guest_email') . ' = :guestEmail')
             ->set($db->quoteName('partner_notes') . ' = :partnerNotes')
-            ->where($db->quoteName('guest_email') . ' = :email')
-            ->bind(':guestName', $guest['guest_name'])
-            ->bind(':guestEmail', $guest['guest_email'])
-            ->bind(':partnerNotes', $guest['partner_notes'])
+            ->where('LOWER(' . $db->quoteName('guest_email') . ') = LOWER(:email)')
+            ->bind(':guestName', $guestName)
+            ->bind(':guestEmail', $guestEmail)
+            ->bind(':partnerNotes', $notes)
             ->bind(':email', $email);
         $db->setQuery($query)->execute();
 
-        $partner = PrivacyDataHelper::anonymisedPartnerValues();
-        $redact  = $db->createQuery()
+        $partner     = PrivacyDataHelper::anonymisedPartnerValues();
+        $contactName = $partner['partner_contact_name'];
+        $partnerMail = $partner['partner_email'];
+        $whatsapp    = $partner['partner_whatsapp'];
+        $redact      = $db->createQuery()
             ->update($db->quoteName('#__hotelbooking_destinations'))
             ->set($db->quoteName('partner_contact_name') . ' = :contactName')
             ->set($db->quoteName('partner_email') . ' = :partnerEmail')
             ->set($db->quoteName('partner_whatsapp') . ' = :whatsapp')
-            ->where($db->quoteName('partner_email') . ' = :email')
-            ->bind(':contactName', $partner['partner_contact_name'])
-            ->bind(':partnerEmail', $partner['partner_email'])
-            ->bind(':whatsapp', $partner['partner_whatsapp'])
+            ->where('LOWER(' . $db->quoteName('partner_email') . ') = LOWER(:email)')
+            ->bind(':contactName', $contactName)
+            ->bind(':partnerEmail', $partnerMail)
+            ->bind(':whatsapp', $whatsapp)
             ->bind(':email', $email);
         $db->setQuery($redact)->execute();
     }
