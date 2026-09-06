@@ -3,11 +3,13 @@
 
 /**
  * Enable platform-lab plugins, seed a destination Star rating field,
- * Schema.org rows, destination assets, and two hotel-manager demo groups.
+ * Schema.org rows, destination assets, two hotel-manager demo groups,
+ * a Smart Search filter, and Search menu items.
  *
  * Idempotent. Re-run with:
  *
  *   ddev exec php scripts/seed-platform-labs.php
+ *   ddev exec php cli/joomla.php finder:index
  */
 
 const _JEXEC = 1;
@@ -37,7 +39,9 @@ use Joomla\CMS\Cache\CacheControllerFactoryInterface;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
+use Joomla\CMS\User\User;
 use Joomla\CMS\User\UserFactoryInterface;
+use Joomla\Component\Finder\Administrator\Table\FilterTable;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
@@ -233,12 +237,17 @@ try {
         $index++;
     }
 
+    $filterId = ensureFinderFilter($db, $identity, $superUserId);
+    $searchIds = ensureSmartSearchMenus($app, $db, $superUserId, $access, $filterId);
+    ensureMenuAssociations($db, $searchIds);
+
     restrictCpanelArticleModules($db);
     cleanModuleCache();
     cleanMenuCache();
 
     echo "Star rating field #{$starFieldId}. Plugins lodging/privacy/finder/system hotelbooking enabled.\n";
     echo "Destination assets, Schema.org rows, and manager groups are in place.\n";
+    echo "Smart Search filter Hotel Booking (#{$filterId}); Search menu EN #{$searchIds['en-GB']}, TH #{$searchIds['th-TH']}.\n";
 } catch (Throwable $e) {
     fwrite(STDERR, $e->getMessage() . PHP_EOL);
     exit(1);
@@ -621,4 +630,267 @@ function rebuildExtensionNamespaceMap(): void
 {
     \JLoader::register('JNamespacePsr4Map', JPATH_LIBRARIES . '/namespacemap.php');
     (new \JNamespacePsr4Map())->create();
+}
+
+/**
+ * @return list<int>
+ */
+function finderHotelTypeNodeIds(DatabaseInterface $db): array
+{
+    $paths = ['type/destination', 'type/room'];
+    $query = $db->createQuery()
+        ->select($db->quoteName('id'))
+        ->from($db->quoteName('#__finder_taxonomy'))
+        ->whereIn($db->quoteName('path'), $paths, ParameterType::STRING)
+        ->order($db->quoteName('lft') . ' ASC');
+
+    return array_map('intval', $db->setQuery($query)->loadColumn() ?: []);
+}
+
+function ensureFinderFilter(DatabaseInterface $db, User $identity, int $userId): int
+{
+    $alias = 'hotel-booking';
+    $nodes = finderHotelTypeNodeIds($db);
+    $table = new FilterTable($db);
+    $table->setCurrentUser($identity);
+
+    if ($table->load(['alias' => $alias])) {
+        $table->title = 'Hotel Booking';
+        $table->state = 1;
+        $table->data  = $nodes;
+        $table->params = [];
+
+        if (!$table->store()) {
+            throw new \RuntimeException('Could not update Smart Search filter: ' . $table->getError());
+        }
+
+        echo 'Updated Smart Search filter Hotel Booking (#' . (int) $table->filter_id . ', ' . \count($nodes) . " type maps)\n";
+
+        return (int) $table->filter_id;
+    }
+
+    $table->title          = 'Hotel Booking';
+    $table->alias          = $alias;
+    $table->state          = 1;
+    $table->created_by     = $userId;
+    $table->created_by_alias = '';
+    $table->data           = $nodes;
+    $table->params         = [];
+
+    if (!$table->store()) {
+        throw new \RuntimeException('Could not create Smart Search filter: ' . $table->getError());
+    }
+
+    echo 'Created Smart Search filter Hotel Booking (#' . (int) $table->filter_id . ', ' . \count($nodes) . " type maps)\n";
+
+    if ($nodes === []) {
+        echo "Hotel Booking filter has no Type maps yet. Run finder:index, then re-run this seed.\n";
+    }
+
+    return (int) $table->filter_id;
+}
+
+function findComponentId(DatabaseInterface $db, string $element): int
+{
+    $query = $db->createQuery()
+        ->select($db->quoteName('extension_id'))
+        ->from($db->quoteName('#__extensions'))
+        ->where($db->quoteName('type') . ' = ' . $db->quote('component'))
+        ->where($db->quoteName('element') . ' = :element')
+        ->bind(':element', $element)
+        ->setLimit(1);
+
+    return (int) $db->setQuery($query)->loadResult();
+}
+
+function findMenuItem(DatabaseInterface $db, string $alias, string $language): array
+{
+    $query = $db->createQuery()
+        ->select($db->quoteName(['id', 'menutype', 'parent_id', 'language', 'client_id', 'link']))
+        ->from($db->quoteName('#__menu'))
+        ->where($db->quoteName('alias') . ' = :alias')
+        ->where($db->quoteName('language') . ' = :language')
+        ->where($db->quoteName('client_id') . ' = 0')
+        ->bind(':alias', $alias)
+        ->bind(':language', $language)
+        ->setLimit(1);
+
+    $row = $db->setQuery($query)->loadAssoc();
+
+    return \is_array($row) ? $row : [];
+}
+
+function ensureMenuItem($menuItemModel, DatabaseInterface $db, int $userId, int $access, array $data): int
+{
+    $existing = findMenuItem($db, $data['alias'], $data['language']);
+
+    if (!empty($existing['id'])) {
+        $id   = (int) $existing['id'];
+        $link = (string) $data['link'];
+
+        if (($existing['link'] ?? '') !== $link) {
+            $query = $db->createQuery()
+                ->update($db->quoteName('#__menu'))
+                ->set($db->quoteName('link') . ' = :link')
+                ->where($db->quoteName('id') . ' = :id')
+                ->bind(':link', $link)
+                ->bind(':id', $id, ParameterType::INTEGER);
+            $db->setQuery($query)->execute();
+            echo "Updated menu item link: {$data['title']} (#{$id})\n";
+        } else {
+            echo "Menu item exists: {$data['title']} (#{$id})\n";
+        }
+
+        return $id;
+    }
+
+    $menuItemModel->setState('item.id', 0);
+
+    $data += [
+        'id'                => 0,
+        'created_user_id'   => $userId,
+        'note'              => '',
+        'img'               => '',
+        'associations'      => [],
+        'client_id'         => 0,
+        'level'             => 1,
+        'home'              => 0,
+        'browserNav'        => 0,
+        'template_style_id' => 0,
+        'access'            => $data['access'] ?? $access,
+    ];
+
+    if (!$menuItemModel->save($data)) {
+        throw new \RuntimeException('Could not save menu "' . $data['title'] . '": ' . $menuItemModel->getError());
+    }
+
+    $id = (int) $menuItemModel->getState('item.id');
+    echo "Created menu item: {$data['title']} (#{$id})\n";
+
+    return $id;
+}
+
+/**
+ * @return array<string, int>
+ */
+function ensureSmartSearchMenus(AdministratorApplication $app, DatabaseInterface $db, int $userId, int $access, int $filterId): array
+{
+    if (!ComponentHelper::isEnabled('com_finder')) {
+        throw new \RuntimeException('com_finder must be enabled.');
+    }
+
+    $finderComponentId = findComponentId($db, 'com_finder');
+
+    if ($finderComponentId < 1) {
+        throw new \RuntimeException('Could not resolve com_finder extension id.');
+    }
+
+    $menusFactory  = $app->bootComponent('com_menus')->getMVCFactory();
+    $menuItemModel = $menusFactory->createModel('Item', 'Administrator', ['ignore_request' => true]);
+    $link          = 'index.php?option=com_finder&view=search';
+
+    if ($filterId > 0) {
+        $link .= '&f=' . $filterId;
+    }
+
+    $enId = ensureMenuItem($menuItemModel, $db, $userId, $access, [
+        'title'        => 'Search',
+        'alias'        => 'search',
+        'link'         => $link,
+        'type'         => 'component',
+        'component_id' => $finderComponentId,
+        'menutype'     => 'mainmenu',
+        'parent_id'    => 1,
+        'language'     => 'en-GB',
+        'access'       => $access,
+        'published'    => 1,
+        'params'       => [
+            'show_page_heading' => '1',
+            'page_heading'      => 'Search',
+            'show_advanced'     => '1',
+            'show_description'  => '1',
+            'show_date'         => '0',
+        ],
+    ]);
+
+    $thId = ensureMenuItem($menuItemModel, $db, $userId, $access, [
+        'title'        => 'ค้นหา',
+        'alias'        => 'search',
+        'link'         => $link,
+        'type'         => 'component',
+        'component_id' => $finderComponentId,
+        'menutype'     => 'mainmenu',
+        'parent_id'    => 1,
+        'language'     => 'th-TH',
+        'access'       => $access,
+        'published'    => 1,
+        'params'       => [
+            'show_page_heading' => '1',
+            'page_heading'      => 'ค้นหา',
+            'show_advanced'     => '1',
+            'show_description'  => '1',
+            'show_date'         => '0',
+        ],
+    ]);
+
+    return [
+        'en-GB' => $enId,
+        'th-TH' => $thId,
+    ];
+}
+
+/**
+ * @param  array<string, int>  $idsByLanguage
+ */
+function ensureMenuAssociations(DatabaseInterface $db, array $idsByLanguage): void
+{
+    ksort($idsByLanguage);
+
+    $ids = array_values(array_filter(array_map('intval', $idsByLanguage)));
+
+    if (\count($ids) < 2) {
+        return;
+    }
+
+    $context = 'com_menus.item';
+    $key     = md5(json_encode($idsByLanguage));
+
+    $query = $db->createQuery()
+        ->select($db->quoteName(['id', 'key']))
+        ->from($db->quoteName('#__associations'))
+        ->where($db->quoteName('context') . ' = :context')
+        ->whereIn($db->quoteName('id'), $ids)
+        ->bind(':context', $context);
+    $existing = $db->setQuery($query)->loadAssocList('id') ?: [];
+
+    $sameKey = \count($existing) === \count($ids);
+
+    foreach ($ids as $id) {
+        if (!isset($existing[$id]) || $existing[$id]['key'] !== $key) {
+            $sameKey = false;
+            break;
+        }
+    }
+
+    if ($sameKey) {
+        return;
+    }
+
+    $query = $db->createQuery()
+        ->delete($db->quoteName('#__associations'))
+        ->where($db->quoteName('context') . ' = :context')
+        ->whereIn($db->quoteName('id'), $ids)
+        ->bind(':context', $context);
+    $db->setQuery($query)->execute();
+
+    foreach ($ids as $id) {
+        $row = (object) [
+            'id'      => $id,
+            'context' => $context,
+            'key'     => $key,
+        ];
+        $db->insertObject('#__associations', $row);
+    }
+
+    echo 'Associated Search menu items #' . implode(', #', $ids) . "\n";
 }

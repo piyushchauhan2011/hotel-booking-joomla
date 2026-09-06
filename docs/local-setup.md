@@ -49,7 +49,7 @@ ddev exec php scripts/seed-platform-labs.php
 | `seed-article-fields.php` | Two field groups, four article fields, two Blog articles for the Custom Fields UI |
 | `seed-people-fields.php` | Contact/User field groups, user `maya`, org/team contacts, About / Contact / My Profile menus |
 | `seed-privacy-consent.php` | Privacy Policy article, hidden menu item, enables core Privacy Consent plus `plg_system_hbconsent`. Does **not** pre-consent `maya` (the lesson is the redirect after login) |
-| `seed-platform-labs.php` | Enables Schema.org lodging, privacy, finder, and system hotelbooking plugins; seeds a destination Star rating field, `#__schemaorg` rows, destination ACL assets, two hotel-manager demo groups, and hides site-wide article widgets and the FAQs admin menu from those managers |
+| `seed-platform-labs.php` | Enables Schema.org lodging, privacy, finder, and system hotelbooking plugins; seeds a destination Star rating field, `#__schemaorg` rows, destination ACL assets, two hotel-manager demo groups, a Hotel Booking Smart Search filter, EN/TH Search menu items, and hides site-wide article widgets and the FAQs admin menu from those managers |
 
 ## Languages
 
