@@ -101,8 +101,13 @@ class RoomsModel extends ListModel
         $user = $this->getCurrentUser();
 
         if (!AccessHelper::isPrivileged($user)) {
-            $query->where($db->quoteName('d.manager_user_id') . ' = :scopedUserId')
-                ->bind(':scopedUserId', $user->id, ParameterType::INTEGER);
+            $ids = AccessHelper::editableDestinationIds($user, $db);
+
+            if ($ids === []) {
+                $query->where('0 = 1');
+            } else {
+                $query->whereIn($db->quoteName('a.destination_id'), $ids);
+            }
         }
 
         $orderCol  = $this->state->get('list.ordering', 'a.ordering');

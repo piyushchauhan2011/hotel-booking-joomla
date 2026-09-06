@@ -47,8 +47,16 @@ class Dispatcher extends ComponentDispatcher
             return;
         }
 
-        // Submitting information requests and confirmation through the frontend is restricted to authenticated users at this time
-        if (\in_array($view, ['confirm', 'request']) && $this->app->getIdentity()->guest) {
+        // Creating a request still needs a login. Confirmation emails prove
+        // control of the address, and booking guests are not CMS users, so
+        // the confirm view must work with only the emailed token.
+        if ($view === 'request' && $this->app->getIdentity()->guest) {
+            $this->app->redirect(
+                Route::_('index.php?option=com_users&view=login&return=' . base64_encode('index.php?option=com_privacy&view=' . $view), false)
+            );
+        }
+
+        if ($view === 'confirm' && $this->app->getIdentity()->guest && $this->input->getAlnum('confirm_token') === '') {
             $this->app->redirect(
                 Route::_('index.php?option=com_users&view=login&return=' . base64_encode('index.php?option=com_privacy&view=' . $view), false)
             );

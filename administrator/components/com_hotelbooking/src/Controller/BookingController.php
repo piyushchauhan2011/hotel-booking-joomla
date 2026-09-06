@@ -9,6 +9,9 @@ use Joomla\CMS\Router\Route;
 use Joomla\Database\ParameterType;
 use Learn\Component\Hotelbooking\Administrator\Helper\AccessHelper;
 use Learn\Component\Hotelbooking\Administrator\Helper\PartnerNotificationHelper;
+use Learn\Component\Hotelbooking\Administrator\Table\BookingTable;
+use Learn\Component\Hotelbooking\Administrator\Table\DestinationTable;
+use Learn\Component\Hotelbooking\Administrator\Table\RoomTable;
 
 \defined('_JEXEC') or die;
 
@@ -16,13 +19,23 @@ class BookingController extends FormController
 {
     protected $text_prefix = 'COM_HOTELBOOKING_BOOKING';
 
-    public function execute($task)
+    protected function allowEdit($data = [], $key = 'id')
     {
-        if (!AccessHelper::isPrivileged(Factory::getApplication()->getIdentity())) {
-            throw new \Exception(Text::_('JERROR_ALERTNOAUTHOR'), 403);
+        $user = $this->app->getIdentity();
+
+        if (AccessHelper::isPrivileged($user)) {
+            return parent::allowEdit($data, $key);
         }
 
-        return parent::execute($task);
+        $id = (int) ($data[$key] ?? 0);
+
+        if ($id <= 0) {
+            return false;
+        }
+
+        $auth = $this->destinationAuthForBooking($id);
+
+        return AccessHelper::canEditDestination($user, $auth['id'], $auth['created_by']);
     }
 
     public function notifyHotel()
@@ -75,6 +88,12 @@ class BookingController extends FormController
             return;
         }
 
+        $user = $this->app->getIdentity();
+
+        if (!AccessHelper::canEditDestination($user, (int) $destination->id, (int) $destination->created_by)) {
+            throw new \Exception(Text::_('JERROR_ALERTNOAUTHOR'), 403);
+        }
+
         $sent = PartnerNotificationHelper::sendEmail($booking, $room, $destination);
 
         $notifiedAt = Factory::getDate()->toSql();
@@ -89,5 +108,35 @@ class BookingController extends FormController
 
         $this->setMessage(Text::_($sent ? 'COM_HOTELBOOKING_NOTIFY_SUCCESS' : 'COM_HOTELBOOKING_NOTIFY_EMAIL_FAILED'), $sent ? 'message' : 'warning');
         $this->setRedirect($redirect);
+    }
+
+    /**
+     * @return array{id:int,created_by:int}
+     */
+    private function destinationAuthForBooking(int $bookingId): array
+    {
+        $db = Factory::getDbo();
+        $bookingTable = new BookingTable($db);
+
+        if (!$bookingTable->load($bookingId)) {
+            return ['id' => 0, 'created_by' => 0];
+        }
+
+        $roomTable = new RoomTable($db);
+
+        if (!$roomTable->load((int) $bookingTable->room_id)) {
+            return ['id' => 0, 'created_by' => 0];
+        }
+
+        $destinationTable = new DestinationTable($db);
+
+        if (!$destinationTable->load((int) $roomTable->destination_id)) {
+            return ['id' => 0, 'created_by' => 0];
+        }
+
+        return [
+            'id'         => (int) $destinationTable->id,
+            'created_by' => (int) $destinationTable->created_by,
+        ];
     }
 }

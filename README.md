@@ -40,6 +40,7 @@ Details: [architecture](docs/architecture.md).
 | `plg_content_hotelbooking` | Turns `{hotelbooking}` tags into cards |
 | `plg_editors-xtd_hotelbooking` | Editor button that opens the snippet picker |
 | `plg_system_hbconsent` | Guest Contact ticks and cookie Accept → Privacy Consents |
+| `plg_system_hotelbooking` | Hides site-wide FAQs in the admin menu from hotel managers |
 | `mod_hotelhero` | Hotel landing hero |
 | `mod_hoteldetails` | Hotel landing intro, offers, CTA |
 | `mod_hotelrooms` | Rooms for the current hotel landing destination |

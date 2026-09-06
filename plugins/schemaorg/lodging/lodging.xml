@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="schemaorg" method="upgrade">
+	<name>plg_schemaorg_lodging</name>
+	<author>Piyush Chauhan</author>
+	<creationDate>2026-09-04</creationDate>
+	<copyright>(C) 2026 Piyush Chauhan. Learning project.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.0.0</version>
+	<description>PLG_SCHEMAORG_LODGING_XML_DESCRIPTION</description>
+	<namespace path="src">Learn\Plugin\Schemaorg\Lodging</namespace>
+	<files>
+		<folder plugin="lodging">services</folder>
+		<folder>src</folder>
+		<folder>forms</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_schemaorg_lodging.ini</language>
+		<language tag="en-GB">language/en-GB/plg_schemaorg_lodging.sys.ini</language>
+		<language tag="th-TH">language/th-TH/plg_schemaorg_lodging.ini</language>
+		<language tag="th-TH">language/th-TH/plg_schemaorg_lodging.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="allowedlist"
+					type="SchemaorgComponentSections"
+					label="JSCHEMAORG_EXTENSION_ALLOWED_LABEL"
+					description="JSCHEMAORG_EXTENSION_ALLOWED_DESCRIPTION"
+					multiple="multiple"
+					layout="joomla.form.field.list-fancy-select"
+				/>
+				<field
+					name="forbiddenlist"
+					type="SchemaorgComponentSections"
+					label="JSCHEMAORG_EXTENSION_FORBIDDEN_LABEL"
+					description="JSCHEMAORG_EXTENSION_FORBIDDEN_DESCRIPTION"
+					multiple="multiple"
+					layout="joomla.form.field.list-fancy-select"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

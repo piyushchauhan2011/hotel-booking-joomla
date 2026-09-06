@@ -33,6 +33,6 @@ class DestinationController extends FormController
             return false;
         }
 
-        return AccessHelper::canEditDestination($user, (int) $table->manager_user_id);
+        return AccessHelper::canEditDestination($user, $id, (int) $table->created_by);
     }
 }

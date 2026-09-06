@@ -42,6 +42,6 @@ class RoomController extends FormController
             return false;
         }
 
-        return AccessHelper::canEditRoom($user, (int) $destinationTable->manager_user_id);
+        return AccessHelper::canEditRoom($user, (int) $destinationTable->id, (int) $destinationTable->created_by);
     }
 }

@@ -8,7 +8,7 @@ PHP namespaces use the `Learn\` prefix (see `com_hotelbooking`’s `<namespace>`
 
 `Learn\Component\Hotelbooking` — admin CRUD plus site views.
 
-**Administrator:** destinations, rooms, bookings, FAQs, and the snippets picker modal (`view=snippets`) used by the editor button.
+**Administrator:** destinations, rooms, bookings, FAQs, and the snippets picker modal (`view=snippets`) used by the editor button. Site-wide FAQs are Super User only; hotel managers edit per-hotel FAQs on the destination/room form instead.
 
 **Site** routes are registered in [`components/com_hotelbooking/src/Service/Router.php`](../components/com_hotelbooking/src/Service/Router.php):
 

@@ -86,8 +86,13 @@ class DestinationsModel extends ListModel
         $user = $this->getCurrentUser();
 
         if (!AccessHelper::isPrivileged($user)) {
-            $query->where($db->quoteName('a.manager_user_id') . ' = :scopedUserId')
-                ->bind(':scopedUserId', $user->id, ParameterType::INTEGER);
+            $ids = AccessHelper::editableDestinationIds($user, $db);
+
+            if ($ids === []) {
+                $query->where('0 = 1');
+            } else {
+                $query->whereIn($db->quoteName('a.id'), $ids);
+            }
         }
 
         $orderCol  = $this->state->get('list.ordering', 'a.ordering');

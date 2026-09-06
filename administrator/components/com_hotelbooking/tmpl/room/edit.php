@@ -2,7 +2,9 @@
 
 \defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Associations;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
@@ -14,8 +16,17 @@ $wa = $this->getDocument()->getWebAssetManager();
 $wa->useScript('keepalive')
     ->useScript('form.validate');
 
+$app     = Factory::getApplication();
+$input   = $app->getInput();
+$assoc   = Associations::isEnabled();
+$isModal = $input->get('layout') === 'modal';
+$layout  = $isModal ? 'modal' : 'edit';
+$tmpl    = $isModal || $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
+
+$this->ignore_fieldsets = ['basic', 'item_associations', 'jmetadata'];
+$this->useCoreUI        = true;
 ?>
-<form action="<?php echo Route::_('index.php?option=com_hotelbooking&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="room-form" class="form-validate">
+<form action="<?php echo Route::_('index.php?option=com_hotelbooking&layout=' . $layout . $tmpl . '&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="room-form" class="form-validate">
 
     <?php echo LayoutHelper::render('joomla.edit.title_alias', $this); ?>
 
@@ -60,6 +71,21 @@ $wa->useScript('keepalive')
         </fieldset>
         <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
+        <?php if (!$isModal && $assoc) : ?>
+            <?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'associations', Text::_('JGLOBAL_FIELDSET_ASSOCIATIONS')); ?>
+            <fieldset id="fieldset-associations" class="options-form">
+                <legend><?php echo Text::_('JGLOBAL_FIELDSET_ASSOCIATIONS'); ?></legend>
+                <div>
+                    <?php echo LayoutHelper::render('joomla.edit.associations', $this); ?>
+                </div>
+            </fieldset>
+            <?php echo HTMLHelper::_('uitab.endTab'); ?>
+        <?php elseif ($isModal && $assoc) : ?>
+            <div class="hidden"><?php echo LayoutHelper::render('joomla.edit.associations', $this); ?></div>
+        <?php endif; ?>
+
+        <?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
+
         <?php echo HTMLHelper::_('uitab.endTabSet'); ?>
     </div>
 
@@ -68,5 +94,6 @@ $wa->useScript('keepalive')
     echo $this->form->renderField('ordering');
     ?>
     <input type="hidden" name="task" value="">
+    <input type="hidden" name="forcedLanguage" value="<?php echo $this->escape($input->get('forcedLanguage', '', 'cmd')); ?>">
     <?php echo HTMLHelper::_('form.token'); ?>
 </form>

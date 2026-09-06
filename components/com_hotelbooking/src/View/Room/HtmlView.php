@@ -4,7 +4,7 @@ namespace Learn\Component\Hotelbooking\Site\View\Room;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
-use Learn\Component\Hotelbooking\Site\Helper\SchemaHelper;
+use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
 use Learn\Component\Hotelbooking\Site\Helper\SubformHelper;
 
 \defined('_JEXEC') or die;
@@ -27,6 +27,7 @@ class HtmlView extends BaseHtmlView
             $this->item->amenities     = $this->item->amenities ? explode(',', $this->item->amenities) : [];
             $this->item->nearby_places = SubformHelper::decodeRows($this->item->nearby_places, 'nearby_place_item');
             $this->item->faqs          = SubformHelper::decodeRows($this->item->faqs, 'faq_item');
+            $this->item->jcfields      = FieldsHelper::getFields('com_hotelbooking.room', $this->item, true);
 
             $description = trim(strip_tags((string) $this->item->description));
             $description = $description !== ''
@@ -38,12 +39,6 @@ class HtmlView extends BaseHtmlView
             }
 
             $this->getDocument()->setDescription($description);
-
-            $this->getDocument()->addCustomTag(
-                '<script type="application/ld+json">'
-                . json_encode(SchemaHelper::forRoom($this->item), JSON_UNESCAPED_SLASHES)
-                . '</script>',
-            );
         }
 
         return parent::display($tpl);

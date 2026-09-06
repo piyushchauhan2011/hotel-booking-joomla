@@ -19,7 +19,10 @@
 			"Learn\\Module\\Hotelrooms\\Site\\": "../modules/mod_hotelrooms/src/",
 			"Learn\\Plugin\\Content\\Hotelbooking\\": "../plugins/content/hotelbooking/src/",
 			"Learn\\Plugin\\EditorsXtd\\Hotelbooking\\": "../plugins/editors-xtd/hotelbooking/src/",
-			"Learn\\Plugin\\System\\Hbconsent\\": "../plugins/system/hbconsent/src/"
+			"Learn\\Plugin\\System\\Hbconsent\\": "../plugins/system/hbconsent/src/",
+			"Learn\\Plugin\\Schemaorg\\Lodging\\": "../plugins/schemaorg/lodging/src/",
+			"Learn\\Plugin\\Privacy\\Hotelbooking\\": "../plugins/privacy/hotelbooking/src/",
+			"Learn\\Plugin\\Finder\\Hotelbooking\\": "../plugins/finder/hotelbooking/src/"
 		}
 	},
 	"config": {

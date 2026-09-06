@@ -9,10 +9,9 @@ use Joomla\CMS\Component\Router\RouterViewConfiguration;
 use Joomla\CMS\Component\Router\Rules\MenuRules;
 use Joomla\CMS\Component\Router\Rules\NomenuRules;
 use Joomla\CMS\Component\Router\Rules\StandardRules;
-use Joomla\CMS\Filter\OutputFilter;
 use Joomla\CMS\Menu\AbstractMenu;
 use Joomla\Database\DatabaseInterface;
-use Joomla\Database\ParameterType;
+use Learn\Component\Hotelbooking\Site\Helper\RouterSegmentHelper;
 
 \defined('_JEXEC') or die;
 
@@ -90,42 +89,16 @@ class Router extends RouterView
 
     private function buildSegment(string $table, int $id): string
     {
-        if ($id <= 0) {
-            return (string) $id;
-        }
-
-        $query = $this->db->createQuery()
-            ->select($this->db->quoteName('alias'))
-            ->from($this->db->quoteName($table))
-            ->where($this->db->quoteName('id') . ' = :id')
-            ->bind(':id', $id, ParameterType::INTEGER);
-
-        $this->db->setQuery($query);
-
-        $value = (string) $this->db->loadResult();
-        $slug  = $value !== '' ? OutputFilter::stringURLSafe($value) : '';
-
-        return $slug !== '' ? $slug : (string) $id;
+        return RouterSegmentHelper::buildSegment($this->db, $table, $id);
     }
 
     private function getIdFromSegment(string $table, string $segment): int
     {
-        $language = $this->app->getLanguage()->getTag();
-
-        $query = $this->db->createQuery()
-            ->select($this->db->quoteName('id'))
-            ->from($this->db->quoteName($table))
-            ->where($this->db->quoteName('alias') . ' = :alias')
-            ->bind(':alias', $segment, ParameterType::STRING)
-            ->whereIn($this->db->quoteName('language'), [$language, '*'], ParameterType::STRING)
-            ->order('CASE ' . $this->db->quoteName('language') . ' WHEN ' . $this->db->quote($language) . ' THEN 0 ELSE 1 END');
-
-        $this->db->setQuery($query, 0, 1);
-
-        $id = (int) $this->db->loadResult();
-
-        // Alias not found for any language: fall back to treating the segment as a raw id
-        // (covers legacy id-alias links and menu-item links built with a bare id).
-        return $id > 0 ? $id : (int) $segment;
+        return RouterSegmentHelper::getIdFromSegment(
+            $this->db,
+            $table,
+            $segment,
+            $this->app->getLanguage()->getTag(),
+        );
     }
 }

@@ -14,7 +14,11 @@
     <source>
         <include>
             <file>components/com_hotelbooking/src/Helper/SubformHelper.php</file>
+            <file>components/com_hotelbooking/src/Helper/SchemaHelper.php</file>
+            <file>components/com_hotelbooking/src/Helper/RouterSegmentHelper.php</file>
             <file>administrator/components/com_hotelbooking/src/Helper/AccessHelper.php</file>
+            <file>administrator/components/com_hotelbooking/src/Helper/PartnerNotificationHelper.php</file>
+            <file>plugins/privacy/hotelbooking/src/Helper/PrivacyDataHelper.php</file>
         </include>
     </source>
 </phpunit>
