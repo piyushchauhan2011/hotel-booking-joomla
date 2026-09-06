@@ -77,5 +77,5 @@ CI has no MySQL, so these stay local after `ddev exec php scripts/seed-platform-
 - Users → Privacy → Requests: export and remove for a booking guest email (anonymises rows, does not delete bookings)
 - System → Mail Templates: edit `com_hotelbooking.partner_notify`, then Notify hotel on a booking and check Mailpit
 - `ddev exec php cli/joomla.php finder:index` then Smart Search for a destination or room name
-- Two hotel-manager users scoped to different destinations; Super User still sees both
+- Two hotel-manager users scoped to different destinations (`paris_manager` sees only Paris; Bookings open without a 403; FAQs stay Super User only; Home Dashboard does not list site-wide articles)
 

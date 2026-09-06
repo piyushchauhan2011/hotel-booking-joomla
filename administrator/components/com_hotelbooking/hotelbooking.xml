@@ -46,7 +46,11 @@
 			<menu link="option=com_hotelbooking&amp;view=destinations">COM_HOTELBOOKING_SUBMENU_DESTINATIONS</menu>
 			<menu link="option=com_hotelbooking&amp;view=rooms">COM_HOTELBOOKING_SUBMENU_ROOMS</menu>
 			<menu link="option=com_hotelbooking&amp;view=bookings">COM_HOTELBOOKING_SUBMENU_BOOKINGS</menu>
-			<menu link="option=com_hotelbooking&amp;view=faqs">COM_HOTELBOOKING_SUBMENU_FAQS</menu>
+			<menu link="option=com_hotelbooking&amp;view=faqs">COM_HOTELBOOKING_SUBMENU_FAQS
+				<params>
+					<menu-permission>core.create;com_hotelbooking</menu-permission>
+				</params>
+			</menu>
 		</submenu>
 		<files folder="admin">
 			<folder>src</folder>

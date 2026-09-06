@@ -5,6 +5,7 @@ namespace Learn\Component\Hotelbooking\Administrator\Extension;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
 use Joomla\Database\ParameterType;
+use Joomla\Registry\Registry;
 
 \defined('_JEXEC') or die;
 
@@ -73,10 +74,12 @@ class HotelbookingInstallerScript
         // withheld below. Do not grant component-level core.edit: destination
         // assets inherit it and a hotel manager would then edit every hotel.
         $this->grantRule('com_hotelbooking', 'core.manage', $groupId, false);
+        $this->revokeRule('com_hotelbooking', 'core.create', $groupId, false);
         $this->revokeRule('com_hotelbooking', 'core.edit', $groupId, false);
         $this->grantRule('com_hotelbooking', 'core.edit.own', $groupId, false);
 
         $this->addGroupToSpecialViewLevel($groupId);
+        $this->restrictFaqsAdminMenu();
     }
 
     /**
@@ -122,6 +125,60 @@ class HotelbookingInstallerScript
             ->bind(':rules', json_encode(array_values($rules)), ParameterType::STRING)
             ->bind(':id', $row->id, ParameterType::INTEGER);
         $db->setQuery($updateQuery)->execute();
+    }
+
+    /**
+     * Site-wide FAQs are not hotel-scoped. CssMenu ignores #__menu.access, so
+     * Super Users view level alone does not hide the item. Also set
+     * menu-permission (honoured by mod_submenu) and let plg_system_hotelbooking
+     * drop the sidebar link for anyone without core.create.
+     */
+    private function restrictFaqsAdminMenu(): void
+    {
+        $db    = Factory::getDbo();
+        $title = 'Super Users';
+
+        $query = $db->createQuery()
+            ->select($db->quoteName('id'))
+            ->from($db->quoteName('#__viewlevels'))
+            ->where($db->quoteName('title') . ' = :title')
+            ->bind(':title', $title, ParameterType::STRING);
+        $db->setQuery($query);
+        $accessId = (int) $db->loadResult();
+
+        $clientId = 1;
+        $link     = '%view=faqs%';
+        $option   = '%option=com_hotelbooking%';
+        $query    = $db->createQuery()
+            ->select([$db->quoteName('id'), $db->quoteName('params')])
+            ->from($db->quoteName('#__menu'))
+            ->where($db->quoteName('client_id') . ' = :clientId')
+            ->where($db->quoteName('link') . ' LIKE :option')
+            ->where($db->quoteName('link') . ' LIKE :link')
+            ->bind(':clientId', $clientId, ParameterType::INTEGER)
+            ->bind(':option', $option)
+            ->bind(':link', $link);
+
+        foreach ($db->setQuery($query)->loadObjectList() ?: [] as $row) {
+            $params = new Registry($row->params);
+            $params->set('menu-permission', 'core.create;com_hotelbooking');
+            $encoded = $params->toString();
+            $id      = (int) $row->id;
+
+            $update = $db->createQuery()
+                ->update($db->quoteName('#__menu'))
+                ->set($db->quoteName('params') . ' = :params')
+                ->where($db->quoteName('id') . ' = :id')
+                ->bind(':params', $encoded)
+                ->bind(':id', $id, ParameterType::INTEGER);
+
+            if ($accessId > 0) {
+                $update->set($db->quoteName('access') . ' = :access')
+                    ->bind(':access', $accessId, ParameterType::INTEGER);
+            }
+
+            $db->setQuery($update)->execute();
+        }
     }
 
     private function grantRule($assetIdentifier, string $action, int $groupId, bool $byId): void
@@ -172,11 +229,17 @@ class HotelbookingInstallerScript
 
         $rules = json_decode($asset->rules ?: '{}', true);
 
-        if (!\is_array($rules) || !isset($rules[$action][(string) $groupId])) {
+        $groupKey = (string) $groupId;
+
+        if (!\is_array($rules) || !isset($rules[$action]) || !\is_array($rules[$action])) {
             return;
         }
 
-        unset($rules[$action][(string) $groupId]);
+        if (!\array_key_exists($groupKey, $rules[$action]) && !\array_key_exists($groupId, $rules[$action])) {
+            return;
+        }
+
+        unset($rules[$action][$groupKey], $rules[$action][$groupId]);
 
         if ($rules[$action] === []) {
             unset($rules[$action]);

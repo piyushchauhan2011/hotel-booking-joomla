@@ -17,6 +17,7 @@ final class AccessHelperTest extends TestCase
     {
         $user = $this->createMock(User::class);
         $user->method('authorise')->willReturnCallback($authorise);
+        $user->method('getAuthorisedGroups')->willReturn([]);
         $user->id = $id;
 
         return $user;
@@ -52,6 +53,15 @@ final class AccessHelperTest extends TestCase
         );
 
         $this->assertFalse(AccessHelper::isPrivileged($user));
+    }
+
+    public function testIsAdministratorFaqsLink(): void
+    {
+        $this->assertTrue(AccessHelper::isAdministratorFaqsLink('index.php?option=com_hotelbooking&view=faqs'));
+        $this->assertTrue(AccessHelper::isAdministratorFaqsLink('index.php?option=com_hotelbooking&task=faq.edit&id=1'));
+        $this->assertFalse(AccessHelper::isAdministratorFaqsLink('index.php?option=com_hotelbooking&view=destinations'));
+        $this->assertFalse(AccessHelper::isAdministratorFaqsLink('index.php?option=com_content&view=faqs'));
+        $this->assertFalse(AccessHelper::isAdministratorFaqsLink(''));
     }
 
     public function testCanEditDestinationWhenPrivileged(): void

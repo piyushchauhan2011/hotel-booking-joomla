@@ -16,6 +16,8 @@ $finder = PhpCsFixer\Finder::create()
         $root . '/plugins/editors-xtd/hotelbooking/services',
         $root . '/plugins/system/hbconsent/src',
         $root . '/plugins/system/hbconsent/services',
+        $root . '/plugins/system/hotelbooking/src',
+        $root . '/plugins/system/hotelbooking/services',
         $root . '/plugins/schemaorg/lodging/src',
         $root . '/plugins/schemaorg/lodging/services',
         $root . '/plugins/privacy/hotelbooking/src',

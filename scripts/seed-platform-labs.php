@@ -95,9 +95,11 @@ try {
     ensurePluginRow($db, 'schemaorg', 'lodging', 'plg_schemaorg_lodging');
     ensurePluginRow($db, 'privacy', 'hotelbooking', 'plg_privacy_hotelbooking');
     ensurePluginRow($db, 'finder', 'hotelbooking', 'plg_finder_hotelbooking');
+    ensurePluginRow($db, 'system', 'hotelbooking', 'plg_system_hotelbooking');
     enablePlugin($db, 'schemaorg', 'lodging', []);
     enablePlugin($db, 'privacy', 'hotelbooking', []);
     enablePlugin($db, 'finder', 'hotelbooking', []);
+    enablePlugin($db, 'system', 'hotelbooking', []);
     enablePlugin($db, 'system', 'schemaorg', []);
     enablePlugin($db, 'system', 'fields', []);
     rebuildExtensionNamespaceMap();
@@ -158,12 +160,12 @@ try {
 
     $mvcFactory       = $app->bootComponent('com_hotelbooking')->getMVCFactory();
     $destinationTable = $mvcFactory->createTable('Destination', 'Administrator');
-    $hotelManagerId   = findUsergroupId($db, 'Hotel Manager');
+    $installer = new \Learn\Component\Hotelbooking\Administrator\Extension\HotelbookingInstallerScript();
+    $installer->install(null);
+    $hotelManagerId = findUsergroupId($db, 'Hotel Manager');
 
     if ($hotelManagerId < 1) {
-        $installer = new \Learn\Component\Hotelbooking\Administrator\Extension\HotelbookingInstallerScript();
-        $installer->install(null);
-        $hotelManagerId = findUsergroupId($db, 'Hotel Manager');
+        throw new \RuntimeException('Could not create the Hotel Manager user group.');
     }
 
     $usersFactory = $app->bootComponent('com_users')->getMVCFactory();
@@ -227,7 +229,11 @@ try {
         $index++;
     }
 
-    echo "Star rating field #{$starFieldId}. Plugins lodging/privacy/finder enabled.\n";
+    restrictCpanelArticleModules($db);
+    cleanModuleCache();
+    cleanMenuCache();
+
+    echo "Star rating field #{$starFieldId}. Plugins lodging/privacy/finder/system hotelbooking enabled.\n";
     echo "Destination assets, Schema.org rows, and manager groups are in place.\n";
 } catch (Throwable $e) {
     fwrite(STDERR, $e->getMessage() . PHP_EOL);
@@ -550,6 +556,61 @@ function cleanPluginCache(): void
     foreach (['com_plugins', '_system'] as $group) {
         $factory->createCacheController('callback', ['defaultgroup' => $group])->clean();
     }
+}
+
+function cleanModuleCache(): void
+{
+    $factory = Factory::getContainer()->get(CacheControllerFactoryInterface::class);
+    $factory->createCacheController('callback', ['defaultgroup' => 'com_modules'])->clean();
+}
+
+function cleanMenuCache(): void
+{
+    $factory = Factory::getContainer()->get(CacheControllerFactoryInterface::class);
+
+    foreach (['com_menus', 'mod_menu'] as $group) {
+        $factory->createCacheController('callback', ['defaultgroup' => $group])->clean();
+    }
+}
+
+/**
+ * Popular / Recently Added articles are site-wide Blog posts, not hotel records.
+ * They sit on the Home Dashboard with Special access, which Hotel Manager is in
+ * (so the admin toolbar renders). Point those two modules at Super Users instead.
+ */
+function restrictCpanelArticleModules(DatabaseInterface $db): void
+{
+    $title = 'Super Users';
+    $query = $db->createQuery()
+        ->select($db->quoteName('id'))
+        ->from($db->quoteName('#__viewlevels'))
+        ->where($db->quoteName('title') . ' = :title')
+        ->bind(':title', $title)
+        ->setLimit(1);
+    $accessId = (int) $db->setQuery($query)->loadResult();
+
+    if ($accessId < 1) {
+        echo "No Super Users view level; skip cpanel article module restriction.\n";
+
+        return;
+    }
+
+    $clientId = 1;
+    $position = 'cpanel';
+    $popular  = 'mod_popular';
+    $latest   = 'mod_latest';
+    $query    = $db->createQuery()
+        ->update($db->quoteName('#__modules'))
+        ->set($db->quoteName('access') . ' = :access')
+        ->where($db->quoteName('client_id') . ' = :clientId')
+        ->where($db->quoteName('position') . ' = :position')
+        ->where($db->quoteName('module') . ' IN (' . $db->quote($popular) . ', ' . $db->quote($latest) . ')')
+        ->bind(':access', $accessId, ParameterType::INTEGER)
+        ->bind(':clientId', $clientId, ParameterType::INTEGER)
+        ->bind(':position', $position);
+    $db->setQuery($query)->execute();
+
+    echo "Restricted Popular/Recently Added dashboard modules to Super Users.\n";
 }
 
 function rebuildExtensionNamespaceMap(): void
