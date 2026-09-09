@@ -22,7 +22,8 @@
 			"Learn\\Plugin\\System\\Hbconsent\\": "../plugins/system/hbconsent/src/",
 			"Learn\\Plugin\\Schemaorg\\Lodging\\": "../plugins/schemaorg/lodging/src/",
 			"Learn\\Plugin\\Privacy\\Hotelbooking\\": "../plugins/privacy/hotelbooking/src/",
-			"Learn\\Plugin\\Finder\\Hotelbooking\\": "../plugins/finder/hotelbooking/src/"
+			"Learn\\Plugin\\Finder\\Hotelbooking\\": "../plugins/finder/hotelbooking/src/",
+			"Learn\\Plugin\\Workflow\\Hotelbooking\\": "../plugins/workflow/hotelbooking/src/"
 		}
 	},
 	"config": {

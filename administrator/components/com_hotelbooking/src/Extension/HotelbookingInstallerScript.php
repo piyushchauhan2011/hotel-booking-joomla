@@ -6,6 +6,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
+use Learn\Component\Hotelbooking\Administrator\Helper\BookingWorkflowSeeder;
 use Learn\Component\Hotelbooking\Administrator\Helper\PartnerNotificationHelper;
 
 \defined('_JEXEC') or die;
@@ -40,6 +41,7 @@ class HotelbookingInstallerScript
     {
         if (\in_array($type, ['install', 'update', 'discover_install'], true)) {
             PartnerNotificationHelper::ensureRegisteredMailTemplate();
+            $this->ensureBookingWorkflow();
         }
 
         return true;
@@ -82,6 +84,7 @@ class HotelbookingInstallerScript
         $this->revokeRule('com_hotelbooking', 'core.create', $groupId, false);
         $this->revokeRule('com_hotelbooking', 'core.edit', $groupId, false);
         $this->grantRule('com_hotelbooking', 'core.edit.own', $groupId, false);
+        $this->grantRule('com_hotelbooking', 'core.execute.transition', $groupId, false);
 
         $this->addGroupToSpecialViewLevel($groupId);
         $this->restrictFaqsAdminMenu();
@@ -184,6 +187,11 @@ class HotelbookingInstallerScript
 
             $db->setQuery($update)->execute();
         }
+    }
+
+    private function ensureBookingWorkflow(): void
+    {
+        BookingWorkflowSeeder::seed(Factory::getDbo());
     }
 
     private function grantRule($assetIdentifier, string $action, int $groupId, bool $byId): void

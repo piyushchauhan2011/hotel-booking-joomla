@@ -19,6 +19,17 @@
 			<option value="confirmed">COM_HOTELBOOKING_STATUS_CONFIRMED</option>
 			<option value="cancelled">COM_HOTELBOOKING_STATUS_CANCELLED</option>
 		</field>
+
+		<field
+			name="stage"
+			type="workflowstage"
+			label="JOPTION_SELECT_STAGE"
+			onchange="this.form.submit();"
+			activeonly="true"
+			extension="com_hotelbooking.booking"
+			>
+			<option value="">JOPTION_SELECT_STAGE</option>
+		</field>
 	</fields>
 
 	<fields name="list">

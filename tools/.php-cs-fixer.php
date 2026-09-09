@@ -24,6 +24,8 @@ $finder = PhpCsFixer\Finder::create()
         $root . '/plugins/privacy/hotelbooking/services',
         $root . '/plugins/finder/hotelbooking/src',
         $root . '/plugins/finder/hotelbooking/services',
+        $root . '/plugins/workflow/hotelbooking/src',
+        $root . '/plugins/workflow/hotelbooking/services',
         $root . '/modules/mod_hoteldetails/src',
         $root . '/modules/mod_hoteldetails/services',
         $root . '/modules/mod_hotelhero/src',
