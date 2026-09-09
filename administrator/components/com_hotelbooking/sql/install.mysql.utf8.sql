@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `#__hotelbooking_bookings` (
   `commission_rate` DECIMAL(5,2) NOT NULL DEFAULT 0.00,
   `commission_amount` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
   `status` VARCHAR(20) NOT NULL DEFAULT 'pending',
-  `partner_status` VARCHAR(30) NOT NULL DEFAULT 'awaiting_hotel_check',
+  `partner_status` VARCHAR(64) NOT NULL DEFAULT 'awaiting_hotel_check',
   `partner_notes` MEDIUMTEXT,
   `hotel_notified_at` DATETIME NULL DEFAULT NULL,
   `commission_paid` TINYINT(1) NOT NULL DEFAULT 0,

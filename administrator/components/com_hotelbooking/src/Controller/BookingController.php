@@ -8,7 +8,9 @@ use Joomla\CMS\MVC\Controller\FormController;
 use Joomla\CMS\Router\Route;
 use Joomla\Database\ParameterType;
 use Learn\Component\Hotelbooking\Administrator\Helper\AccessHelper;
+use Learn\Component\Hotelbooking\Administrator\Helper\BookingWorkflowHelper;
 use Learn\Component\Hotelbooking\Administrator\Helper\PartnerNotificationHelper;
+use Learn\Component\Hotelbooking\Administrator\Model\BookingModel;
 use Learn\Component\Hotelbooking\Administrator\Table\BookingTable;
 use Learn\Component\Hotelbooking\Administrator\Table\DestinationTable;
 use Learn\Component\Hotelbooking\Administrator\Table\RoomTable;
@@ -92,6 +94,23 @@ class BookingController extends FormController
 
         if (!AccessHelper::canEditDestination($user, (int) $destination->id, (int) $destination->created_by)) {
             throw new \Exception(Text::_('JERROR_ALERTNOAUTHOR'), 403);
+        }
+
+        if (BookingWorkflowHelper::isEnabled()) {
+            $transitionId = BookingWorkflowHelper::findNotifyTransitionId($db, (int) $id);
+
+            if ($transitionId > 0) {
+                /** @var BookingModel $model */
+                $model = $this->getModel();
+
+                if ($model->executeTransition([(int) $id], $transitionId)) {
+                    $this->setMessage(Text::_('COM_HOTELBOOKING_NOTIFY_SUCCESS'));
+                }
+
+                $this->setRedirect($redirect);
+
+                return;
+            }
         }
 
         $sent = PartnerNotificationHelper::sendEmail($booking, $room, $destination);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fields name="options">
+		<fieldset name="actions"
+			label="COM_WORKFLOW_TRANSITION_ACTIONS_LABEL"
+		>
+			<field
+				name="booking_action"
+				type="list"
+				label="PLG_WORKFLOW_HOTELBOOKING_ACTION_LABEL"
+				default=""
+				>
+				<option value="">PLG_WORKFLOW_HOTELBOOKING_ACTION_NONE</option>
+				<option value="notify_hotel">PLG_WORKFLOW_HOTELBOOKING_ACTION_NOTIFY</option>
+			</field>
+			<field
+				name="guest_status"
+				type="list"
+				label="PLG_WORKFLOW_HOTELBOOKING_GUEST_STATUS_LABEL"
+				default=""
+				>
+				<option value="">JOPTION_DO_NOT_USE</option>
+				<option value="pending">COM_HOTELBOOKING_STATUS_PENDING</option>
+				<option value="confirmed">COM_HOTELBOOKING_STATUS_CONFIRMED</option>
+				<option value="cancelled">COM_HOTELBOOKING_STATUS_CANCELLED</option>
+			</field>
+			<field
+				name="partner_status"
+				type="list"
+				label="PLG_WORKFLOW_HOTELBOOKING_PARTNER_STATUS_LABEL"
+				default=""
+				>
+				<option value="">JOPTION_DO_NOT_USE</option>
+				<option value="awaiting_hotel_check">COM_HOTELBOOKING_PARTNER_STATUS_AWAITING_HOTEL_CHECK</option>
+				<option value="hotel_confirmed_awaiting_payment">COM_HOTELBOOKING_PARTNER_STATUS_HOTEL_CONFIRMED_AWAITING_PAYMENT</option>
+				<option value="confirmed_paid">COM_HOTELBOOKING_PARTNER_STATUS_CONFIRMED_PAID</option>
+				<option value="declined_by_hotel">COM_HOTELBOOKING_PARTNER_STATUS_DECLINED_BY_HOTEL</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

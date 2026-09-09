@@ -21,7 +21,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Joomla\\CMS\\Application\\CMSApplicationInterface\:\:getUserStateFromRequest\(\)\.$#'
 			identifier: method.notFound
-			count: 3
+			count: 4
 			path: ../administrator/components/com_hotelbooking/src/Model/BookingsModel.php
 
 		-

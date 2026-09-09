@@ -7,6 +7,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\Table\Table;
 use Joomla\Database\ParameterType;
+use Learn\Component\Hotelbooking\Administrator\Helper\BookingWorkflowHelper;
 
 \defined('_JEXEC') or die;
 
@@ -96,6 +97,8 @@ class BookingModel extends AdminModel
         if (!$table->check() || !$table->store()) {
             throw new \RuntimeException($table->getError());
         }
+
+        BookingWorkflowHelper::associateNewItem((int) $table->id, $this->getDatabase());
 
         return (int) $table->id;
     }

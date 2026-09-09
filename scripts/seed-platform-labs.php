@@ -45,6 +45,7 @@ use Joomla\Component\Finder\Administrator\Table\FilterTable;
 use Joomla\Database\DatabaseInterface;
 use Joomla\Database\ParameterType;
 use Joomla\Registry\Registry;
+use Learn\Component\Hotelbooking\Administrator\Helper\BookingWorkflowSeeder;
 use Learn\Component\Hotelbooking\Administrator\Helper\PartnerNotificationHelper;
 use Learn\Component\Hotelbooking\Site\Helper\SchemaHelper;
 
@@ -101,14 +102,23 @@ try {
     ensurePluginRow($db, 'privacy', 'hotelbooking', 'plg_privacy_hotelbooking');
     ensurePluginRow($db, 'finder', 'hotelbooking', 'plg_finder_hotelbooking');
     ensurePluginRow($db, 'system', 'hotelbooking', 'plg_system_hotelbooking');
+    ensurePluginRow($db, 'workflow', 'hotelbooking', 'plg_workflow_hotelbooking');
     enablePlugin($db, 'schemaorg', 'lodging', []);
     enablePlugin($db, 'privacy', 'hotelbooking', []);
     enablePlugin($db, 'finder', 'hotelbooking', []);
     enablePlugin($db, 'system', 'hotelbooking', []);
+    enablePlugin($db, 'workflow', 'hotelbooking', []);
     enablePlugin($db, 'system', 'schemaorg', []);
     enablePlugin($db, 'system', 'fields', []);
     if (PartnerNotificationHelper::ensureRegisteredMailTemplate()) {
         echo "Registered mail template com_hotelbooking.partner_notify\n";
+    }
+    BookingWorkflowSeeder::seed($db);
+    echo "Seeded booking workflow and enabled workflow_enabled.\n";
+    $hotelManagerIdForWorkflow = findUsergroupId($db, 'Hotel Manager');
+
+    if ($hotelManagerIdForWorkflow > 0) {
+        grantAssetRule($db, 'com_hotelbooking', 'core.execute.transition', $hotelManagerIdForWorkflow);
     }
     rebuildExtensionNamespaceMap();
     cleanPluginCache();
@@ -245,7 +255,7 @@ try {
     cleanModuleCache();
     cleanMenuCache();
 
-    echo "Star rating field #{$starFieldId}. Plugins lodging/privacy/finder/system hotelbooking enabled.\n";
+    echo "Star rating field #{$starFieldId}. Plugins lodging/privacy/finder/system/workflow hotelbooking enabled.\n";
     echo "Destination assets, Schema.org rows, and manager groups are in place.\n";
     echo "Smart Search filter Hotel Booking (#{$filterId}); Search menu EN #{$searchIds['en-GB']}, TH #{$searchIds['th-TH']}.\n";
 } catch (Throwable $e) {

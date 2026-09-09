@@ -106,6 +106,20 @@ final class BookingWorkflowHelperTest extends TestCase
         );
     }
 
+    public function testNotifyTransitionIdPicksNotifyHotelAction(): void
+    {
+        $transitions = [
+            ['id' => 8, 'options' => ['booking_action' => '', 'guest_status' => 'pending']],
+            ['id' => 9, 'options' => ['booking_action' => BookingWorkflowHelper::ACTION_NOTIFY_HOTEL]],
+            ['id' => 10, 'options' => ['booking_action' => BookingWorkflowHelper::ACTION_NOTIFY_HOTEL]],
+        ];
+
+        $this->assertSame(9, BookingWorkflowHelper::notifyTransitionId($transitions));
+        $this->assertSame(0, BookingWorkflowHelper::notifyTransitionId([
+            ['id' => 1, 'options' => ['booking_action' => '']],
+        ]));
+    }
+
     public function testShouldStopNotifyOnlyWhenNotifyFails(): void
     {
         $this->assertTrue(

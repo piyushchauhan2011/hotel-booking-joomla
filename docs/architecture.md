@@ -23,6 +23,30 @@ PHP namespaces use the `Learn\` prefix (see `com_hotelbooking`’s `<namespace>`
 
 HTMX fragment tasks (`destinations.items`, `booking.submit` when `HX-Request: true`) return layouts from [`components/com_hotelbooking/layouts`](../components/com_hotelbooking/layouts) and close the app. Do not use `tmpl=component` for these swaps: that still wraps [`templates/tpl_hotelbooking/component.php`](../templates/tpl_hotelbooking/component.php). CSRF tokens are attached in [`media/com_hotelbooking/js/htmx-joomla.js`](../media/com_hotelbooking/js/htmx-joomla.js); flash messages use an `HX-Trigger` `hbMessage` event.
 
+## Booking workflow
+
+Joomla `com_workflow` stores the current **stage** of each booking in `#__workflow_associations`. That row is the durable pointer: if the site goes down, the booking is still in the last saved stage. Allowed moves are **transitions**. `plg_workflow_hotelbooking` sends the hotel email in `onWorkflowBeforeTransition`; a failed notify calls `setStopTransition()` so the stage does not advance and the same transition can be retried. Status columns on `#__hotelbooking_bookings` are updated only after a successful transition.
+
+```mermaid
+flowchart LR
+  received[Received]
+  notified[HotelNotified]
+  awaiting[AwaitingPayment]
+  confirmed[Confirmed]
+  declined[Declined]
+  cancelled[Cancelled]
+  received -->|"Notify hotel"| notified
+  received --> declined
+  received --> cancelled
+  notified -->|"Hotel confirms"| awaiting
+  notified --> declined
+  notified --> cancelled
+  awaiting -->|"Mark paid"| confirmed
+  awaiting --> cancelled
+```
+
+The workflow is seeded for `com_hotelbooking.booking` and can be inspected under Components → Workflows (including the graph view). The booking edit **Notify Hotel** toolbar button stays available: when the booking is in **Received**, it runs the same notify transition (email first; failure does not advance the stage). On later stages it only resends the email. Turn workflow off with `workflow_enabled` to restore free-form status fields.
+
 ## Snippet tags
 
 Articles can embed promo cards. The editors-xtd plugin opens the snippets modal; Insert writes a tag; the content plugin renders it on the site.

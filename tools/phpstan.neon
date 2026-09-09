@@ -23,6 +23,8 @@ parameters:
         - ../plugins/privacy/hotelbooking/services
         - ../plugins/finder/hotelbooking/src
         - ../plugins/finder/hotelbooking/services
+        - ../plugins/workflow/hotelbooking/src
+        - ../plugins/workflow/hotelbooking/services
         - ../modules/mod_hoteldetails/src
         - ../modules/mod_hoteldetails/services
         - ../modules/mod_hotelhero/src
@@ -36,3 +38,4 @@ parameters:
         - ../administrator/components/com_fields/src
         - ../administrator/components/com_finder/src
         - ../administrator/components/com_privacy/src
+        - ../administrator/components/com_workflow/src

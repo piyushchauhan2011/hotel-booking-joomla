@@ -114,6 +114,56 @@ class BookingWorkflowHelper
     }
 
     /**
+     * @param  list<array<string, mixed>>  $transitions
+     */
+    public static function notifyTransitionId(array $transitions): int
+    {
+        foreach ($transitions as $transition) {
+            $parsed = self::statusesFromOptions($transition['options'] ?? []);
+
+            if ($parsed['action'] === self::ACTION_NOTIFY_HOTEL) {
+                return (int) ($transition['id'] ?? $transition['value'] ?? 0);
+            }
+        }
+
+        return 0;
+    }
+
+    public static function findNotifyTransitionId(DatabaseInterface $db, int $bookingId): int
+    {
+        if ($bookingId < 1) {
+            return 0;
+        }
+
+        $extension = self::EXTENSION;
+        $query     = $db->createQuery()
+            ->select($db->quoteName(['t.id', 't.options']))
+            ->from($db->quoteName('#__workflow_transitions', 't'))
+            ->join(
+                'INNER',
+                $db->quoteName('#__workflow_associations', 'a'),
+                $db->quoteName('a.item_id') . ' = :bookingId',
+            )
+            ->join(
+                'INNER',
+                $db->quoteName('#__workflow_stages', 's'),
+                $db->quoteName('s.id') . ' = ' . $db->quoteName('a.stage_id'),
+            )
+            ->where($db->quoteName('a.extension') . ' = :extension')
+            ->where($db->quoteName('t.workflow_id') . ' = ' . $db->quoteName('s.workflow_id'))
+            ->where(
+                '(' . $db->quoteName('t.from_stage_id') . ' = ' . $db->quoteName('a.stage_id')
+                . ' OR ' . $db->quoteName('t.from_stage_id') . ' = -1)',
+            )
+            ->where($db->quoteName('t.published') . ' = 1')
+            ->bind(':bookingId', $bookingId, ParameterType::INTEGER)
+            ->bind(':extension', $extension);
+        $db->setQuery($query);
+
+        return self::notifyTransitionId($db->loadAssocList() ?: []);
+    }
+
+    /**
      * @param  array<string, mixed>|Registry  $options
      *
      * @return array{action:string, guest_status:string, partner_status:string}
