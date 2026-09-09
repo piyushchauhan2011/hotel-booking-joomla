@@ -13,6 +13,8 @@ use Learn\Component\Hotelbooking\Site\Helper\FaqHelper;
 
 class DestinationsModel extends ListModel
 {
+    public const PAGE_SIZE = 3;
+
     public function __construct($config = [])
     {
         if (empty($config['filter_fields'])) {
@@ -29,6 +31,8 @@ class DestinationsModel extends ListModel
         $this->setState('filter.search', $search);
 
         parent::populateState($ordering, $direction);
+
+        $this->setState('list.limit', self::PAGE_SIZE);
     }
 
     protected function getListQuery(): QueryInterface

@@ -1075,3 +1075,78 @@
 	color: var(--hb-text-muted);
 	font-size: 0.85rem;
 }
+
+/* HTMX indicators and fragment states */
+.htmx-indicator {
+	display: none;
+}
+
+.htmx-request.htmx-indicator,
+.htmx-request .htmx-indicator {
+	display: inline-block;
+}
+
+.hb-spinner {
+	width: 1.1rem;
+	height: 1.1rem;
+	border: 2px solid var(--hb-border);
+	border-top-color: var(--hb-accent);
+	border-radius: 50%;
+	animation: hb-spin 0.7s linear infinite;
+	vertical-align: middle;
+}
+
+@keyframes hb-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.hotelbooking-destinations > form #hb-search-spinner {
+	flex-shrink: 0;
+	align-self: center;
+}
+
+.hb-load-more {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.6rem;
+	padding: 1rem;
+	color: var(--hb-text-muted);
+	font-size: 0.95rem;
+}
+
+.hb-booking-result {
+	margin-top: 1.25rem;
+}
+
+.hb-booking-error {
+	padding: 0.85rem 1rem;
+	border-radius: var(--hb-radius-sm);
+	background: #fdecea;
+	color: #8a1f11;
+	border: 1px solid #f5c2c0;
+}
+
+.hb-booking-result-success {
+	margin: 0;
+	padding: 1rem 1.1rem;
+	background: var(--hb-surface);
+	border: 1px solid var(--hb-border);
+	border-radius: var(--hb-radius-sm);
+}
+
+.hb-booking-result-success h2 {
+	margin-top: 0;
+}
+
+#hb-booking-submit {
+	position: relative;
+	gap: 0.5rem;
+}
+
+#hb-booking-submit.htmx-request .hb-booking-submit-label {
+	opacity: 0.7;
+}

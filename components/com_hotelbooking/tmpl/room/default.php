@@ -106,7 +106,14 @@ $itemId = Factory::getApplication()->getInput()->getInt('Itemid', 0);
 
 		<h2><?php echo Text::_('COM_HOTELBOOKING_BOOKING_FORM_TITLE'); ?></h2>
 
-		<form method="post" action="<?php echo Route::_('index.php?option=com_hotelbooking&task=booking.submit'); ?>">
+		<?php $bookingUrl = Route::_('index.php?option=com_hotelbooking&task=booking.submit'); ?>
+		<form method="post" action="<?php echo $bookingUrl; ?>"
+			hx-post="<?php echo $bookingUrl; ?>"
+			hx-target="#hb-booking-result"
+			hx-swap="innerHTML"
+			hx-indicator="#hb-booking-submit"
+			hx-disabled-elt="#hb-booking-submit"
+			hx-sync="this:abort">
 			<div class="hb-field">
 				<label for="checkin_date"><?php echo Text::_('COM_HOTELBOOKING_FIELD_CHECKIN_LABEL'); ?></label>
 				<input type="date" name="checkin_date" id="checkin_date" required>
@@ -132,7 +139,12 @@ $itemId = Factory::getApplication()->getInput()->getInt('Itemid', 0);
 			<input type="hidden" name="Itemid" value="<?php echo $itemId; ?>">
 			<?php echo HTMLHelper::_('form.token'); ?>
 
-			<button type="submit" class="hb-btn hb-btn--primary"><?php echo Text::_('COM_HOTELBOOKING_SUBMIT_BOOKING'); ?></button>
+			<button type="submit" class="hb-btn hb-btn--primary" id="hb-booking-submit">
+				<span class="hb-booking-submit-label"><?php echo Text::_('COM_HOTELBOOKING_SUBMIT_BOOKING'); ?></span>
+				<span class="hb-spinner htmx-indicator" aria-hidden="true"></span>
+			</button>
 		</form>
+
+		<div id="hb-booking-result" class="hb-booking-result" aria-live="polite"></div>
 	</aside>
 </div>

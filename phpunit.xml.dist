@@ -13,6 +13,7 @@
     </testsuites>
     <source>
         <include>
+            <file>components/com_hotelbooking/src/Helper/HtmxHelper.php</file>
             <file>components/com_hotelbooking/src/Helper/SubformHelper.php</file>
             <file>components/com_hotelbooking/src/Helper/SchemaHelper.php</file>
             <file>components/com_hotelbooking/src/Helper/RouterSegmentHelper.php</file>

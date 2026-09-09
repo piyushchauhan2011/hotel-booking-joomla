@@ -1,0 +1,86 @@
+<?php
+
+\defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+
+/** @var array $displayData */
+
+$items      = $displayData['items'] ?? [];
+$search     = (string) ($displayData['search'] ?? '');
+$limitstart = (int) ($displayData['limitstart'] ?? 0);
+$limit      = (int) ($displayData['limit'] ?? 3);
+$total      = (int) ($displayData['total'] ?? 0);
+$append     = !empty($displayData['append']);
+$hasMore    = ($limitstart + $limit) < $total;
+$nextUrl    = Route::_(
+	'index.php?option=com_hotelbooking&task=destinations.items&search=' . rawurlencode($search)
+		. '&limitstart=' . ($limitstart + $limit)
+);
+
+if (!$append && empty($items)) :
+	?>
+	<p><svg class="hb-empty-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="2"/><line x1="14.5" y1="14.5" x2="20" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><?php echo Text::_('COM_HOTELBOOKING_NO_DESTINATIONS'); ?></p>
+	<?php
+	return;
+endif;
+
+ob_start();
+
+foreach ($items as $destination) :
+	$teaser = '';
+
+	if (!empty($destination->description)) {
+		$teaser = trim(strtok(strip_tags($destination->description), "\n"));
+
+		if (\function_exists('mb_strlen') && mb_strlen($teaser) > 160) {
+			$teaser = mb_substr($teaser, 0, 160);
+			$teaser = mb_substr($teaser, 0, (int) mb_strrpos($teaser, ' ')) . '…';
+		}
+	}
+	?>
+	<div class="hotelbooking-destination-card hb-card">
+		<?php if (!empty($destination->image)) : ?>
+			<img class="hb-card-image" src="<?php echo htmlspecialchars($destination->image); ?>" alt="<?php echo htmlspecialchars($destination->name); ?>">
+		<?php else : ?>
+			<div class="hb-card-image hb-card-image--placeholder"></div>
+		<?php endif; ?>
+		<div class="hb-card-body">
+			<h2>
+				<a href="<?php echo Route::_('index.php?option=com_hotelbooking&view=destination&id=' . (int) $destination->id); ?>">
+					<?php echo htmlspecialchars($destination->name); ?>
+				</a>
+			</h2>
+			<?php if ($teaser !== '') : ?>
+				<p><?php echo htmlspecialchars($teaser); ?></p>
+			<?php endif; ?>
+		</div>
+	</div>
+	<?php
+endforeach;
+
+if ($hasMore) :
+	?>
+	<div class="hb-load-more"
+		hx-get="<?php echo $nextUrl; ?>"
+		hx-trigger="revealed"
+		hx-swap="outerHTML"
+		hx-indicator="find .hb-spinner">
+		<span class="hb-load-more-label"><?php echo Text::_('COM_HOTELBOOKING_LOADING_MORE'); ?></span>
+		<span class="hb-spinner htmx-indicator" aria-hidden="true"></span>
+	</div>
+	<?php
+endif;
+
+$cards = ob_get_clean();
+
+if ($append) {
+	echo $cards;
+
+	return;
+}
+?>
+<div class="hotelbooking-destination-grid hb-grid">
+	<?php echo $cards; ?>
+</div>

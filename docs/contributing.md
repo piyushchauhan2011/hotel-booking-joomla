@@ -34,9 +34,11 @@ ddev exec composer test --working-dir=tools
 ddev exec composer test:coverage --working-dir=tools
 ```
 
-CI uses **PCOV** and points `pcov.directory` at the repo root (coverage would otherwise stay at 0% if PHPUnit ran from `tools/`). Helper coverage must stay at **80%** or higher (`tools/check-coverage.php`).
+CI and DDEV both use **PCOV**. The runner enables it only for that command (`pcov.enabled=1`) and points `pcov.directory` at the repo root (coverage would otherwise stay at 0% if PHPUnit ran from `tools/`). Helper coverage must stay at **80%** or higher (`tools/check-coverage.php`).
 
-Locally you need a coverage driver. With DDEV:
+DDEV installs `php-pcov` via `webimage_extra_packages` in [`.ddev/config.yaml`](../.ddev/config.yaml). After changing that list, run `ddev restart`.
+
+If PCOV is missing, you can use Xdebug instead:
 
 ```bash
 ddev xdebug on

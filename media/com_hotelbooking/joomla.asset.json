@@ -23,6 +23,28 @@
       }
     },
     {
+      "name": "com_hotelbooking.htmx",
+      "description": "htmx 2.0.10 for HTML fragment swaps on Destinations and Room views.",
+      "type": "script",
+      "uri": "com_hotelbooking/htmx.min.js",
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_hotelbooking.htmx-joomla",
+      "description": "Joomla CSRF token injection and system-message rendering for htmx requests.",
+      "type": "script",
+      "uri": "com_hotelbooking/htmx-joomla.js",
+      "dependencies": [
+        "core",
+        "com_hotelbooking.htmx"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
       "name": "com_hotelbooking.gallery-lightbox",
       "description": "Photo gallery lightbox (Destination and Room pages).",
       "type": "script",

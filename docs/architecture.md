@@ -21,6 +21,8 @@ PHP namespaces use the `Learn\` prefix (see `com_hotelbooking`’s `<namespace>`
 | `bookings` | Guest booking form / list |
 | `faqs` | Published FAQs |
 
+HTMX fragment tasks (`destinations.items`, `booking.submit` when `HX-Request: true`) return layouts from [`components/com_hotelbooking/layouts`](../components/com_hotelbooking/layouts) and close the app. Do not use `tmpl=component` for these swaps: that still wraps [`templates/tpl_hotelbooking/component.php`](../templates/tpl_hotelbooking/component.php). CSRF tokens are attached in [`media/com_hotelbooking/js/htmx-joomla.js`](../media/com_hotelbooking/js/htmx-joomla.js); flash messages use an `HX-Trigger` `hbMessage` event.
+
 ## Snippet tags
 
 Articles can embed promo cards. The editors-xtd plugin opens the snippets modal; Insert writes a tag; the content plugin renders it on the site.

@@ -4,6 +4,7 @@ namespace Learn\Component\Hotelbooking\Site\Controller;
 
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Router\Route;
+use Learn\Component\Hotelbooking\Site\Helper\HtmxHelper;
 use Learn\Component\Hotelbooking\Site\Model\DestinationsModel;
 
 \defined('_JEXEC') or die;
@@ -38,5 +39,43 @@ class DestinationsController extends BaseController
         $app->sendHeaders();
         echo json_encode($results);
         $app->close();
+    }
+
+    public function items(): void
+    {
+        $app        = $this->app;
+        $search     = $app->getInput()->getString('search', '');
+        $limitstart = $app->getInput()->getInt('limitstart', $app->getInput()->getInt('start', 0));
+        $limit      = DestinationsModel::PAGE_SIZE;
+
+        /** @var DestinationsModel $model */
+        $model = $this->getModel('Destinations', 'Site', ['ignore_request' => true]);
+        $model->setState('filter.search', $search);
+        $model->setState('list.start', $limitstart);
+        $model->setState('list.limit', $limit);
+        $model->setState('list.ordering', 'a.ordering');
+        $model->setState('list.direction', 'ASC');
+
+        $items      = $model->getItems();
+        $pagination = $model->getPagination();
+
+        if ($limitstart === 0) {
+            $pushUrl = 'index.php?option=com_hotelbooking&view=destinations';
+
+            if ($search !== '') {
+                $pushUrl .= '&search=' . rawurlencode($search);
+            }
+
+            HtmxHelper::pushUrl($app, Route::_($pushUrl, false));
+        }
+
+        HtmxHelper::sendLayout($app, 'destination_items', [
+            'items'      => $items,
+            'search'     => $search,
+            'limitstart' => $limitstart,
+            'limit'      => $limit,
+            'total'      => (int) $pagination->total,
+            'append'     => $limitstart > 0,
+        ]);
     }
 }

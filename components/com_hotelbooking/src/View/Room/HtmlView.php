@@ -17,7 +17,8 @@ class HtmlView extends BaseHtmlView
     {
         Factory::getApplication()->getDocument()->getWebAssetManager()
             ->useStyle('com_hotelbooking.site')
-            ->useScript('com_hotelbooking.gallery-lightbox');
+            ->useScript('com_hotelbooking.gallery-lightbox')
+            ->useScript('com_hotelbooking.htmx-joomla');
 
         $this->item = $this->getModel()->getItem();
 
